@@ -27,7 +27,6 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var textInLoadingView: UILabel!
     @IBOutlet weak var successUrlInLoadingView: UILabel!
-    var loadingViewAnimator: UIViewPropertyAnimator!
     @IBOutlet weak var loadingBlurView: UIVisualEffectView!
     
     @IBOutlet weak var failUrlsLabel: UILabel!
