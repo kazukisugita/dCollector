@@ -238,11 +238,15 @@ public struct Transaction {
                 } else {
                     print("\(name) -> response: FAILURE")
                     //print(response as? HTTPURLResponse!)
-                    
                     DispatchQueue.main.async(execute: { () -> Void in
+                        let i = #imageLiteral(resourceName: "no-image-icon")
+                        
+                        let iconObject = RealmManager.getDomainWithPrimaryKey(name)
+                        RealmManager.rewriteSpecificDomain(iconObject!, image: UIImagePNGRepresentation(i)! as NSData)
+                        
                         if cell is ListsTableViewCell {
                             let cell = cell as! ListsTableViewCell
-                            let i = #imageLiteral(resourceName: "no-image-icon")
+                            //let i = #imageLiteral(resourceName: "no-image-icon")
                             cell.domainIcon?.image = i
                             cell.domainIcon?.backgroundColor = .none
                         }
