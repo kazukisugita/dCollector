@@ -192,6 +192,9 @@ public struct Transaction {
                     //Transaction.getIconImageInBackground(forCell: cell, domainName: host)
                     Transaction.getIconImageInBackground(forCell: cell, url: iconPath!, domainName: host)
                 }
+                
+                session.invalidateAndCancel()
+                
             }).resume()
         }
     }
@@ -245,6 +248,8 @@ public struct Transaction {
                         }
                     })
                 }
+                
+                session.invalidateAndCancel()
                 
             }).resume()
         }
