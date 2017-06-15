@@ -9,6 +9,8 @@
 import UIKit
 import RealmSwift
 
+import UserNotifications
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -46,6 +48,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
         print(" *** applicationDidEnterBackground *** ")
+        
+        
+        let center = UNUserNotificationCenter.current()
+        let content = UNMutableNotificationContent()
+        content.title = "dCollector"
+        content.body = "I'm dCollector !!"
+        content.sound = UNNotificationSound.default()
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        center.add(request)
+        
+        center.requestAuthorization(options: [.alert, .sound]) { success, error in
+            if success {
+                
+            }
+        }
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
