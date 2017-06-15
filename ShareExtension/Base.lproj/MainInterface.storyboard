@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="j1y-V4-xli">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Share View Controller-->
+        <scene sceneID="ceB-am-kn3">
+            <objects>
+                <viewController id="j1y-V4-xli" customClass="ShareViewController" customModule="ShareExtension" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8bI-gs-bmD"/>
+                        <viewControllerLayoutGuide type="bottom" id="d5i-Ba-RvD"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="wbc-yd-nQP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="innerView" destination="pll-fv-0gV" id="l94-wW-6rK"/>
+                        <outlet property="message" destination="usb-H2-wkt" id="ugW-3a-OKj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CEy-Cv-SGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="pll-fv-0gV">
+                    <rect key="frame" x="0.0" y="0.0" width="180" height="48"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-App-40x40" translatesAutoresizingMaskIntoConstraints="NO" id="Xxv-dt-7rh">
+                            <rect key="frame" x="8" y="4" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="f9g-Y7-dvN"/>
+                                <constraint firstAttribute="width" constant="40" id="wHn-92-ehO"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usb-H2-wkt">
+                            <rect key="frame" x="56" y="14" width="0.0" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="M3P-iK-x8a"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="textColor" red="0.3651253172588832" green="0.3651253172588832" blue="0.3651253172588832" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="usb-H2-wkt" firstAttribute="leading" secondItem="Xxv-dt-7rh" secondAttribute="trailing" constant="8" id="4Zw-4n-ibK"/>
+                        <constraint firstItem="Xxv-dt-7rh" firstAttribute="leading" secondItem="pll-fv-0gV" secondAttribute="leading" constant="8" id="6Qa-ci-UD9"/>
+                        <constraint firstItem="usb-H2-wkt" firstAttribute="centerY" secondItem="pll-fv-0gV" secondAttribute="centerY" id="Kco-gn-o38"/>
+                        <constraint firstItem="Xxv-dt-7rh" firstAttribute="centerY" secondItem="pll-fv-0gV" secondAttribute="centerY" id="hlO-QB-2Fk"/>
+                        <constraint firstItem="usb-H2-wkt" firstAttribute="leading" secondItem="pll-fv-0gV" secondAttribute="leading" constant="56" id="m65-zy-76Y"/>
+                    </constraints>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="1342" y="-67"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icon-App-40x40" width="16" height="16"/>
+    </resources>
+</document>

@@ -1,0 +1,24 @@
+PODS:
+  - Ji (2.0.1):
+    - Ji/Ji (= 2.0.1)
+  - Ji/Ji (2.0.1):
+    - Ji/Ji-libxml
+  - Ji/Ji-libxml (2.0.1)
+  - Realm (2.6.2):
+    - Realm/Headers (= 2.6.2)
+  - Realm/Headers (2.6.2)
+  - RealmSwift (2.6.2):
+    - Realm (= 2.6.2)
+
+DEPENDENCIES:
+  - Ji (~> 2.0.0)
+  - RealmSwift
+
+SPEC CHECKSUMS:
+  Ji: 6bb602a28dd08b804158f64990e6051ed5de0110
+  Realm: 29222766425b9f831228f81b63f0e38a97a4d700
+  RealmSwift: d161a80f96cb91ae88391a7d5a9cf08024a7bc8e
+
+PODFILE CHECKSUM: ee057f1f0ed4bacb2143dcf642a9e7a1ce01bba1
+
+COCOAPODS: 1.2.0
