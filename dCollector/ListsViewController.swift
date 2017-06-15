@@ -47,9 +47,9 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         
         // Self View
         
-        let titleImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
-        titleImageView.image = #imageLiteral(resourceName: "tabbar-icon-lists")
-        self.navigationItem.titleView = titleImageView
+        //let titleImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        //titleImageView.image = #imageLiteral(resourceName: "tabbar-icon-lists")
+        //self.navigationItem.titleView = titleImageView
         self.navigationItem.title = "Domains"
         
         // TableView
