@@ -21,7 +21,6 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     var selectedDomain: Domain?
     var urls: [Url] = []
     
-    var animator: UIViewPropertyAnimator!
     
     fileprivate var selfViewPanDirectionY: CGFloat = 0.0
     
@@ -33,7 +32,7 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         // Self View
         
         //self.title = "Urls"
-        self.view.backgroundColor = UIColor(white: 0.0, alpha: 0.0)
+//        self.view.backgroundColor = UIColor(white: 0.0, alpha: 0.0)
         self.view.alpha = 1.0
         
         //let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ListDetailViewController.handlePan(gestureRecognizer:)))
@@ -49,7 +48,7 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         listDetailTableView.rowHeight = 70.0
         listDetailTableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
         listDetailTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
-        listDetailTableView.contentInset = UIEdgeInsetsMake(8.0, 0.0, 24.0, 0.0)
+        listDetailTableView.contentInset = UIEdgeInsetsMake(24.0, 0.0, 24.0, 0.0)
         /*
         listDetailTableView.clipsToBounds = false
         listDetailTableView.layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -64,20 +63,7 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         let nib: UINib = UINib(nibName: "ListDetailTableViewCell", bundle: nil)
         listDetailTableView.register(nib, forCellReuseIdentifier: "ListDetailTableViewCell")
         
-
         if let _domain = selectedDomain {
-            /*
-            for _url in _domain.urls {
-                urls.append(_url)
-            }
-            */
-            /*
-            if let sortedUrls = RealmManager.getDomainByName(_domain.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false) {
-                for _url in sortedUrls {
-                    urls.append(_url)
-                }
-            }
-            */
             self.domainTitle?.text = _domain.title
             self.domainHost?.text = _domain.name
             self.domainDescription?.text = _domain.siteDescription
@@ -90,7 +76,7 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             
         }
-        
+ 
         // Long Press
         
         let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ListDetailViewController.longPressHandler))
@@ -110,12 +96,13 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         
         // Domain Info View
         
-        domainInfoView.layer.cornerRadius = 4
+        domainInfoView.layer.cornerRadius = 12
+        /*
         domainInfoView.layer.shadowOffset = CGSize(width: 0, height: 0)
         domainInfoView.layer.shadowColor = UIColor.black.cgColor
         domainInfoView.layer.shadowRadius = 1
         domainInfoView.layer.shadowOpacity = 0.1
-        
+        */
         domainInfoView.isUserInteractionEnabled = true
         let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.callSafariInHostPage))
         domainInfoView.addGestureRecognizer(domainInfoViewTap)

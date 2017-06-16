@@ -29,16 +29,12 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var successUrlInLoadingView: UILabel!
     @IBOutlet weak var loadingBlurView: UIVisualEffectView!
     
-    @IBOutlet weak var failUrlsLabel: UILabel!
-    @IBOutlet weak var failUrlsView: UIView!
-    var failUrls: [String] = []
-
     @IBOutlet weak var extensionGuid: UIImageView!
     @IBOutlet weak var guidLabel: UILabel!
     
     fileprivate var isLoading: Bool = false
     var userdefaults: Array<String>?
-
+    
     
     override func viewDidLoad() {
         
@@ -98,13 +94,6 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         longPress.numberOfTapsRequired = 0
         longPress.numberOfTouchesRequired = 1
         listsTableView.addGestureRecognizer(longPress)
-        
-    
-        //  FailUrlsView
-        
-        self.failUrlsLabel.text = ""
-        
-        
     }
     
     
@@ -120,7 +109,6 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         //print(" --- ListsViewController viewWillAppear --- ")
         super.viewWillAppear(animated)
         refreshTable()
-        
     }
     
     
@@ -187,14 +175,10 @@ extension ListsViewController {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //print("didSelectRowAt")
-        
         tableView.deselectRow(at: indexPath, animated: false)
-        
         self.selectedDomain = RealmManager.getAllDomain()[indexPath.row]
         
         performSegue(withIdentifier: "toListDetailFromLists", sender: nil)
-        
     }
     
     
