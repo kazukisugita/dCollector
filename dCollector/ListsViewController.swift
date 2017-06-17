@@ -29,7 +29,7 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
     fileprivate var isLoading: Bool = false
     var userdefaults: Array<String>?
     
-    let movieTransitionDelegate = ModalTransitionDelegate()
+    let modalTransitionDelegate = ModalTransitionDelegate()
     
     
     override func viewDidLoad() {
@@ -185,8 +185,8 @@ extension ListsViewController {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let listsDetailVC = sb.instantiateViewController(withIdentifier: "ListDetailView") as! ListDetailViewController
         
-        transitioningDelegate = movieTransitionDelegate
-        listsDetailVC.transitioningDelegate = movieTransitionDelegate
+        transitioningDelegate = modalTransitionDelegate
+        listsDetailVC.transitioningDelegate = modalTransitionDelegate
         listsDetailVC.modalPresentationStyle = .custom
         
         self.present(listsDetailVC, animated: true, completion: nil)

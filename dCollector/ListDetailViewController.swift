@@ -145,6 +145,7 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     func callSafariInHostPage() {
         let url: String = "https://" + self.domainHost.text!
         let safariViewController = SFSafariViewController(url: URL(string: url)!)
+        safariViewController.modalPresentationStyle = .popover
         present(safariViewController, animated: true, completion: nil);
     }
     
@@ -197,6 +198,7 @@ extension ListDetailViewController {
         url = sortedUrls![indexPath.row]
         
         let safariViewController = SFSafariViewController(url: URL(string: url.url)!)
+        safariViewController.modalPresentationStyle = .popover
         present(safariViewController, animated: true, completion: nil);
     }
     
