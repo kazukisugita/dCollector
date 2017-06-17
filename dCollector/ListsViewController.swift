@@ -8,12 +8,6 @@
 
 import UIKit
 
-/*
-protocol ListsViewControllerDelegate: class {
-    func setMessage(url: String)
-    func appendFailUrls(url: String)
-}
-*/
 
 final class ListsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -34,6 +28,8 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
     
     fileprivate var isLoading: Bool = false
     var userdefaults: Array<String>?
+    
+    let movieTransitionDelegate = ModalTransitionDelegate()
     
     
     override func viewDidLoad() {
@@ -117,7 +113,9 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewWillDisappear(true)
     }
 
-    
+    func removeBlurView() {
+        print("hoge")
+    }
 }
 
 
@@ -173,12 +171,26 @@ extension ListsViewController {
         //print("didSelectRowAtIndexPath")
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func _tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: false)
         self.selectedDomain = RealmManager.getAllDomain()[indexPath.row]
         
         performSegue(withIdentifier: "toListDetailFromLists", sender: nil)
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let listsDetailVC = sb.instantiateViewController(withIdentifier: "ListDetailView") as! ListDetailViewController
+        
+        transitioningDelegate = movieTransitionDelegate
+        listsDetailVC.transitioningDelegate = movieTransitionDelegate
+        listsDetailVC.modalPresentationStyle = .custom
+        
+        self.present(listsDetailVC, animated: true, completion: nil)
+        listsDetailVC.selectedDomain = RealmManager.getAllDomain()[indexPath.row]
     }
     
     
@@ -517,3 +529,4 @@ extension ListsViewController {
     }
     
 }
+

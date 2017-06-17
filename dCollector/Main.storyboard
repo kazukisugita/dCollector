@@ -370,17 +370,17 @@
                                 <rect key="frame" x="0.0" y="43" width="320" height="128"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="www.businessinsider.jp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2h-aZ-7MG">
-                                        <rect key="frame" x="56" y="42" width="240" height="14"/>
+                                        <rect key="frame" x="56" y="51" width="240" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="EaE-YC-QIB"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="www.businessinsider.jp" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwr-wO-wm9">
-                                        <rect key="frame" x="56" y="56" width="240" height="38"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="www.businessinsider.jp" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwr-wO-wm9">
+                                        <rect key="frame" x="56" y="65" width="240" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="9"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -392,7 +392,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BusinessInsider" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrR-vT-sDv">
-                                        <rect key="frame" x="56" y="25" width="240" height="17"/>
+                                        <rect key="frame" x="56" y="31" width="240" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="DWz-8K-Qh6"/>
                                         </constraints>
@@ -405,15 +405,15 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="e2h-aZ-7MG" firstAttribute="top" secondItem="wrR-vT-sDv" secondAttribute="bottom" id="0Zj-2v-dyX"/>
+                                    <constraint firstItem="e2h-aZ-7MG" firstAttribute="top" secondItem="wrR-vT-sDv" secondAttribute="bottom" constant="3" id="0Zj-2v-dyX"/>
                                     <constraint firstItem="e2h-aZ-7MG" firstAttribute="trailing" secondItem="Nwr-wO-wm9" secondAttribute="trailing" id="5PR-9v-so6"/>
                                     <constraint firstAttribute="height" constant="128" id="8cI-J2-Kha"/>
                                     <constraint firstItem="wrR-vT-sDv" firstAttribute="leading" secondItem="e2h-aZ-7MG" secondAttribute="leading" id="KQn-Ir-nb0"/>
-                                    <constraint firstItem="wrR-vT-sDv" firstAttribute="top" secondItem="xyg-HC-YTm" secondAttribute="top" constant="25" id="MNQ-sF-U34"/>
-                                    <constraint firstAttribute="bottom" secondItem="Nwr-wO-wm9" secondAttribute="bottom" constant="34" id="P6L-FG-O0q"/>
+                                    <constraint firstItem="wrR-vT-sDv" firstAttribute="top" secondItem="xyg-HC-YTm" secondAttribute="top" constant="31" id="MNQ-sF-U34"/>
+                                    <constraint firstAttribute="bottom" secondItem="Nwr-wO-wm9" secondAttribute="bottom" constant="31" id="P6L-FG-O0q"/>
                                     <constraint firstItem="0Ty-CT-yy8" firstAttribute="top" secondItem="xyg-HC-YTm" secondAttribute="top" constant="25" id="YqF-2R-GGH"/>
                                     <constraint firstItem="e2h-aZ-7MG" firstAttribute="leading" secondItem="Nwr-wO-wm9" secondAttribute="leading" id="b7Q-Rf-ALb"/>
-                                    <constraint firstItem="0Ty-CT-yy8" firstAttribute="top" secondItem="wrR-vT-sDv" secondAttribute="top" id="gkP-nB-EF8"/>
+                                    <constraint firstItem="0Ty-CT-yy8" firstAttribute="top" secondItem="wrR-vT-sDv" secondAttribute="top" constant="-6" id="gkP-nB-EF8"/>
                                     <constraint firstItem="0Ty-CT-yy8" firstAttribute="leading" secondItem="xyg-HC-YTm" secondAttribute="leadingMargin" id="jZ4-Za-i2I"/>
                                     <constraint firstItem="wrR-vT-sDv" firstAttribute="trailing" secondItem="e2h-aZ-7MG" secondAttribute="trailing" id="jxf-0K-Lku"/>
                                     <constraint firstItem="Nwr-wO-wm9" firstAttribute="top" secondItem="e2h-aZ-7MG" secondAttribute="bottom" id="kOT-rn-Hyo"/>
@@ -459,7 +459,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gPI-B9-ZuE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="368" y="-781"/>
+            <point key="canvasLocation" x="367.5" y="-781.69014084507046"/>
         </scene>
     </scenes>
     <resources>

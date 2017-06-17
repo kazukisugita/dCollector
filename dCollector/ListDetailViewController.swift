@@ -18,9 +18,12 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var domainTitle: UILabel!
     @IBOutlet weak var domainDescription: UILabel!
     
-    var selectedDomain: Domain?
+    var selectedDomain: Domain? {
+        didSet {
+            configureDomainView()
+        }
+    }
     var urls: [Url] = []
-    
     
     fileprivate var selfViewPanDirectionY: CGFloat = 0.0
     
@@ -62,7 +65,7 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let nib: UINib = UINib(nibName: "ListDetailTableViewCell", bundle: nil)
         listDetailTableView.register(nib, forCellReuseIdentifier: "ListDetailTableViewCell")
-        
+        /*
         if let _domain = selectedDomain {
             self.domainTitle?.text = _domain.title
             self.domainHost?.text = _domain.name
@@ -76,7 +79,7 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             
         }
- 
+        */
         // Long Press
         
         let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ListDetailViewController.longPressHandler))
@@ -108,6 +111,23 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         domainInfoView.addGestureRecognizer(domainInfoViewTap)
         //domainInfoView.addGestureRecognizer(swipeDown)
 
+    }
+    
+    
+    func configureDomainView() {
+        if let _domain = selectedDomain {
+            self.domainTitle?.text = _domain.title
+            self.domainHost?.text = _domain.name
+            self.domainDescription?.text = _domain.siteDescription
+            
+            if let image = _domain.icon {
+                self.domainIcon?.image = UIImage(data: image as Data)
+            } else {
+                let i = #imageLiteral(resourceName: "no-image-icon")
+                self.domainIcon?.image = i
+            }
+            
+        }
     }
     
     
