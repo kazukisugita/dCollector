@@ -182,6 +182,8 @@ extension ListsViewController {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        tableView.deselectRow(at: indexPath, animated: false)
+        
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let listsDetailVC = sb.instantiateViewController(withIdentifier: "ListDetailView") as! ListDetailViewController
         
@@ -229,8 +231,6 @@ extension ListsViewController {
     
     func refreshTable() {
         
-        print(" --- --- --- --- --- --- --- --- ")
-        
         if AppSettings.onlyDownloadWithWifi() {
             //print(" --- Only Download With Wifi --- ")
             
@@ -248,6 +248,8 @@ extension ListsViewController {
         }
         
         //self.listRefresher.beginRefreshing()
+        
+        self.view.setNeedsLayout()
         
         var defaultsCount: Int
         
@@ -404,7 +406,6 @@ extension ListsViewController {
         actionSheet.addAction(cancel)
         
         self.present(actionSheet, animated: true, completion: nil)
-        
     }
     
     

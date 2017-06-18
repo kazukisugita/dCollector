@@ -14,7 +14,7 @@ class ModalAnimatedTransitoning: NSObject, UIViewControllerAnimatedTransitioning
     
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.7
+        return 0.6
     }
     
     
@@ -70,7 +70,7 @@ class ModalAnimatedTransitoning: NSObject, UIViewControllerAnimatedTransitioning
 class ModalTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         
-        let presentationController = MoviePresentationController(presentedViewController: presented, presenting: presenting)
+        let presentationController = ModalPresentationController(presentedViewController: presented, presenting: presenting)
         
         return presentationController
         

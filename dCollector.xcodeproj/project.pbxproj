@@ -17,7 +17,7 @@
 		BB1948061ECD86CB0065A473 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB1948051ECD86CB0065A473 /* Assets.xcassets */; };
 		BB1CFA321EE69F7A00B58C57 /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1CFA311EE69F7A00B58C57 /* ListsViewController.swift */; };
 		BB291F601EEFA29500266406 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB291F5F1EEFA29500266406 /* NavigationController.swift */; };
-		BB2B050C1EF4D34100339B5E /* MoviePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2B050A1EF4D34100339B5E /* MoviePresentationController.swift */; };
+		BB2B050C1EF4D34100339B5E /* ModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2B050A1EF4D34100339B5E /* ModalPresentationController.swift */; };
 		BB2B050D1EF4D34100339B5E /* ModalTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2B050B1EF4D34100339B5E /* ModalTransition.swift */; };
 		BB2D01521EBD673F00D13D35 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2D01511EBD673F00D13D35 /* AppGroup.swift */; };
 		BB2D01531EBD673F00D13D35 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2D01511EBD673F00D13D35 /* AppGroup.swift */; };
@@ -82,7 +82,7 @@
 		BB1962531EB9D0FF00AA3818 /* ShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareExtension.entitlements; sourceTree = "<group>"; };
 		BB1CFA311EE69F7A00B58C57 /* ListsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
 		BB291F5F1EEFA29500266406 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
-		BB2B050A1EF4D34100339B5E /* MoviePresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviePresentationController.swift; sourceTree = "<group>"; };
+		BB2B050A1EF4D34100339B5E /* ModalPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalPresentationController.swift; sourceTree = "<group>"; };
 		BB2B050B1EF4D34100339B5E /* ModalTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalTransition.swift; sourceTree = "<group>"; };
 		BB2D01511EBD673F00D13D35 /* AppGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
 		BB3A66631ED81299003E7CC9 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
@@ -153,13 +153,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		BB2B05091EF4D32400339B5E /* New Group */ = {
+		BB2B05091EF4D32400339B5E /* ModalSystem */ = {
 			isa = PBXGroup;
 			children = (
-				BB2B050A1EF4D34100339B5E /* MoviePresentationController.swift */,
+				BB2B050A1EF4D34100339B5E /* ModalPresentationController.swift */,
 				BB2B050B1EF4D34100339B5E /* ModalTransition.swift */,
 			);
-			name = "New Group";
+			name = ModalSystem;
 			sourceTree = "<group>";
 		};
 		BB2D014F1EBD66A600D13D35 /* appGroup */ = {
@@ -214,7 +214,7 @@
 		BB7783141EB89EEA004C132E /* dCollector */ = {
 			isa = PBXGroup;
 			children = (
-				BB2B05091EF4D32400339B5E /* New Group */,
+				BB2B05091EF4D32400339B5E /* ModalSystem */,
 				BB1948051ECD86CB0065A473 /* Assets.xcassets */,
 				BBC0636A1EC5B02B00840A40 /* AppDelegate.swift */,
 				BBC0636F1EC5B02B00840A40 /* dCollector.entitlements */,
@@ -451,7 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBC063781EC5B02B00840A40 /* AppDelegate.swift in Sources */,
-				BB2B050C1EF4D34100339B5E /* MoviePresentationController.swift in Sources */,
+				BB2B050C1EF4D34100339B5E /* ModalPresentationController.swift in Sources */,
 				BB2B050D1EF4D34100339B5E /* ModalTransition.swift in Sources */,
 				BB063C811ED6D9EA00A1DE1C /* LicenseViewController.swift in Sources */,
 				BB063C871ED6E35800A1DE1C /* FileName.swift in Sources */,

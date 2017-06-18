@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoviePresentationController: UIPresentationController, UIAdaptivePresentationControllerDelegate{
+class ModalPresentationController: UIPresentationController, UIAdaptivePresentationControllerDelegate{
     
     var dimmingView = UIVisualEffectView()
     
@@ -18,40 +18,41 @@ class MoviePresentationController: UIPresentationController, UIAdaptivePresentat
     
     override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
-        
-        //dimmingView.backgroundColor = UIColor(white: 0, alpha: 0.8)
-        //dimmingView.alpha = 0
     }
     
     override func presentationTransitionWillBegin() {
+        super.presentationTransitionWillBegin()
+        dimmingView.setNeedsLayout()
+        
         dimmingView.frame = self.containerView!.bounds
-        //dimmingView.alpha = 0
         containerView?.insertSubview(dimmingView, at: 0)
         
         if let coordinator = presentedViewController.transitionCoordinator {
             coordinator.animate(alongsideTransition: { (context:UIViewControllerTransitionCoordinatorContext) in
-                //self.dimmingView.alpha = 1
                 self.dimmingView.effect = UIBlurEffect(style: .dark)
             }, completion: nil)
         }else{
-            //dimmingView.alpha = 1
         }
-        
     }
     
     override func dismissalTransitionWillBegin() {
+        super.dismissalTransitionWillBegin()
+        dimmingView.setNeedsLayout()
+        
         if let coordinator = presentedViewController.transitionCoordinator {
             coordinator.animate(alongsideTransition: { (context:UIViewControllerTransitionCoordinatorContext) in
-                //self.dimmingView.alpha = 0
                 self.dimmingView.effect = nil
-            }, completion: nil)
+            }, completion: { _ in
+                self.dimmingView.removeFromSuperview()
+            })
         }else{
-            //dimmingView.alpha = 0
             dimmingView.removeFromSuperview()
         }
     }
     
     override func containerViewWillLayoutSubviews() {
+        super.containerViewWillLayoutSubviews()
+        
         if let containerBounds = containerView?.bounds {
             dimmingView.frame = containerBounds
             presentedView?.frame = containerBounds

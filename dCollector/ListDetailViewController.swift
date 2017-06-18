@@ -264,7 +264,6 @@ extension ListDetailViewController {
         actionSheet.addAction(cancel)
         
         self.present(actionSheet, animated: true, completion: nil)
-        
     }
     
     
