@@ -213,12 +213,14 @@ extension ListDetailViewController {
     // Cell
     
     func longPressHandler(sender: UILongPressGestureRecognizer) {
-        //print("ListDetailViewController: Long Press")
-        let point: CGPoint = sender.location(in: self.listDetailTableView)
-        let indexPath = self.listDetailTableView.indexPathForRow(at: point)
         
-        callActionSheet(indexPath!)
+        if sender.state == UIGestureRecognizerState.began {
+
+            let point: CGPoint = sender.location(in: self.listDetailTableView)
+            let indexPath = self.listDetailTableView.indexPathForRow(at: point)
         
+            callActionSheet(indexPath!)
+        }
     }
     
     

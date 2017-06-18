@@ -112,10 +112,7 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         //print(" --- ListsViewController viewWillDisappear --- ")
         super.viewWillDisappear(true)
     }
-
-    func removeBlurView() {
-        print("hoge")
-    }
+    
 }
 
 
@@ -365,15 +362,16 @@ extension ListsViewController {
 extension ListsViewController {
     
     func longPressHandler(sender: UILongPressGestureRecognizer) {
-        //print("ListsViewController: Long Press")
-        let point: CGPoint = sender.location(in: self.listsTableView)
-        let indexPath = self.listsTableView.indexPathForRow(at: point)
         
-        if let _ = indexPath {
-            //print(indexPath!)
-            callActionSheet(indexPath!)
+        if sender.state == UIGestureRecognizerState.began {
+            let point: CGPoint = sender.location(in: self.listsTableView)
+            let indexPath = self.listsTableView.indexPathForRow(at: point)
+            
+            if let _ = indexPath {
+                //print(indexPath!)
+                callActionSheet(indexPath!)
+            }
         }
-        
     }
     
     
