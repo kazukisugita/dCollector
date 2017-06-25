@@ -34,10 +34,8 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
         // Self View
         
-        //self.title = "Urls"
-//        self.view.backgroundColor = UIColor(white: 0.0, alpha: 0.0)
         self.view.alpha = 1.0
-        
+    
         //let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ListDetailViewController.handlePan(gestureRecognizer:)))
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ListDetailViewController.handlePan(gestureRecognizer:)))
         self.view.addGestureRecognizer(panGestureRecognizer)
@@ -52,14 +50,10 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         listDetailTableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
         listDetailTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
         listDetailTableView.contentInset = UIEdgeInsetsMake(24.0, 0.0, 24.0, 0.0)
-        /*
-        listDetailTableView.clipsToBounds = false
-        listDetailTableView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        listDetailTableView.layer.shadowColor = UIColor.gray.cgColor
-        listDetailTableView.layer.shadowRadius = 16
-        listDetailTableView.layer.shadowOpacity = 0.8
-        */
         
+        //let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(ListDetailViewController.swipeDownTableView(sendor:)))
+        //swipeGesture.direction = .down
+        //listDetailTableView.addGestureRecognizer(swipeGesture)
         
         // TableView Cell
         
@@ -80,6 +74,7 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             
         }
         */
+        
         // Long Press
         
         let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ListDetailViewController.longPressHandler))
@@ -89,27 +84,13 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         longPress.numberOfTouchesRequired = 1
         listDetailTableView.addGestureRecognizer(longPress)
         
-        
-        // Swipe Down
-        
-        //let swipeDown: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(ListDetailViewController.swipeDownAction))
-        //swipeDown.numberOfTouchesRequired = 1
-        //swipeDown.direction = UISwipeGestureRecognizerDirection.down
-        
-        
         // Domain Info View
         
         domainInfoView.layer.cornerRadius = 12
-        /*
-        domainInfoView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        domainInfoView.layer.shadowColor = UIColor.black.cgColor
-        domainInfoView.layer.shadowRadius = 1
-        domainInfoView.layer.shadowOpacity = 0.1
-        */
         domainInfoView.isUserInteractionEnabled = true
         let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.callSafariInHostPage))
         domainInfoView.addGestureRecognizer(domainInfoViewTap)
-        //domainInfoView.addGestureRecognizer(swipeDown)
+        
 
     }
     
@@ -149,13 +130,6 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         present(safariViewController, animated: true, completion: nil);
     }
     
-    
-    /*
-    func swipeDownAction() {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
-        self.dismiss(animated: true, completion: nil)
-    }
-    */
     
 }
 
