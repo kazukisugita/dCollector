@@ -90,8 +90,9 @@ extension MoreTableViewController {
         case 0:
             break
         case 1:
-            guard let licenseText = license?.getLicenseText(index: indexPath.row) else { return }
-            guard let githubText = license?.getGithubText(index: indexPath.row) else { return }
+            guard
+            let licenseText = license?.getLicenseText(index: indexPath.row),
+            let githubText = license?.getGithubText(index: indexPath.row) else { return }
             tappedLicense.githubText = githubText
             tappedLicense.licenseText = licenseText
             performSegue(withIdentifier: "licenseSegue", sender: nil)

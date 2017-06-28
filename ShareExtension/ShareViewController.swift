@@ -40,6 +40,8 @@ final class ShareViewController: UIViewController {
     
     private func appearAnimation() {
         
+        self.view.setNeedsLayout()
+        
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             self.innerView.frame.size.width = self.innerViewWidth.appeared
             self.message.alpha = 1.0

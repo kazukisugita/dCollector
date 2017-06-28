@@ -8,12 +8,6 @@
 
 import UIKit
 
-/*
-protocol ListsViewControllerDelegate: class {
-    func setMessage(url: String)
-    func appendFailUrls(url: String)
-}
-*/
 
 final class ListsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -27,19 +21,16 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var textInLoadingView: UILabel!
     @IBOutlet weak var successUrlInLoadingView: UILabel!
-    var loadingViewAnimator: UIViewPropertyAnimator!
     @IBOutlet weak var loadingBlurView: UIVisualEffectView!
     
-    @IBOutlet weak var failUrlsLabel: UILabel!
-    @IBOutlet weak var failUrlsView: UIView!
-    var failUrls: [String] = []
-
     @IBOutlet weak var extensionGuid: UIImageView!
     @IBOutlet weak var guidLabel: UILabel!
     
     fileprivate var isLoading: Bool = false
     var userdefaults: Array<String>?
-
+    
+    let modalTransitionDelegate = ModalTransitionDelegate()
+    
     
     override func viewDidLoad() {
         
@@ -99,13 +90,6 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         longPress.numberOfTapsRequired = 0
         longPress.numberOfTouchesRequired = 1
         listsTableView.addGestureRecognizer(longPress)
-        
-    
-        //  FailUrlsView
-        
-        self.failUrlsLabel.text = ""
-        
-        
     }
     
     
@@ -121,7 +105,6 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         //print(" --- ListsViewController viewWillAppear --- ")
         super.viewWillAppear(animated)
         refreshTable()
-        
     }
     
     
@@ -129,7 +112,6 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         //print(" --- ListsViewController viewWillDisappear --- ")
         super.viewWillDisappear(true)
     }
-
     
 }
 
@@ -186,16 +168,28 @@ extension ListsViewController {
         //print("didSelectRowAtIndexPath")
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        //print("didSelectRowAt")
+    func _tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: false)
-        
         self.selectedDomain = RealmManager.getAllDomain()[indexPath.row]
         
         performSegue(withIdentifier: "toListDetailFromLists", sender: nil)
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let listsDetailVC = sb.instantiateViewController(withIdentifier: "ListDetailView") as! ListDetailViewController
+        
+        transitioningDelegate = modalTransitionDelegate
+        listsDetailVC.transitioningDelegate = modalTransitionDelegate
+        listsDetailVC.modalPresentationStyle = .custom
+        
+        self.present(listsDetailVC, animated: true, completion: nil)
+        listsDetailVC.selectedDomain = RealmManager.getAllDomain()[indexPath.row]
     }
     
     
@@ -234,8 +228,6 @@ extension ListsViewController {
     
     func refreshTable() {
         
-        print(" --- --- --- --- --- --- --- --- ")
-        
         if AppSettings.onlyDownloadWithWifi() {
             //print(" --- Only Download With Wifi --- ")
             
@@ -253,6 +245,8 @@ extension ListsViewController {
         }
         
         //self.listRefresher.beginRefreshing()
+        
+        self.view.setNeedsLayout()
         
         var defaultsCount: Int
         
@@ -368,15 +362,16 @@ extension ListsViewController {
 extension ListsViewController {
     
     func longPressHandler(sender: UILongPressGestureRecognizer) {
-        //print("ListsViewController: Long Press")
-        let point: CGPoint = sender.location(in: self.listsTableView)
-        let indexPath = self.listsTableView.indexPathForRow(at: point)
         
-        if let _ = indexPath {
-            //print(indexPath!)
-            callActionSheet(indexPath!)
+        if sender.state == UIGestureRecognizerState.began {
+            let point: CGPoint = sender.location(in: self.listsTableView)
+            let indexPath = self.listsTableView.indexPathForRow(at: point)
+            
+            if let _ = indexPath {
+                //print(indexPath!)
+                callActionSheet(indexPath!)
+            }
         }
-        
     }
     
     
@@ -409,7 +404,6 @@ extension ListsViewController {
         actionSheet.addAction(cancel)
         
         self.present(actionSheet, animated: true, completion: nil)
-        
     }
     
     
@@ -534,3 +528,4 @@ extension ListsViewController {
     }
     
 }
+
