@@ -9,9 +9,10 @@
 import UIKit
 import SafariServices
 
-class ListDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+final class ListDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var listDetailTableView: UITableView!
+
     @IBOutlet weak var domainInfoView: UIView!
     @IBOutlet weak var domainIcon: UIImageView?
     @IBOutlet weak var domainHost: UILabel!
@@ -36,10 +37,8 @@ class ListDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.view.alpha = 1.0
     
-        //let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ListDetailViewController.handlePan(gestureRecognizer:)))
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ListDetailViewController.handlePan(gestureRecognizer:)))
         self.view.addGestureRecognizer(panGestureRecognizer)
-        
         
         // TableView
     
@@ -308,6 +307,9 @@ extension ListDetailViewController {
         } else if gestureRecognizer.state == .changed {
             
             let translation = gestureRecognizer.translation(in: self.view)
+
+            if (gestureRecognizer.view!.center.y < UIScreen.main.bounds.height/2) { return }
+            
             gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: gestureRecognizer.view!.center.y + translation.y)
             gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
             
@@ -335,12 +337,13 @@ extension ListDetailViewController {
                 self.dismiss(animated: true, completion: nil)
             } else {
                 //print("up")
-                UIView.animate(withDuration: 0.2, delay: 0.00, options: .curveEaseOut, animations: {
+                UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
                     gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: UIScreen.main.bounds.height/2)
                 }, completion: nil)
             }
         }
         
     }
+    
     
 }
