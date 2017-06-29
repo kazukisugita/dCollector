@@ -39,7 +39,8 @@ class ModalAnimatedTransitoning: NSObject, UIViewControllerAnimatedTransitioning
         let appearedFrame = transitionContext.finalFrame(for: animatingVC!)
         var dismissedFrame = appearedFrame
         
-        dismissedFrame.origin.y += dismissedFrame.size.height
+        //dismissedFrame.origin.y += dismissedFrame.size.height
+        dismissedFrame.origin.x += dismissedFrame.size.width
         
         let initialFrame = isPresentation ? dismissedFrame : appearedFrame
         let finalFrame = isPresentation ? appearedFrame : dismissedFrame

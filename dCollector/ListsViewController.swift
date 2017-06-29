@@ -164,12 +164,12 @@ extension ListsViewController {
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //print("didSelectRowAtIndexPath")
-    }
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        //print("didSelectRowAtIndexPath")
+//    }
     
     func _tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+                
         tableView.deselectRow(at: indexPath, animated: false)
         self.selectedDomain = RealmManager.getAllDomain()[indexPath.row]
         
@@ -189,6 +189,7 @@ extension ListsViewController {
         listsDetailVC.modalPresentationStyle = .custom
         
         self.present(listsDetailVC, animated: true, completion: nil)
+ 
         listsDetailVC.selectedDomain = RealmManager.getAllDomain()[indexPath.row]
     }
     
