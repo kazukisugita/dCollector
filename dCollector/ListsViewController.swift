@@ -48,9 +48,9 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         listsTableView.delegate = self
         listsTableView.dataSource = self
         
-        listsTableView.rowHeight = 60.0
-        listsTableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
-        listsTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
+        listsTableView.rowHeight = 72.0 + 20.0
+        listsTableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        //listsTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
         let barHeight = self.navigationController!.navigationBar.bounds.height
         listsTableView.contentInset = UIEdgeInsetsMake((barHeight-1.0), 0.0, 0.0, 0.0)
         

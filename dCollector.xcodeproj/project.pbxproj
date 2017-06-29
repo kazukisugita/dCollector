@@ -22,7 +22,7 @@
 		BB3A66641ED81299003E7CC9 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3A66631ED81299003E7CC9 /* AppSettings.swift */; };
 		BB3A66661ED8192D003E7CC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB3A66651ED8192D003E7CC9 /* SystemConfiguration.framework */; };
 		BB3D02891ECC082200604435 /* ListsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D02871ECC082200604435 /* ListsTableViewCell.swift */; };
-		BB3D028A1ECC082200604435 /* ListsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB3D02881ECC082200604435 /* ListsTableViewCell.xib */; };
+		BB3D028A1ECC082200604435 /* _ListsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB3D02881ECC082200604435 /* _ListsTableViewCell.xib */; };
 		BB3D028F1ECC3C7F00604435 /* ListDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D028D1ECC3C7F00604435 /* ListDetailTableViewCell.swift */; };
 		BB3D02901ECC3C7F00604435 /* ListDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB3D028E1ECC3C7F00604435 /* ListDetailTableViewCell.xib */; };
 		BB7783571EB8A77E004C132E /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7783561EB8A77E004C132E /* ShareViewController.swift */; };
@@ -30,6 +30,7 @@
 		BB77835E1EB8A77E004C132E /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BB7783541EB8A77E004C132E /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BB7783961EB8B169004C132E /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB7783951EB8B169004C132E /* AppIcon.xcassets */; };
 		BBA2E4351F04D31800074357 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4341F04D31800074357 /* NavigationController.swift */; };
+		BBA5C3611F04EED400FFD815 /* ListsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBA5C3601F04EED400FFD815 /* ListsTableViewCell.xib */; };
 		BBC063781EC5B02B00840A40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC0636A1EC5B02B00840A40 /* AppDelegate.swift */; };
 		BBC0637B1EC5B02B00840A40 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC0636D1EC5B02B00840A40 /* Realm.swift */; };
 		BBC0637C1EC5B02B00840A40 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC0636E1EC5B02B00840A40 /* RealmManager.swift */; };
@@ -83,7 +84,7 @@
 		BB3A66631ED81299003E7CC9 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		BB3A66651ED8192D003E7CC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BB3D02871ECC082200604435 /* ListsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsTableViewCell.swift; sourceTree = "<group>"; };
-		BB3D02881ECC082200604435 /* ListsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListsTableViewCell.xib; sourceTree = "<group>"; };
+		BB3D02881ECC082200604435 /* _ListsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = _ListsTableViewCell.xib; sourceTree = "<group>"; };
 		BB3D028D1ECC3C7F00604435 /* ListDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailTableViewCell.swift; sourceTree = "<group>"; };
 		BB3D028E1ECC3C7F00604435 /* ListDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListDetailTableViewCell.xib; sourceTree = "<group>"; };
 		BB7783121EB89EEA004C132E /* dCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +94,7 @@
 		BB77835B1EB8A77E004C132E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB7783951EB8B169004C132E /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
 		BBA2E4341F04D31800074357 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		BBA5C3601F04EED400FFD815 /* ListsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListsTableViewCell.xib; sourceTree = "<group>"; };
 		BBC0636A1EC5B02B00840A40 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC0636D1EC5B02B00840A40 /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		BBC0636E1EC5B02B00840A40 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -255,7 +257,8 @@
 			isa = PBXGroup;
 			children = (
 				BB3D02871ECC082200604435 /* ListsTableViewCell.swift */,
-				BB3D02881ECC082200604435 /* ListsTableViewCell.xib */,
+				BBA5C3601F04EED400FFD815 /* ListsTableViewCell.xib */,
+				BB3D02881ECC082200604435 /* _ListsTableViewCell.xib */,
 				BB3D028D1ECC3C7F00604435 /* ListDetailTableViewCell.swift */,
 				BB3D028E1ECC3C7F00604435 /* ListDetailTableViewCell.xib */,
 			);
@@ -367,7 +370,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB3D028A1ECC082200604435 /* ListsTableViewCell.xib in Resources */,
+				BB3D028A1ECC082200604435 /* _ListsTableViewCell.xib in Resources */,
+				BBA5C3611F04EED400FFD815 /* ListsTableViewCell.xib in Resources */,
 				BBC0637F1EC5B02B00840A40 /* Launch.xib in Resources */,
 				BB063C831ED6DD0700A1DE1C /* Licenses.plist in Resources */,
 				BBF6D0E71EED7F7200F87F88 /* Localizable.strings in Resources */,

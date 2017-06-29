@@ -20,6 +20,7 @@ enum Colors {
     case navHeader
     case textBlack_v2
     case textBlack_light_v2
+    case shadow
 }
 
 extension UIColor {
@@ -50,6 +51,8 @@ extension UIColor {
             hexStr = "444444"
         case .textBlack_light_v2:
             hexStr = "CCCCCC"
+        case .shadow:
+            hexStr = "000000"
         }
         
         let alpha = alpha

@@ -122,7 +122,7 @@
             <objects>
                 <navigationController id="vBA-vv-lOR" customClass="NavigationController" customModule="dCollector" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Collection" image="tabbar-icon-lists" id="41E-s3-Gyn"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="GHK-3e-df2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="GHK-3e-df2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
@@ -488,8 +488,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="29J-sM-IGJ">
-                        <barButtonItem key="rightBarButtonItem" image="ic-setting" id="A9k-vw-yQH">
-                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <barButtonItem key="rightBarButtonItem" image="menu" id="A9k-vw-yQH">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -520,6 +520,7 @@
         <image name="close" width="45" height="45"/>
         <image name="extensionGuid" width="621" height="1104"/>
         <image name="ic-setting" width="20" height="20"/>
+        <image name="menu" width="38" height="23"/>
         <image name="tabbar-icon-lists" width="30" height="30"/>
     </resources>
 </document>
