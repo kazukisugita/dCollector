@@ -7,6 +7,20 @@
 //
 
 import UIKit
+import Foundation
+
+enum Colors {
+    case textBlack
+    case grayBack
+    case littleGray
+    case blue1
+    case textLight
+    case defaultBackground
+    // v2
+    case navHeader
+    case textBlack_v2
+    case textBlack_light_v2
+}
 
 extension UIColor {
     
@@ -29,6 +43,13 @@ extension UIColor {
             hexStr = "4E4E4E"
         case .defaultBackground:
             hexStr = "EFEFF4"
+        // v2
+        case .navHeader:
+            hexStr = "0087EC"
+        case .textBlack_v2:
+            hexStr = "444444"
+        case .textBlack_light_v2:
+            hexStr = "CCCCCC"
         }
         
         let alpha = alpha

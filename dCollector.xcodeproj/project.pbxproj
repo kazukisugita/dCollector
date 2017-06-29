@@ -29,6 +29,7 @@
 		BB77835A1EB8A77E004C132E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB7783581EB8A77E004C132E /* MainInterface.storyboard */; };
 		BB77835E1EB8A77E004C132E /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BB7783541EB8A77E004C132E /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BB7783961EB8B169004C132E /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB7783951EB8B169004C132E /* AppIcon.xcassets */; };
+		BBA2E4351F04D31800074357 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4341F04D31800074357 /* NavigationController.swift */; };
 		BBC063781EC5B02B00840A40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC0636A1EC5B02B00840A40 /* AppDelegate.swift */; };
 		BBC0637B1EC5B02B00840A40 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC0636D1EC5B02B00840A40 /* Realm.swift */; };
 		BBC0637C1EC5B02B00840A40 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC0636E1EC5B02B00840A40 /* RealmManager.swift */; };
@@ -36,7 +37,6 @@
 		BBC063801EC5B02B00840A40 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC063731EC5B02B00840A40 /* ListDetailViewController.swift */; };
 		BBC063821EC5B02B00840A40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC063751EC5B02B00840A40 /* Main.storyboard */; };
 		BBDEB0711EC97A4100E85572 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDEB0701EC97A4100E85572 /* UIColorExtension.swift */; };
-		BBDEB0731EC97ACF00E85572 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDEB0721EC97ACF00E85572 /* AppColors.swift */; };
 		BBDEB0861EC9D67100E85572 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDEB0851EC9D67100E85572 /* Transaction.swift */; };
 		BBF6D0E41EED7B5100F87F88 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF6D0E31EED7B5100F87F88 /* StringExtension.swift */; };
 		BBF6D0E71EED7F7200F87F88 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBF6D0E91EED7F7200F87F88 /* Localizable.strings */; };
@@ -92,6 +92,7 @@
 		BB7783591EB8A77E004C132E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		BB77835B1EB8A77E004C132E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB7783951EB8B169004C132E /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
+		BBA2E4341F04D31800074357 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		BBC0636A1EC5B02B00840A40 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC0636D1EC5B02B00840A40 /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		BBC0636E1EC5B02B00840A40 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -101,7 +102,6 @@
 		BBC063731EC5B02B00840A40 /* ListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
 		BBC063751EC5B02B00840A40 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BBDEB0701EC97A4100E85572 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
-		BBDEB0721EC97ACF00E85572 /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		BBDEB0851EC9D67100E85572 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		BBF6D0E31EED7B5100F87F88 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		BBF6D0E81EED7F7200F87F88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -171,7 +171,6 @@
 			children = (
 				BB2D01511EBD673F00D13D35 /* AppGroup.swift */,
 				BBDEB0701EC97A4100E85572 /* UIColorExtension.swift */,
-				BBDEB0721EC97ACF00E85572 /* AppColors.swift */,
 				BB3A66631ED81299003E7CC9 /* AppSettings.swift */,
 				BBF6D0E31EED7B5100F87F88 /* StringExtension.swift */,
 			);
@@ -210,6 +209,7 @@
 			children = (
 				BB2B05091EF4D32400339B5E /* ModalSystem */,
 				BB1948051ECD86CB0065A473 /* Assets.xcassets */,
+				BBA2E4341F04D31800074357 /* NavigationController.swift */,
 				BBC0636A1EC5B02B00840A40 /* AppDelegate.swift */,
 				BBC0636F1EC5B02B00840A40 /* dCollector.entitlements */,
 				BBC063711EC5B02B00840A40 /* Info.plist */,
@@ -447,13 +447,13 @@
 				BB063C811ED6D9EA00A1DE1C /* LicenseViewController.swift in Sources */,
 				BB063C871ED6E35800A1DE1C /* FileName.swift in Sources */,
 				BBDEB0861EC9D67100E85572 /* Transaction.swift in Sources */,
-				BBDEB0731EC97ACF00E85572 /* AppColors.swift in Sources */,
 				BB3D02891ECC082200604435 /* ListsTableViewCell.swift in Sources */,
 				BB1CFA321EE69F7A00B58C57 /* ListsViewController.swift in Sources */,
 				BB3D028F1ECC3C7F00604435 /* ListDetailTableViewCell.swift in Sources */,
 				BBC0637B1EC5B02B00840A40 /* Realm.swift in Sources */,
 				BBC0637C1EC5B02B00840A40 /* RealmManager.swift in Sources */,
 				BB063C851ED6DF5F00A1DE1C /* License.swift in Sources */,
+				BBA2E4351F04D31800074357 /* NavigationController.swift in Sources */,
 				BB063C7F1ED6CB1C00A1DE1C /* MoreTableViewController.swift in Sources */,
 				BB3A66641ED81299003E7CC9 /* AppSettings.swift in Sources */,
 				BBC063801EC5B02B00840A40 /* ListDetailViewController.swift in Sources */,
