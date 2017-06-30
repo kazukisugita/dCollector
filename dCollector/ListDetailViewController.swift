@@ -21,12 +21,13 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     
     var selectedDomain: Domain? {
         didSet {
-            configureDomainView()
+            configureDomain()
         }
     }
     var urls: [Url] = []
     
-    fileprivate var selfViewPanDirectionY: CGFloat = 0.0
+    fileprivate var selfViewPanDirectionX: CGFloat = 0.0
+    fileprivate var panBlock: Bool = false
     
 
     override func viewDidLoad() {
@@ -45,10 +46,10 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         listDetailTableView.delegate = self
         listDetailTableView.dataSource = self
         
-        listDetailTableView.rowHeight = 70.0
-        listDetailTableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
-        listDetailTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
-        listDetailTableView.contentInset = UIEdgeInsetsMake(24.0, 0.0, 24.0, 0.0)
+        listDetailTableView.rowHeight = 98.0 + 20.0
+        listDetailTableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        //listDetailTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
+        listDetailTableView.contentInset = UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0)
         
         //let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(ListDetailViewController.swipeDownTableView(sendor:)))
         //swipeGesture.direction = .down
@@ -85,16 +86,34 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         
         // Domain Info View
         
-        domainInfoView.layer.cornerRadius = 12
-        domainInfoView.isUserInteractionEnabled = true
-        let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.callSafariInHostPage))
-        domainInfoView.addGestureRecognizer(domainInfoViewTap)
-        
-
+        configureDomainInfoView()
+    
     }
     
     
-    func configureDomainView() {
+    func configureDomainInfoView() {
+        
+        //domainInfoView.layer.cornerRadius = 12
+        //domainInfoView.isUserInteractionEnabled = true
+        //let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.callSafariInHostPage))
+        //domainInfoView.addGestureRecognizer(domainInfoViewTap)
+        
+    
+        let leftColor = UIColor.hexStrRaw(hex: "#9FA8DA", alpha: 1.0).cgColor
+        let rightColor = UIColor.hexStrRaw(hex: "#90CAF9", alpha: 1.0).cgColor
+        
+        let gradientColors: [CGColor] = [leftColor, rightColor]
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.colors = gradientColors
+        gradientLayer.frame = domainInfoView.bounds
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+        
+        domainInfoView.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    
+    func configureDomain() {
         if let _domain = selectedDomain {
             self.domainTitle?.text = _domain.title
             self.domainHost?.text = _domain.name
@@ -120,12 +139,12 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
         self.dismiss(animated: true, completion: nil)
     }
-    
+        
     
     func callSafariInHostPage() {
         let url: String = "https://" + self.domainHost.text!
         let safariViewController = SFSafariViewController(url: URL(string: url)!)
-        safariViewController.modalPresentationStyle = .popover
+        //safariViewController.modalPresentationStyle = .popover
         present(safariViewController, animated: true, completion: nil);
     }
     
@@ -164,6 +183,8 @@ extension ListDetailViewController {
     /// セルが選択された時に呼ばれるデリゲートメソッド
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        print("tap tap !!")
+        
         tableView.deselectRow(at: indexPath, animated: false)
         
         var url: Url!
@@ -171,11 +192,12 @@ extension ListDetailViewController {
         url = sortedUrls![indexPath.row]
         
         let safariViewController = SFSafariViewController(url: URL(string: url.url)!)
-        safariViewController.modalPresentationStyle = .popover
+        //safariViewController.modalPresentationStyle = .popover
         present(safariViewController, animated: true, completion: nil);
     }
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        print("hogehoge!!")
     }
     
     
@@ -304,17 +326,18 @@ extension ListDetailViewController {
         
         if gestureRecognizer.state == .began {
             
-        } else if gestureRecognizer.state == .changed {
+        } else if gestureRecognizer.state == .changed && panBlock == false {
             
             let translation = gestureRecognizer.translation(in: self.view)
 
-            if (gestureRecognizer.view!.center.y < UIScreen.main.bounds.height/2) { return }
+            if ((gestureRecognizer.view!.center.x + translation.x) <= UIScreen.main.bounds.width/2) { return }
             
-            gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: gestureRecognizer.view!.center.y + translation.y)
+            gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x + translation.x, y: gestureRecognizer.view!.center.y)
             gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
             
-            selfViewPanDirectionY = translation.y
-            //print("selfViewPanDirectionY: \(selfViewPanDirectionY)")
+            selfViewPanDirectionX = translation.x
+            
+            //print(gestureRecognizer.view!.center.x)
             
         } else if gestureRecognizer.state == .ended {
             /*
@@ -331,14 +354,14 @@ extension ListDetailViewController {
             }
             */
             
-            if (selfViewPanDirectionY > 0) {
+            if (selfViewPanDirectionX > 0) {
                 //print("down")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
                 self.dismiss(animated: true, completion: nil)
             } else {
                 //print("up")
                 UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
-                    gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: UIScreen.main.bounds.height/2)
+                    self.view!.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
                 }, completion: nil)
             }
         }

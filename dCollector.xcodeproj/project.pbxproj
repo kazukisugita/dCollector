@@ -19,12 +19,13 @@
 		BB2B050D1EF4D34100339B5E /* ModalTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2B050B1EF4D34100339B5E /* ModalTransition.swift */; };
 		BB2D01521EBD673F00D13D35 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2D01511EBD673F00D13D35 /* AppGroup.swift */; };
 		BB2D01531EBD673F00D13D35 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2D01511EBD673F00D13D35 /* AppGroup.swift */; };
+		BB3417CC1F05FF8800800B9F /* ListDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB3417CB1F05FF8800800B9F /* ListDetailTableViewCell.xib */; };
 		BB3A66641ED81299003E7CC9 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3A66631ED81299003E7CC9 /* AppSettings.swift */; };
 		BB3A66661ED8192D003E7CC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB3A66651ED8192D003E7CC9 /* SystemConfiguration.framework */; };
 		BB3D02891ECC082200604435 /* ListsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D02871ECC082200604435 /* ListsTableViewCell.swift */; };
 		BB3D028A1ECC082200604435 /* _ListsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB3D02881ECC082200604435 /* _ListsTableViewCell.xib */; };
 		BB3D028F1ECC3C7F00604435 /* ListDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D028D1ECC3C7F00604435 /* ListDetailTableViewCell.swift */; };
-		BB3D02901ECC3C7F00604435 /* ListDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB3D028E1ECC3C7F00604435 /* ListDetailTableViewCell.xib */; };
+		BB3D02901ECC3C7F00604435 /* _ListDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB3D028E1ECC3C7F00604435 /* _ListDetailTableViewCell.xib */; };
 		BB7783571EB8A77E004C132E /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7783561EB8A77E004C132E /* ShareViewController.swift */; };
 		BB77835A1EB8A77E004C132E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB7783581EB8A77E004C132E /* MainInterface.storyboard */; };
 		BB77835E1EB8A77E004C132E /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BB7783541EB8A77E004C132E /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -81,12 +82,13 @@
 		BB2B050A1EF4D34100339B5E /* ModalPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalPresentationController.swift; sourceTree = "<group>"; };
 		BB2B050B1EF4D34100339B5E /* ModalTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalTransition.swift; sourceTree = "<group>"; };
 		BB2D01511EBD673F00D13D35 /* AppGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
+		BB3417CB1F05FF8800800B9F /* ListDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListDetailTableViewCell.xib; sourceTree = "<group>"; };
 		BB3A66631ED81299003E7CC9 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		BB3A66651ED8192D003E7CC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BB3D02871ECC082200604435 /* ListsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsTableViewCell.swift; sourceTree = "<group>"; };
 		BB3D02881ECC082200604435 /* _ListsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = _ListsTableViewCell.xib; sourceTree = "<group>"; };
 		BB3D028D1ECC3C7F00604435 /* ListDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailTableViewCell.swift; sourceTree = "<group>"; };
-		BB3D028E1ECC3C7F00604435 /* ListDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListDetailTableViewCell.xib; sourceTree = "<group>"; };
+		BB3D028E1ECC3C7F00604435 /* _ListDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = _ListDetailTableViewCell.xib; sourceTree = "<group>"; };
 		BB7783121EB89EEA004C132E /* dCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB7783541EB8A77E004C132E /* ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB7783561EB8A77E004C132E /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -260,7 +262,8 @@
 				BBA5C3601F04EED400FFD815 /* ListsTableViewCell.xib */,
 				BB3D02881ECC082200604435 /* _ListsTableViewCell.xib */,
 				BB3D028D1ECC3C7F00604435 /* ListDetailTableViewCell.swift */,
-				BB3D028E1ECC3C7F00604435 /* ListDetailTableViewCell.xib */,
+				BB3417CB1F05FF8800800B9F /* ListDetailTableViewCell.xib */,
+				BB3D028E1ECC3C7F00604435 /* _ListDetailTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -374,10 +377,11 @@
 				BBA5C3611F04EED400FFD815 /* ListsTableViewCell.xib in Resources */,
 				BBC0637F1EC5B02B00840A40 /* Launch.xib in Resources */,
 				BB063C831ED6DD0700A1DE1C /* Licenses.plist in Resources */,
+				BB3417CC1F05FF8800800B9F /* ListDetailTableViewCell.xib in Resources */,
 				BBF6D0E71EED7F7200F87F88 /* Localizable.strings in Resources */,
 				BB1948061ECD86CB0065A473 /* Assets.xcassets in Resources */,
 				BBC063821EC5B02B00840A40 /* Main.storyboard in Resources */,
-				BB3D02901ECC3C7F00604435 /* ListDetailTableViewCell.xib in Resources */,
+				BB3D02901ECC3C7F00604435 /* _ListDetailTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

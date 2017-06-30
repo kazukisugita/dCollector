@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,17 +16,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon180x180" translatesAutoresizingMaskIntoConstraints="NO" id="9fR-zT-BrN">
-                    <rect key="frame" x="157" y="303" width="60" height="60"/>
+                    <rect key="frame" x="151" y="297" width="72" height="72"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="OFo-Jv-dsP"/>
-                        <constraint firstAttribute="height" constant="60" id="qQz-xZ-nDF"/>
+                        <constraint firstAttribute="width" constant="72" id="OFo-Jv-dsP"/>
+                        <constraint firstAttribute="height" constant="72" id="qQz-xZ-nDF"/>
                     </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="9fR-zT-BrN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="DNC-nX-Ngg"/>
-                <constraint firstItem="9fR-zT-BrN" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NtU-Y6-wgZ"/>
+                <constraint firstItem="9fR-zT-BrN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-0.5" id="DNC-nX-Ngg"/>
+                <constraint firstItem="9fR-zT-BrN" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-0.5" id="NtU-Y6-wgZ"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>

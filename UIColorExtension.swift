@@ -20,6 +20,7 @@ enum Colors {
     case navHeader
     case textBlack_v2
     case textBlack_light_v2
+    case textBlack_light_Domains_v2
     case shadow
 }
 
@@ -51,6 +52,8 @@ extension UIColor {
             hexStr = "444444"
         case .textBlack_light_v2:
             hexStr = "CCCCCC"
+        case .textBlack_light_Domains_v2:
+            hexStr = "95989A"
         case .shadow:
             hexStr = "000000"
         }
@@ -69,6 +72,25 @@ extension UIColor {
             return UIColor.white;
         }
     }
+    
+    
+    class func hexStrRaw(hex: String, alpha: CGFloat) -> UIColor {
+        var hexStr: NSString = hex as NSString
+        let alpha = alpha
+        hexStr = hexStr.replacingOccurrences(of: "#", with: "") as NSString
+        let scanner = Scanner(string: hexStr as String)
+        var color: UInt32 = 0
+        if scanner.scanHexInt32(&color) {
+            let r = CGFloat((color & 0xFF0000) >> 16) / 255.0
+            let g = CGFloat((color & 0x00FF00) >> 8) / 255.0
+            let b = CGFloat(color & 0x0000FF) / 255.0
+            return UIColor(red:r,green:g,blue:b,alpha:alpha)
+        } else {
+            print("invalid hex string")
+            return UIColor.white;
+        }
+    }
+    
 }
 
 

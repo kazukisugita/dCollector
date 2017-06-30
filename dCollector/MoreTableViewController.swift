@@ -21,6 +21,8 @@ class MoreTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "SETTING & LICENSE"
+        
         if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
             self.appVersionLabel.text = "ver " + version
         }
@@ -35,6 +37,12 @@ class MoreTableViewController: UITableViewController {
             }
         }
     }
+    
+    
+    @IBAction func popView() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
 }
 
 
@@ -110,6 +118,14 @@ extension MoreTableViewController {
         }
         return "License"
     }
+    
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.textColor = UIColor.hexStr(type: .textBlack_v2, alpha: 1.0)
+        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+    }
+    
 }
 
 extension MoreTableViewController {

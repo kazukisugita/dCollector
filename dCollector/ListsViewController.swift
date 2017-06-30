@@ -52,7 +52,7 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         listsTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         //listsTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
         let barHeight = self.navigationController!.navigationBar.bounds.height
-        listsTableView.contentInset = UIEdgeInsetsMake((barHeight-1.0), 0.0, 0.0, 0.0)
+        listsTableView.contentInset = UIEdgeInsetsMake((barHeight-1.0) + 10.0, 0.0, 0.0, 0.0)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshTable), name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
         

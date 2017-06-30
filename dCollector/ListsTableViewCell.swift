@@ -23,7 +23,7 @@ class ListsTableViewCell: UITableViewCell {
         
         //domainCount.textColor = UIColor.hexStr(type: .blue1, alpha: 1.0)
         domainHost.textColor = UIColor.hexStr(type: .textBlack_light_v2, alpha: 1.0)
-        domainTitle.textColor = UIColor.hexStr(type: .textBlack_v2, alpha: 1.0)
+        domainTitle.textColor = UIColor.hexStr(type: .textBlack_light_Domains_v2, alpha: 1.0)
         
         containerView.clipsToBounds = false
         containerView.layer.shadowOffset = CGSize(width: 0, height: 1)
