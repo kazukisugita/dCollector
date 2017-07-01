@@ -682,6 +682,9 @@
                     <navigationItem key="navigationItem" id="xxS-Sy-ZK2">
                         <barButtonItem key="leftBarButtonItem" image="back-nav" width="16" id="M5P-xa-9rf">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="popView" destination="z7w-zw-bqf" id="p8t-Gl-Vqb"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>

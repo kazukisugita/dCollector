@@ -91,9 +91,6 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         
         configureDomainInfoView()
     
-        createColorSets()
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.handleTapGesture(gestureRecognizer:)))
-        domainInfoView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     
@@ -117,6 +114,11 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         
         domainInfoView.layer.insertSublayer(gradientLayer, at: 0)
         */
+        
+        createColorSets()
+        createGradientLayer()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.handleTapGesture(gestureRecognizer:)))
+        domainInfoView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     
@@ -190,8 +192,6 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        createGradientLayer()
     }
     
     
@@ -250,8 +250,9 @@ extension ListDetailViewController {
         url = sortedUrls![indexPath.row]
         
         let safariViewController = SFSafariViewController(url: URL(string: url.url)!)
-        safariViewController.modalPresentationStyle = .popover
+        //safariViewController.modalPresentationStyle = .popover
         present(safariViewController, animated: true, completion: nil);
+        //guard let root = UIApplication.shared.keyWindow?.rootViewController else { return }
     }
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {

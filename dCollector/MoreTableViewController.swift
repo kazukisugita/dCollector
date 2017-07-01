@@ -29,6 +29,7 @@ class MoreTableViewController: UITableViewController, UIGestureRecognizerDelegat
         if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
             self.appVersionLabel.text = "ver " + version
         }
+        
     }
     
     

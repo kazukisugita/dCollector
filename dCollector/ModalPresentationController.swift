@@ -21,6 +21,7 @@ class ModalPresentationController: UIPresentationController, UIAdaptivePresentat
     }
     
     override func presentationTransitionWillBegin() {
+        
         super.presentationTransitionWillBegin()
         dimmingView.setNeedsLayout()
         
@@ -36,6 +37,7 @@ class ModalPresentationController: UIPresentationController, UIAdaptivePresentat
     }
     
     override func dismissalTransitionWillBegin() {
+    
         super.dismissalTransitionWillBegin()
         dimmingView.setNeedsLayout()
         
@@ -51,11 +53,12 @@ class ModalPresentationController: UIPresentationController, UIAdaptivePresentat
     }
     
     override func containerViewWillLayoutSubviews() {
+       
         super.containerViewWillLayoutSubviews()
         
         if let containerBounds = containerView?.bounds {
-            dimmingView.frame = containerBounds
-            presentedView?.frame = containerBounds
+            //dimmingView.frame = containerBounds
+            //presentedView?.frame = containerBounds
         }
     }
     
