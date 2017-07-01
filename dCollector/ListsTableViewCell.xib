@@ -21,16 +21,6 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qa3-Z9-FiS">
                         <rect key="frame" x="16" y="10" width="343" height="71.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Z7-A3-ufC">
-                                <rect key="frame" x="70" y="17" width="205" height="20"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="Rg0-ZE-NP0"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ako-m1-Med">
                                 <rect key="frame" x="16" y="17" width="36" height="36"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -64,6 +54,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Z7-A3-ufC">
+                                <rect key="frame" x="70" y="13" width="205" height="28"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="Rg0-ZE-NP0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -77,7 +77,7 @@
                             <constraint firstItem="9lf-LP-RzI" firstAttribute="leading" secondItem="2Z7-A3-ufC" secondAttribute="trailing" constant="18" id="aBk-4r-oKr"/>
                             <constraint firstAttribute="trailing" secondItem="9lf-LP-RzI" secondAttribute="trailing" id="e47-Ca-0Bn"/>
                             <constraint firstAttribute="height" constant="72" id="f2j-wY-Wjp"/>
-                            <constraint firstItem="7Yz-ki-uT4" firstAttribute="top" secondItem="2Z7-A3-ufC" secondAttribute="bottom" constant="2" id="qLV-3F-Jlf"/>
+                            <constraint firstItem="7Yz-ki-uT4" firstAttribute="top" secondItem="2Z7-A3-ufC" secondAttribute="bottom" constant="-2" id="qLV-3F-Jlf"/>
                             <constraint firstItem="Ako-m1-Med" firstAttribute="leading" secondItem="Qa3-Z9-FiS" secondAttribute="leading" constant="16" id="zbn-0g-erq"/>
                             <constraint firstItem="2Z7-A3-ufC" firstAttribute="leading" secondItem="Ako-m1-Med" secondAttribute="trailing" constant="18" id="zmu-0A-e9R"/>
                         </constraints>

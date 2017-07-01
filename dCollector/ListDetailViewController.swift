@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-final class ListDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+final class ListDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CAAnimationDelegate {
 
     @IBOutlet weak var listDetailTableView: UITableView!
 
@@ -18,6 +18,9 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var domainHost: UILabel!
     @IBOutlet weak var domainTitle: UILabel!
     @IBOutlet weak var domainDescription: UILabel!
+    var gradientLayer: CAGradientLayer!
+    var colorSets = [[CGColor]]()
+    var currentColorSet: Int!
     
     var selectedDomain: Domain? {
         didSet {
@@ -88,6 +91,9 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         
         configureDomainInfoView()
     
+        createColorSets()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.handleTapGesture(gestureRecognizer:)))
+        domainInfoView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     
@@ -98,7 +104,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         //let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.callSafariInHostPage))
         //domainInfoView.addGestureRecognizer(domainInfoViewTap)
         
-    
+        /*
         let leftColor = UIColor.hexStrRaw(hex: "#9FA8DA", alpha: 1.0).cgColor
         let rightColor = UIColor.hexStrRaw(hex: "#90CAF9", alpha: 1.0).cgColor
         
@@ -110,6 +116,58 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
         
         domainInfoView.layer.insertSublayer(gradientLayer, at: 0)
+        */
+    }
+    
+    
+    func createGradientLayer() {
+        gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.domainInfoView.bounds
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+        gradientLayer.colors = colorSets[currentColorSet]
+        self.domainInfoView.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+
+    func createColorSets() {
+        colorSets.append([UIColor.hexStrRaw(hex: "#F48FB1", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#EF9A9A", alpha: 1.0).cgColor])
+        colorSets.append([UIColor.hexStrRaw(hex: "#CE93D8", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#B39DDB", alpha: 1.0).cgColor])
+        colorSets.append([UIColor.hexStrRaw(hex: "#90CAF9", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#9FA8DA", alpha: 1.0).cgColor])
+        colorSets.append([UIColor.hexStrRaw(hex: "#81D4FA", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#80DEEA", alpha: 1.0).cgColor])
+        colorSets.append([UIColor.hexStrRaw(hex: "#4DB6AC", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#81C784", alpha: 1.0).cgColor])
+        colorSets.append([UIColor.hexStrRaw(hex: "#66BB6A", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#AED581", alpha: 1.0).cgColor])
+        colorSets.append([UIColor.hexStrRaw(hex: "#D6ED00", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#EAD201", alpha: 1.0).cgColor])
+        colorSets.append([UIColor.hexStrRaw(hex: "#FFCA28", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#FFA726", alpha: 1.0).cgColor])
+        colorSets.append([UIColor.hexStrRaw(hex: "#FFA726", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#FF7043", alpha: 1.0).cgColor])
+        colorSets.append([UIColor.hexStrRaw(hex: "#FF5722", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#FF8F8D", alpha: 1.0).cgColor])
+        currentColorSet = 0
+    }
+    
+    
+    func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
+        if currentColorSet < colorSets.count - 1 {
+            currentColorSet! += 1
+        }
+        else {
+            currentColorSet = 0
+        }
+        
+        let colorChangeAnimation = CABasicAnimation(keyPath: "colors")
+        colorChangeAnimation.duration = 0.4
+        colorChangeAnimation.toValue = colorSets[currentColorSet]
+        colorChangeAnimation.fillMode = kCAFillModeForwards
+        colorChangeAnimation.isRemovedOnCompletion = false
+        colorChangeAnimation.delegate = self
+        gradientLayer.add(colorChangeAnimation, forKey: "colorChange")
+    }
+    
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        //print("didStop")
+        if flag {
+            self.gradientLayer.colors = colorSets[currentColorSet]
+        }
     }
     
     
@@ -132,6 +190,8 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        createGradientLayer()
     }
     
     
