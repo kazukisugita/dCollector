@@ -122,7 +122,7 @@
             <objects>
                 <navigationController id="vBA-vv-lOR" customClass="NavigationController" customModule="dCollector" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Collection" image="tabbar-icon-lists" id="41E-s3-Gyn"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="GHK-3e-df2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="GHK-3e-df2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -491,7 +491,7 @@
                         <barButtonItem key="rightBarButtonItem" image="menu" width="38" id="A9k-vw-yQH">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="z7w-zw-bqf" kind="push" identifier="toMoreFromLists" id="LbJ-PL-eQU"/>
+                                <action selector="toMoreViewController" destination="eja-8F-XCy" id="QOk-uN-Igd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -505,6 +505,7 @@
                         <outlet property="successUrlInLoadingView" destination="AEV-cT-2rB" id="6wx-jT-aqI"/>
                         <outlet property="textInLoadingView" destination="xfr-rY-gz2" id="U9W-5E-P8f"/>
                         <segue destination="HyM-h8-MWL" kind="custom" identifier="toListDetailFromLists" animates="NO" id="dWT-hJ-cnV"/>
+                        <segue destination="z7w-zw-bqf" kind="push" identifier="toMoreFromLists" id="5uH-ny-qZ4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zE2-WS-Rvy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -604,7 +605,7 @@
                                     <constraint firstItem="8tC-jl-o9K" firstAttribute="top" secondItem="6GT-5o-KA3" secondAttribute="bottom" constant="10" id="y33-Q8-aUa"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="NUL-lb-pL1">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="NUL-lb-pL1">
                                 <rect key="frame" x="0.0" y="170" width="375" height="497"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -681,9 +682,6 @@
                     <navigationItem key="navigationItem" id="xxS-Sy-ZK2">
                         <barButtonItem key="leftBarButtonItem" image="back-nav" width="16" id="M5P-xa-9rf">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="popView" destination="z7w-zw-bqf" id="kHk-5v-KfK"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -692,13 +690,8 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jfr-gB-09d" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="89w-nW-ht5">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
             </objects>
-            <point key="canvasLocation" x="46" y="827"/>
+            <point key="canvasLocation" x="46" y="769"/>
         </scene>
     </scenes>
     <resources>

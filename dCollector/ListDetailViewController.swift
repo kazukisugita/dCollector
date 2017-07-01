@@ -144,7 +144,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     func callSafariInHostPage() {
         let url: String = "https://" + self.domainHost.text!
         let safariViewController = SFSafariViewController(url: URL(string: url)!)
-        //safariViewController.modalPresentationStyle = .popover
+        safariViewController.modalPresentationStyle = .popover
         present(safariViewController, animated: true, completion: nil);
     }
     
@@ -180,10 +180,8 @@ extension ListDetailViewController {
         return cell
     }
     
-    /// セルが選択された時に呼ばれるデリゲートメソッド
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        print("tap tap !!")
         
         tableView.deselectRow(at: indexPath, animated: false)
         
@@ -192,12 +190,12 @@ extension ListDetailViewController {
         url = sortedUrls![indexPath.row]
         
         let safariViewController = SFSafariViewController(url: URL(string: url.url)!)
-        //safariViewController.modalPresentationStyle = .popover
+        safariViewController.modalPresentationStyle = .popover
         present(safariViewController, animated: true, completion: nil);
     }
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        print("hogehoge!!")
+        //print("hogehoge!!")
     }
     
     

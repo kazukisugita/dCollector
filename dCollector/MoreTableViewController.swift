@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoreTableViewController: UITableViewController {
+class MoreTableViewController: UITableViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var appVersionLabel: UILabel!
     let license = License()
@@ -19,13 +19,21 @@ class MoreTableViewController: UITableViewController {
     fileprivate var tappedLicense = (githubText: "", licenseText: "")
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         
         self.navigationItem.title = "SETTING & LICENSE"
         
         if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
             self.appVersionLabel.text = "ver " + version
         }
+    }
+    
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     
@@ -42,6 +50,9 @@ class MoreTableViewController: UITableViewController {
     @IBAction func popView() {
         self.navigationController?.popToRootViewController(animated: true)
     }
+    
+    
+    
     
 }
 

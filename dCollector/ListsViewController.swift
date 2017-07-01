@@ -194,6 +194,11 @@ extension ListsViewController {
     }
     
     
+    @IBAction func toMoreViewController() {
+        performSegue(withIdentifier: "toMoreFromLists", sender: nil)
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         
         if (segue.identifier == "toListDetailFromLists") {
