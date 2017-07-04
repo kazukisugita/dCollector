@@ -43,34 +43,55 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BrowserSwitch" rowHeight="88" id="xMI-qq-nc1">
-                                <rect key="frame" x="0.0" y="100" width="375" height="88"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BrowserSwitch" rowHeight="88" id="xMI-qq-nc1" customClass="MoreBrowserSwitchTableViewCell" customModule="dCollector" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="99.5" width="375" height="88"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xMI-qq-nc1" id="xUl-z1-UHm">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="87.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dp4-MI-Tci">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dp4-MI-Tci">
                                             <rect key="frame" x="15" y="45" width="352" height="29"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Default"/>
                                                 <segment title="Safari"/>
                                                 <segment title="Chrome"/>
                                             </segments>
+                                            <connections>
+                                                <action selector="segmentChanged:" destination="xMI-qq-nc1" eventType="valueChanged" id="tfB-SR-3ts"/>
+                                            </connections>
                                         </segmentedControl>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open URL in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptn-EW-vQZ">
-                                            <rect key="frame" x="15" y="16" width="96" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptn-EW-vQZ">
+                                            <rect key="frame" x="15" y="12" width="34" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="browser-default" translatesAutoresizingMaskIntoConstraints="NO" id="hzt-h6-up2">
+                                            <rect key="frame" x="315" y="4" width="36" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="36" id="E9r-qt-64n"/>
+                                                <constraint firstAttribute="height" constant="36" id="cVj-EX-hVi"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="dp4-MI-Tci" firstAttribute="leading" secondItem="xUl-z1-UHm" secondAttribute="leading" constant="15" id="6Bn-6Q-HFJ"/>
+                                        <constraint firstAttribute="trailing" secondItem="dp4-MI-Tci" secondAttribute="trailing" constant="8" id="76D-PB-L6b"/>
+                                        <constraint firstItem="hzt-h6-up2" firstAttribute="top" secondItem="xUl-z1-UHm" secondAttribute="top" constant="4" id="CQZ-Ts-2cK"/>
+                                        <constraint firstAttribute="trailing" secondItem="hzt-h6-up2" secondAttribute="trailing" constant="24" id="TWO-ca-CvZ"/>
+                                        <constraint firstItem="dp4-MI-Tci" firstAttribute="top" secondItem="ptn-EW-vQZ" secondAttribute="bottom" constant="12" id="UoH-ex-Rem"/>
+                                        <constraint firstItem="dp4-MI-Tci" firstAttribute="top" secondItem="hzt-h6-up2" secondAttribute="bottom" constant="5" id="Wf2-Nc-6t1"/>
                                         <constraint firstItem="ptn-EW-vQZ" firstAttribute="leading" secondItem="xUl-z1-UHm" secondAttribute="leading" constant="15" id="qcI-fm-vJr"/>
-                                        <constraint firstItem="ptn-EW-vQZ" firstAttribute="top" secondItem="xUl-z1-UHm" secondAttribute="top" constant="16" id="xCc-te-Iaq"/>
+                                        <constraint firstItem="ptn-EW-vQZ" firstAttribute="top" secondItem="xUl-z1-UHm" secondAttribute="top" constant="12" id="xCc-te-Iaq"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="browserImage" destination="hzt-h6-up2" id="wMM-XP-4Io"/>
+                                    <outlet property="browserImageTrailing" destination="TWO-ca-CvZ" id="qaW-gd-s1w"/>
+                                    <outlet property="segment" destination="dp4-MI-Tci" id="4B2-DT-8F6"/>
+                                    <outlet property="title" destination="ptn-EW-vQZ" id="NHT-9I-Xyy"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -410,6 +431,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="browser-default" width="58" height="69"/>
         <image name="close" width="45" height="45"/>
         <image name="extensionGuid" width="621" height="1104"/>
         <image name="ic-setting" width="28" height="28"/>

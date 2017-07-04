@@ -170,10 +170,43 @@ extension ListDetailViewController {
         let sortedUrls = RealmManager.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false)
         url = sortedUrls![indexPath.row]
         
-        let safariViewController = SFSafariViewController(url: URL(string: url.url)!)
-        safariViewController.modalPresentationStyle = .popover
-        present(safariViewController, animated: true, completion: nil);
+        openBrowser(url: url)
     }
+    
+    
+    func openBrowser(url: Url) {
+        
+        switch AppSettings.broswerIs() {
+            
+        case Browsers.dDefault.hashValue:
+            let safariViewController = SFSafariViewController(url: URL(string: url.url)!)
+            safariViewController.modalPresentationStyle = .popover
+            present(safariViewController, animated: true, completion: nil);
+            
+        case Browsers.safari.hashValue:
+            let url: URL = URL(string:"\(url.url)")!
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            
+        case Browsers.chrome.hashValue:
+            
+            var urlStr = url.url
+            
+            if let range = url.url.range(of: "http://") {
+                urlStr.removeSubrange(range)
+            } else if let range = url.url.range(of: "https://") {
+                urlStr.removeSubrange(range)
+            }
+            
+            let _url: URL = URL(string:"googlechrome://\(urlStr)")!
+            UIApplication.shared.open(_url, options: [:], completionHandler: nil)
+            
+        default:
+            break
+        }
+        
+        
+    }
+    
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
     }

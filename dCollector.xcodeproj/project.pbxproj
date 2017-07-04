@@ -29,6 +29,7 @@
 		BB77835A1EB8A77E004C132E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB7783581EB8A77E004C132E /* MainInterface.storyboard */; };
 		BB77835E1EB8A77E004C132E /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BB7783541EB8A77E004C132E /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BB7783961EB8B169004C132E /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB7783951EB8B169004C132E /* AppIcon.xcassets */; };
+		BBAA326D1F0BB2C200AD97D4 /* MoreBrowserSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAA326C1F0BB2C200AD97D4 /* MoreBrowserSwitchTableViewCell.swift */; };
 		BBC063781EC5B02B00840A40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC0636A1EC5B02B00840A40 /* AppDelegate.swift */; };
 		BBC0637B1EC5B02B00840A40 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC0636D1EC5B02B00840A40 /* Realm.swift */; };
 		BBC0637C1EC5B02B00840A40 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC0636E1EC5B02B00840A40 /* RealmManager.swift */; };
@@ -92,6 +93,7 @@
 		BB7783591EB8A77E004C132E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		BB77835B1EB8A77E004C132E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB7783951EB8B169004C132E /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
+		BBAA326C1F0BB2C200AD97D4 /* MoreBrowserSwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreBrowserSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		BBC0636A1EC5B02B00840A40 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC0636D1EC5B02B00840A40 /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		BBC0636E1EC5B02B00840A40 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				BB3D02881ECC082200604435 /* ListsTableViewCell.xib */,
 				BB3D028D1ECC3C7F00604435 /* ListDetailTableViewCell.swift */,
 				BB3D028E1ECC3C7F00604435 /* ListDetailTableViewCell.xib */,
+				BBAA326C1F0BB2C200AD97D4 /* MoreBrowserSwitchTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				BBE178741F0B9A4100A0A646 /* NavigationController.swift in Sources */,
 				BBDEB0711EC97A4100E85572 /* UIColorExtension.swift in Sources */,
 				BB2D01521EBD673F00D13D35 /* AppGroup.swift in Sources */,
+				BBAA326D1F0BB2C200AD97D4 /* MoreBrowserSwitchTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
