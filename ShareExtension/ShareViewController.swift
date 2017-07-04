@@ -71,65 +71,66 @@ final class ShareViewController: UIViewController {
     func getExtensionContext() {
         
         let extensionItem: NSExtensionItem = self.extensionContext?.inputItems.first as! NSExtensionItem
-        let itemProvider = extensionItem.attachments?.first as! NSItemProvider
+        let itemProviders = extensionItem.attachments as! [NSItemProvider]
         let puclicURL = String(kUTTypeURL)  // "public.url"
         
-        // shareExtension で NSURL を取得
-        if itemProvider.hasItemConformingToTypeIdentifier(puclicURL) {
+        for itemProvider in itemProviders {
             
-            itemProvider.loadItem(forTypeIdentifier: puclicURL, options: nil, completionHandler: { (item, error) in
-                // NSURLを取得する
-                if let url: NSURL = item as? NSURL {
-                    let url_str = url.absoluteString!
-                    print("url_str: \(url_str)")
+            if itemProvider.hasItemConformingToTypeIdentifier(puclicURL) {
+                
+                itemProvider.loadItem(forTypeIdentifier: puclicURL, options: nil, completionHandler: { (item, error) in
                     
-                    let defaults = UserDefaults(suiteName: AppGroup.suiteName)!
-                    
-                    // 既存の確認
-                    if let arrayObject = defaults.object(forKey: AppGroup.keyName) as? Array<String> {
-                        self.shareString = arrayObject
+                    if let url: NSURL = item as? NSURL {
+                        let url_str = url.absoluteString!
+                        print("url_str: \(url_str)")
                         
-                        // 新規とUserDefaults内の重複を確認
-                        for object in arrayObject {
-                            if object == url_str {
-                                //self.shareString.append(url_str)
-                                //defaults.set(self.shareString, forKey: AppGroup.keyName)
-                                self.message.text = "Already Have"
-                                return
+                        let defaults = UserDefaults(suiteName: AppGroup.suiteName)!
+                        
+                        // 既存の確認
+                        if let arrayObject = defaults.object(forKey: AppGroup.keyName) as? Array<String> {
+                            self.shareString = arrayObject
+                            
+                            // 新規とUserDefaults内の重複を確認
+                            for object in arrayObject {
+                                if object == url_str {
+                                    //self.shareString.append(url_str)
+                                    //defaults.set(self.shareString, forKey: AppGroup.keyName)
+                                    self.message.text = "Already Have"
+                                    return
+                                }
+                            }
+                            
+                            self.shareString.append(url_str)
+                            defaults.set(self.shareString, forKey: AppGroup.keyName)
+                            
+                            if url_str.hasPrefix("https") {
+                                self.message.text = "   Success"
+                            } else {
+                                //self.message.text = "HTTP might fail"
+                                self.message.text = "   Success"
+                            }
+                        } else {
+                            // ひとつめの格納
+                            self.shareString.append(url_str)
+                            defaults.set(self.shareString, forKey: AppGroup.keyName)
+                            if url_str.hasPrefix("https") {
+                                self.message.text = "   Success"
+                            } else {
+                                //self.message.text = "HTTP might fail"
+                                self.message.text = "   Success"
                             }
                         }
                         
-                        self.shareString.append(url_str)
-                        defaults.set(self.shareString, forKey: AppGroup.keyName)
-                        
-                        if url_str.hasPrefix("https") {
-                            self.message.text = "   Success"
-                        } else {
-                            //self.message.text = "HTTP might fail"
-                            self.message.text = "   Success"
-                        }
+                        AppGroup.tryGetData()
                     } else {
-                        // ひとつめの格納
-                        self.shareString.append(url_str)
-                        defaults.set(self.shareString, forKey: AppGroup.keyName)
-                        if url_str.hasPrefix("https") {
-                            self.message.text = "   Success"
-                        } else {
-                            //self.message.text = "HTTP might fail"
-                            self.message.text = "   Success"
-                        }
+                        self.message.text = "   Failure"
                     }
-                    
-                    AppGroup.tryGetData()
-                } else {
-                    self.message.text = "   Failure"
-                }
-            })
+                })
+            } else {
+                self.message.text = "   Failure"
+            }
             
-        } else {
-            self.message.text = "   Failure"
         }
-        
     }
     
     
