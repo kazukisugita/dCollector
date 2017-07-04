@@ -49,7 +49,7 @@ extension MoreTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
-            return 1
+            return 2
         } else if section == 1 {
             return titles.count
         } else {
@@ -61,27 +61,47 @@ extension MoreTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath)
+        var cell: UITableViewCell!
+        if indexPath.section == 0 && indexPath.row == 1 {
+            cell = tableView.dequeueReusableCell(withIdentifier: "BrowserSwitch")
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "BasicCell")
+        }
         
         switch indexPath.section {
         case 0:
-            let wifiSwitch = UISwitch()
-            wifiSwitch.isOn = AppSettings.onlyDownloadWithWifi()
-            wifiSwitch.addTarget(self, action: #selector(MoreTableViewController.onSwitch), for: UIControlEvents.valueChanged)
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.textLabel?.text = "Only Download with WiFi".localized()
-            cell.accessoryView = UIView(frame: wifiSwitch.frame)
-            cell.accessoryView?.addSubview(wifiSwitch)
+            switch indexPath.row {
+            case 0:
+                let wifiSwitch = UISwitch()
+                wifiSwitch.isOn = AppSettings.onlyDownloadWithWifi()
+                wifiSwitch.addTarget(self, action: #selector(MoreTableViewController.onSwitch), for: UIControlEvents.valueChanged)
+                cell.selectionStyle = UITableViewCellSelectionStyle.none
+                cell.textLabel?.text = "Only Download with WiFi".localized()
+                cell.accessoryView = UIView(frame: wifiSwitch.frame)
+                cell.accessoryView?.addSubview(wifiSwitch)
+                return cell
+            case 1:
+                cell.selectionStyle = .none
+                return cell
+            default:
+                return cell
+            }
         case 1:
             cell.textLabel?.text = titles[indexPath.row]
+            return cell
         default:
-            break
+            return cell
         }
         
-        return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 && indexPath.row == 1 {
+            return 88.0
+        } else {
+            return tableView.rowHeight
+        }
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
