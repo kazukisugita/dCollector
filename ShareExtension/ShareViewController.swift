@@ -127,7 +127,7 @@ final class ShareViewController: UIViewController {
                     }
                 })
             } else {
-                self.message.text = "   Failure"
+                //self.message.text = "   Failure"
             }
             
         }
