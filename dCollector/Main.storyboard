@@ -291,7 +291,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gkp-tN-UMR">
-                        <barButtonItem key="rightBarButtonItem" image="ic-setting" style="plain" id="Xld-Aa-Dza">
+                        <barButtonItem key="rightBarButtonItem" image="info" style="plain" id="Xld-Aa-Dza">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="GBv-tg-4F8" kind="push" identifier="toMoreFromLists" id="BrE-qA-Zhj"/>
@@ -434,7 +434,7 @@
         <image name="browser-default" width="58" height="69"/>
         <image name="close" width="45" height="45"/>
         <image name="extensionGuid" width="621" height="1104"/>
-        <image name="ic-setting" width="28" height="28"/>
+        <image name="info" width="32" height="32"/>
         <image name="tabbar-icon-lists" width="30" height="30"/>
     </resources>
 </document>
