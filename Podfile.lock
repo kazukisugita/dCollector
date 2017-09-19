@@ -26,8 +26,18 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Core
-  - Ji (~> 2.0.0)
+  - Ji (from `git@github.com:honghaoz/Ji.git`, branch `swift4`)
   - RealmSwift
+
+EXTERNAL SOURCES:
+  Ji:
+    :branch: swift4
+    :git: git@github.com:honghaoz/Ji.git
+
+CHECKOUT OPTIONS:
+  Ji:
+    :commit: a2e4f13f972d719b2d7a36ed20cfaf5c5b76f7fa
+    :git: git@github.com:honghaoz/Ji.git
 
 SPEC CHECKSUMS:
   Firebase: 4b66b5b59c43edac745b87f0c87e42cdd0279c13
@@ -39,6 +49,6 @@ SPEC CHECKSUMS:
   Realm: 29222766425b9f831228f81b63f0e38a97a4d700
   RealmSwift: d161a80f96cb91ae88391a7d5a9cf08024a7bc8e
 
-PODFILE CHECKSUM: ce72f8883c0d17838e9e2eb79046b64832329443
+PODFILE CHECKSUM: 1ce4c575dd4d0e0d81775707f1d458ff1fc4aad1
 
 COCOAPODS: 1.2.0

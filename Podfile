@@ -1,6 +1,6 @@
 use_frameworks!
 target 'dCollector' do
-  pod 'Ji', '~> 2.0.0'
+  pod 'Ji', :git=> 'git@github.com:honghaoz/Ji.git', :branch => 'swift4'
   pod 'RealmSwift'
   pod 'Firebase/Core'
 end
