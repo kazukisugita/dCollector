@@ -85,7 +85,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         
         // Domain Info View
         
-        domainInfoView.layer.cornerRadius = 12
+        //domainInfoView.layer.cornerRadius = 12
         domainInfoView.isUserInteractionEnabled = true
         let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.callSafariInHostPage))
         domainInfoView.addGestureRecognizer(domainInfoViewTap)
