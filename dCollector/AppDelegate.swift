@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Firebase
 
 import UserNotifications
 
@@ -33,6 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Realm.Configuration.defaultConfiguration = realmConfig
         */
         RealmManager.getRealmAbsoluteFilePath()
+        
+        FIRApp.configure()
         
         return true
     }
