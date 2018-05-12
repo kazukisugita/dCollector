@@ -21,6 +21,8 @@ class MoreTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Settings".localized()
+        
         if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
             self.appVersionLabel.text = "ver " + version
         }

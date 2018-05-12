@@ -16,6 +16,10 @@ class NavigationController: UINavigationController {
         self.navigationBar.barTintColor = UIColor.hexStr(type: .navHeader, alpha: 1.0)
         self.navigationBar.tintColor = UIColor.white
         self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        
+        if #available(iOS 11.0, *) {
+            self.navigationBar.largeTitleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        }
     }
     
     override func didReceiveMemoryWarning() {
