@@ -50,9 +50,9 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         listDetailTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
         listDetailTableView.contentInset = UIEdgeInsetsMake(24.0, 0.0, 24.0, 0.0)
         
-        //let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(ListDetailViewController.swipeDownTableView(sendor:)))
-        //swipeGesture.direction = .down
-        //listDetailTableView.addGestureRecognizer(swipeGesture)
+//        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(ListDetailViewController.swipeDownTableView(sendor:)))
+//        swipeGesture.direction = .down
+//        listDetailTableView.addGestureRecognizer(swipeGesture)
         
         // TableView Cell
         
@@ -85,12 +85,10 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         
         // Domain Info View
         
-        //domainInfoView.layer.cornerRadius = 12
+        // domainInfoView.layer.cornerRadius = 12
         domainInfoView.isUserInteractionEnabled = true
         let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.callSafariInHostPage))
         domainInfoView.addGestureRecognizer(domainInfoViewTap)
-        
-
     }
     
     
@@ -123,10 +121,9 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     
     
     func callSafariInHostPage() {
-        let url: String = "https://" + self.domainHost.text!
-        let safariViewController = SFSafariViewController(url: URL(string: url)!)
-        safariViewController.modalPresentationStyle = .popover
-        present(safariViewController, animated: true, completion: nil);
+        weak var url: Url? = Url()
+        url?.url = "https://" + self.domainHost.text!
+        openBrowser(url: url!)
     }
     
     
