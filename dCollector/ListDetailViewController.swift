@@ -121,9 +121,9 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     
     
     func callSafariInHostPage() {
-        weak var url: Url? = Url()
-        url?.url = "https://" + self.domainHost.text!
-        openBrowser(url: url!)
+        let url: Url = Url()
+        url.url = "https://" + self.domainHost.text!
+        openBrowser(url: url)
     }
     
     
@@ -344,22 +344,8 @@ extension ListDetailViewController {
             gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
             
             selfViewPanDirectionY = translation.y
-            //print("selfViewPanDirectionY: \(selfViewPanDirectionY)")
             
         } else if gestureRecognizer.state == .ended {
-            /*
-            let centerY = gestureRecognizer.view!.center.y
-            print(centerY)
-            
-            if centerY > 420 {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
-                self.dismiss(animated: true, completion: nil)
-            } else {
-                UIView.animate(withDuration: 0.2, delay: 0.00, options: .curveEaseOut, animations: {
-                    gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: UIScreen.main.bounds.height/2)
-                }, completion: nil)
-            }
-            */
             
             if (selfViewPanDirectionY > 0) {
                 //print("down")
