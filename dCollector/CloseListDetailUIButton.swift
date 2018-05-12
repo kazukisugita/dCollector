@@ -9,13 +9,19 @@
 import UIKit
 
 class CloseListDetailUIButton: UIButton {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
     }
-    */
-
+    
+    func toggleVisible(bool: Bool) {
+        if (bool == false) {
+            self.isHidden = true
+        }
+    }
+    
+    func dismissViewController(uiViewController: UIViewController?, completion: (() -> Void)? = nil) {
+        guard let vc = uiViewController else { return }
+        vc.dismiss(animated: true, completion: completion)
+    }
 }

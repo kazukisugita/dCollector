@@ -12,12 +12,17 @@ import SafariServices
 final class ListDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var listDetailTableView: UITableView!
-
+    @IBOutlet weak var closeButton: CloseListDetailUIButton!
     @IBOutlet weak var domainInfoView: UIView!
     @IBOutlet weak var domainIcon: UIImageView?
     @IBOutlet weak var domainHost: UILabel!
     @IBOutlet weak var domainTitle: UILabel!
     @IBOutlet weak var domainDescription: UILabel!
+    
+    @IBAction func closeButtonHandle(_ sender: UIButton) {
+        // closeButton.toggleVisible(bool: false)
+        closeButton.dismissViewController(uiViewController: self, completion: nil)
+    }
     
     var selectedDomain: Domain? {
         didSet {
