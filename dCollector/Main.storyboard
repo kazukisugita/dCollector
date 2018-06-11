@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ver 1.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f5X-mo-3O9">
+                        <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ver 1.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f5X-mo-3O9">
                             <rect key="frame" x="0.0" y="205.33333333333334" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -389,7 +389,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="XDW-bQ-uf1">
-                                <rect key="frame" x="0.0" y="180" width="375" height="632"/>
+                                <rect key="frame" x="0.0" y="196" width="375" height="616"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <inset key="separatorInset" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableView>
@@ -412,12 +412,12 @@
                             <constraint firstAttribute="trailing" secondItem="ZS0-eC-9PM" secondAttribute="trailing" constant="10" id="0O0-Bg-FxH"/>
                             <constraint firstAttribute="bottom" secondItem="XDW-bQ-uf1" secondAttribute="bottom" id="6F7-pe-WT8"/>
                             <constraint firstAttribute="trailing" secondItem="xyg-HC-YTm" secondAttribute="trailing" id="7DW-tj-D8L"/>
-                            <constraint firstItem="XDW-bQ-uf1" firstAttribute="top" secondItem="c12-hY-p8s" secondAttribute="bottom" constant="136" id="TBF-0e-Gcy"/>
-                            <constraint firstItem="ZS0-eC-9PM" firstAttribute="top" secondItem="c12-hY-p8s" secondAttribute="bottom" constant="5" id="Zvy-pI-njW"/>
+                            <constraint firstItem="XDW-bQ-uf1" firstAttribute="top" secondItem="xyg-HC-YTm" secondAttribute="bottom" id="TBF-0e-Gcy"/>
+                            <constraint firstItem="ZS0-eC-9PM" firstAttribute="top" secondItem="xyg-HC-YTm" secondAttribute="top" constant="-19" id="Zvy-pI-njW"/>
                             <constraint firstItem="XDW-bQ-uf1" firstAttribute="centerX" secondItem="xyg-HC-YTm" secondAttribute="centerX" id="eHZ-Jl-Utg"/>
+                            <constraint firstItem="xyg-HC-YTm" firstAttribute="top" secondItem="c12-hY-p8s" secondAttribute="bottom" constant="24" id="fbb-d9-7E6"/>
                             <constraint firstItem="xyg-HC-YTm" firstAttribute="leading" secondItem="I65-o9-Lbw" secondAttribute="leading" id="kzZ-Cc-5pq"/>
                             <constraint firstItem="XDW-bQ-uf1" firstAttribute="leading" secondItem="I65-o9-Lbw" secondAttribute="leading" id="lxh-oP-VZL"/>
-                            <constraint firstItem="xyg-HC-YTm" firstAttribute="top" secondItem="c12-hY-p8s" secondAttribute="bottom" constant="24" id="z1k-a3-SKu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LGD-rn-de6"/>
@@ -427,6 +427,7 @@
                         <outlet property="domainHost" destination="e2h-aZ-7MG" id="nbM-DD-pEh"/>
                         <outlet property="domainIcon" destination="0Ty-CT-yy8" id="VUd-OE-Ian"/>
                         <outlet property="domainInfoView" destination="xyg-HC-YTm" id="fyu-Mi-xag"/>
+                        <outlet property="domainInfoViewTopConstraint" destination="fbb-d9-7E6" id="ows-vo-zPZ"/>
                         <outlet property="domainTitle" destination="wrR-vT-sDv" id="Rel-q9-kYb"/>
                         <outlet property="listDetailTableView" destination="XDW-bQ-uf1" id="1Z2-nq-mAR"/>
                     </connections>

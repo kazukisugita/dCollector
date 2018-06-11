@@ -14,13 +14,14 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var listDetailTableView: UITableView!
     @IBOutlet weak var closeButton: CloseListDetailUIButton!
     @IBOutlet weak var domainInfoView: UIView!
+    fileprivate let domainInfoViewTopMargin: CGFloat = 24.0
+    @IBOutlet weak var domainInfoViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var domainIcon: UIImageView?
     @IBOutlet weak var domainHost: UILabel!
     @IBOutlet weak var domainTitle: UILabel!
     @IBOutlet weak var domainDescription: UILabel!
     
     @IBAction func closeButtonHandle(_ sender: UIButton) {
-        // closeButton.toggleVisible(bool: false)
         closeButton.dismissViewController(uiViewController: self, completion: nil)
     }
     
@@ -55,29 +56,10 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         listDetailTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
         listDetailTableView.contentInset = UIEdgeInsetsMake(24.0, 0.0, 24.0, 0.0)
         
-//        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(ListDetailViewController.swipeDownTableView(sendor:)))
-//        swipeGesture.direction = .down
-//        listDetailTableView.addGestureRecognizer(swipeGesture)
-        
         // TableView Cell
         
         let nib: UINib = UINib(nibName: "ListDetailTableViewCell", bundle: nil)
         listDetailTableView.register(nib, forCellReuseIdentifier: "ListDetailTableViewCell")
-        /*
-        if let _domain = selectedDomain {
-            self.domainTitle?.text = _domain.title
-            self.domainHost?.text = _domain.name
-            self.domainDescription?.text = _domain.siteDescription
-            
-            if let image = _domain.icon {
-                self.domainIcon?.image = UIImage(data: image as Data)
-            } else {
-                let i = #imageLiteral(resourceName: "no-image-icon")
-                self.domainIcon?.image = i
-            }
-            
-        }
-        */
         
         // Long Press
         
@@ -94,6 +76,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         domainInfoView.isUserInteractionEnabled = true
         let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.callSafariInHostPage))
         domainInfoView.addGestureRecognizer(domainInfoViewTap)
+        domainInfoViewTopConstraint.constant = domainInfoViewTopMargin
     }
     
     
@@ -130,7 +113,6 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         url.url = "https://" + self.domainHost.text!
         openBrowser(url: url)
     }
-    
     
 }
 
@@ -209,11 +191,6 @@ extension ListDetailViewController {
         
     }
     
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-    }
-    
-    
 }
 
 extension ListDetailViewController {
@@ -281,74 +258,18 @@ extension ListDetailViewController {
 
 extension ListDetailViewController {
     
-    // SearchBar
-    /*
-    // 検索ボタンが押された時に呼ばれる
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.view.endEditing(true)
-        searchBar.showsCancelButton = true
-        self.searchResults = self.urls.filter{_ in 
-            // 大文字と小文字を区別せずに検索
-            //$0.lowercased().contains(searchBar.text!.lowercased())
-        }
-        self.listDetailTableView.reloadData()
-    }
-    
-    // キャンセルボタンが押された時に呼ばれる
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
-        self.view.endEditing(true)
-        searchBar.text = ""
-        self.listDetailTableView.reloadData()
-    }
-    
-    // テキストフィールド入力開始前に呼ばれる
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.showsCancelButton = true
-        return true
-    }
-    */
-    
-    
-}
-
-
-extension ListDetailViewController {
-    /*
-    func handlePan_(recognizer: UIPanGestureRecognizer) {
+    func handlePan (gestureRecognizer: UIPanGestureRecognizer) {
         
-        switch recognizer.state {
-        case .began:
-            animator = UIViewPropertyAnimator(duration: 1, curve: .easeOut, animations: {
-                self.view.frame = self.view.frame.offsetBy(dx: 0, dy: 300)
-            })
-            animator.pauseAnimation()
-        case .changed:
-            let translation = recognizer.translation(in: self.view)
-            animator.fractionComplete = translation.y / 300
-        case .ended:
-            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-        default:
-            return
-        }
-        
-    }
-    */
-    
-    func handlePan (gestureRecognizer:UIPanGestureRecognizer) {
-        
-        if gestureRecognizer.state == .began {
-            
-        } else if gestureRecognizer.state == .changed {
-            
-            let translation = gestureRecognizer.translation(in: self.view)
+        if gestureRecognizer.state == .changed {
 
-            if (gestureRecognizer.view!.center.y < UIScreen.main.bounds.height/2) { return }
+            let translationY = gestureRecognizer.translation(in: self.view).y
             
-            gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: gestureRecognizer.view!.center.y + translation.y)
+            domainInfoViewTopConstraint.constant += translationY
             gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
             
-            selfViewPanDirectionY = translation.y
+            selfViewPanDirectionY = translationY
+            
+            self.view.layoutIfNeeded()
             
         } else if gestureRecognizer.state == .ended {
             
@@ -359,7 +280,8 @@ extension ListDetailViewController {
             } else {
                 //print("up")
                 UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
-                    gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: UIScreen.main.bounds.height/2)
+                    self.domainInfoViewTopConstraint.constant = self.domainInfoViewTopMargin
+                    self.view.layoutIfNeeded()
                 }, completion: nil)
             }
         }
