@@ -15,14 +15,13 @@ class NavigationController: UINavigationController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        let navBar = self.navigationBar
-        navBar.addObserver(self, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
+//        let navBar = self.navigationBar
+//        navBar.addObserver(self, forKeyPath: "frame", options: NSKeyValueObservingOptions.new, context: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.navigationBar.barTintColor = UIColor.hexStr(type: .navHeader, alpha: 1.0)
         self.navigationBar.barTintColor = UIColor.white
         self.navigationBar.tintColor = UIColor.black
         self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.black]
@@ -38,10 +37,10 @@ class NavigationController: UINavigationController {
         }
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "frame" {
-            debugPrint(change!)
-        }
-    }
+//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        if keyPath == "frame" {
+//            debugPrint(change!)
+//        }
+//    }
 }
 
