@@ -12,6 +12,7 @@ import SafariServices
 final class ListDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var listDetailTableView: UITableView!
+    fileprivate let listDetailTableViewTopContentInset: CGFloat = 24.0
     @IBOutlet weak var closeButton: CloseListDetailUIButton!
     @IBOutlet weak var domainInfoView: UIView!
     fileprivate let domainInfoViewTopMargin: CGFloat = 24.0
@@ -42,7 +43,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         // Self View
         
         self.view.alpha = 1.0
-    
+        
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ListDetailViewController.handlePan(gestureRecognizer:)))
         self.view.addGestureRecognizer(panGestureRecognizer)
         
@@ -54,7 +55,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         listDetailTableView.rowHeight = 70.0
         listDetailTableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
         listDetailTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
-        listDetailTableView.contentInset = UIEdgeInsetsMake(24.0, 0.0, 24.0, 0.0)
+        listDetailTableView.contentInset = UIEdgeInsetsMake(listDetailTableViewTopContentInset, 0.0, 24.0, 0.0)
         
         // TableView Cell
         
@@ -114,11 +115,41 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         openBrowser(url: url)
     }
     
+    func openBrowser(url: Url) {
+        
+        switch AppSettings.broswerIs() {
+            
+        case Browsers.dDefault.hashValue:
+            let safariViewController = SFSafariViewController(url: URL(string: url.url)!)
+            safariViewController.modalPresentationStyle = .popover
+            present(safariViewController, animated: true, completion: nil);
+            
+        case Browsers.safari.hashValue:
+            let url: URL = URL(string:"\(url.url)")!
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            
+        case Browsers.chrome.hashValue:
+            
+            var urlStr = url.url
+            
+            if let range = url.url.range(of: "http://") {
+                urlStr.removeSubrange(range)
+            } else if let range = url.url.range(of: "https://") {
+                urlStr.removeSubrange(range)
+            }
+            
+            let _url: URL = URL(string:"googlechrome://\(urlStr)")!
+            UIApplication.shared.open(_url, options: [:], completionHandler: nil)
+            
+        default:
+            break
+        }
+    }
+    
 }
 
+// MARK: TableView
 extension ListDetailViewController {
-    
-    // TableView
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 1.0
@@ -157,40 +188,21 @@ extension ListDetailViewController {
         openBrowser(url: url)
     }
     
-    
-    func openBrowser(url: Url) {
-        
-        switch AppSettings.broswerIs() {
-            
-        case Browsers.dDefault.hashValue:
-            let safariViewController = SFSafariViewController(url: URL(string: url.url)!)
-            safariViewController.modalPresentationStyle = .popover
-            present(safariViewController, animated: true, completion: nil);
-            
-        case Browsers.safari.hashValue:
-            let url: URL = URL(string:"\(url.url)")!
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            
-        case Browsers.chrome.hashValue:
-            
-            var urlStr = url.url
-            
-            if let range = url.url.range(of: "http://") {
-                urlStr.removeSubrange(range)
-            } else if let range = url.url.range(of: "https://") {
-                urlStr.removeSubrange(range)
-            }
-            
-            let _url: URL = URL(string:"googlechrome://\(urlStr)")!
-            UIApplication.shared.open(_url, options: [:], completionHandler: nil)
-            
-        default:
-            break
-        }
-        
-        
-    }
-    
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//
+//        let recognizer = scrollView.panGestureRecognizer
+//
+//        if recognizer.state == .began {
+//            let translationY = scrollView.panGestureRecognizer.translation(in: self.view).y
+//            if translationY > 0.0 && self.returnTableViewIsOnTop() {
+//                self.listDetailTableView.isScrollEnabled = false
+//            }
+//        }
+//    }
+//
+//    func returnTableViewIsOnTop() -> Bool {
+//        return listDetailTableView.contentOffset.y == -(listDetailTableViewTopContentInset)
+//    }
 }
 
 extension ListDetailViewController {
