@@ -54,7 +54,7 @@ class NavigationController: UINavigationController {
 //            NSLayoutConstraint(item: headerView, attribute: .trailing, relatedBy: .equal, toItem: self.navigationBar, attribute: .trailing, multiplier: 1.0, constant: 0),
 //            NSLayoutConstraint(item: headerView, attribute: .bottom, relatedBy: .equal, toItem: self.navigationBar, attribute: .bottom, multiplier: 1.0, constant: 0),
 //            NSLayoutConstraint(item: headerView, attribute: .leading, relatedBy: .equal, toItem: self.navigationBar, attribute: .leading, multiplier: 1.0, constant: 0),
-            NSLayoutConstraint(item: headerView, attribute: .centerY, relatedBy: .equal, toItem: self.navigationBar, attribute: .centerY, multiplier: 1.0, constant: -(self.navigationBar.bounds.height / 2))
+            NSLayoutConstraint(item: headerView, attribute: .centerY, relatedBy: .equal, toItem: self.navigationBar, attribute: .centerY, multiplier: 1.0, constant: 0)
         ])
     }
     
@@ -79,8 +79,10 @@ class NavigationController: UINavigationController {
             return
         }
         
+        let ty = -71+((heightDiff/2)*rate) as CGFloat
+        
         UIView.animate(withDuration: 0.1, animations: { () in
-            self.headerView.transform = __CGAffineTransformMake(1, -0.04*rate, 0, 1, 0, 0)
+            self.headerView.transform = __CGAffineTransformMake(1, -0.04*rate, 0, 1, 0, ty)
         })
     }
     
