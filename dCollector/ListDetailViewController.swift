@@ -10,8 +10,10 @@ import UIKit
 import SafariServices
 
 final class ListDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-
+    
+    fileprivate var selfDidAppeared: Bool = false
     @IBOutlet weak var listDetailTableView: UITableView!
+    fileprivate let listDetailTableViewContentInsetTop: CGFloat = 24.0
     fileprivate let listDetailTableViewTopContentInset: CGFloat = 24.0
     @IBOutlet weak var closeButton: CloseListDetailUIButton!
     @IBOutlet weak var domainInfoView: UIView!
@@ -22,8 +24,11 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var domainTitle: UILabel!
     @IBOutlet weak var domainDescription: UILabel!
     
+    fileprivate var readyToPullDismiss: Bool = true
+    fileprivate var viewPositionY: CGFloat = 0.0
+    fileprivate var previousListDetailTableViewContentOffsetY: CGFloat = 0.0
+    
     @IBAction func closeButtonHandle(_ sender: UIButton) {
-        closeButton.dismissViewController(uiViewController: self, completion: nil)
     }
     
     var selectedDomain: Domain? {
@@ -39,16 +44,16 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
-        // Self View
         
-        self.view.alpha = 1.0
+        // Self View
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ListDetailViewController.handlePan(gestureRecognizer:)))
         self.view.addGestureRecognizer(panGestureRecognizer)
         
         // TableView
     
+        listDetailTableView.addObserver(self, forKeyPath: "contentOffset", options: .new, context: nil)
+        
         listDetailTableView.delegate = self
         listDetailTableView.dataSource = self
         
@@ -73,13 +78,21 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         
         // Domain Info View
         
-        // domainInfoView.layer.cornerRadius = 12
         domainInfoView.isUserInteractionEnabled = true
         let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.callSafariInHostPage))
         domainInfoView.addGestureRecognizer(domainInfoViewTap)
         domainInfoViewTopConstraint.constant = domainInfoViewTopMargin
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        selfDidAppeared = true
+    }
+    
+    deinit {
+        listDetailTableView.removeObserver(self, forKeyPath: "contentOffset")
+    }
     
     func configureDomainView() {
         if let _domain = selectedDomain {
@@ -96,18 +109,6 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
             
         }
     }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    
-    @IBAction func dismiss(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     
     func callSafariInHostPage() {
         let url: Url = Url()
@@ -148,6 +149,61 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     
 }
 
+// MARK: ScrollView KeyValueChangeEvent
+extension ListDetailViewController {
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        if keyPath != "contentOffset" { return }
+        
+        guard
+            let tableView = object as? UITableView,
+            let offset = change![NSKeyValueChangeKey.newKey] as? CGPoint
+        else {
+            return
+        }
+        
+        print(offset.y)
+        
+        updateViewPosition(scrollView: tableView, offset: offset.y)
+    }
+    
+    fileprivate func updateViewPosition(scrollView: UIScrollView, offset: CGFloat) {
+        
+        if offset >= -(listDetailTableViewContentInsetTop) { return }
+        if selfDidAppeared == false { return }
+        if readyToPullDismiss == false { return }
+        
+        let diff = -(offset - previousListDetailTableViewContentOffsetY)
+        
+        viewPositionY += diff
+        self.view.frame.origin.y = viewPositionY + domainInfoViewTopMargin
+        
+        // reset
+        scrollView.contentOffset.y = -scrollView.contentInset.top
+        previousListDetailTableViewContentOffsetY = scrollView.contentOffset.y
+    }
+    
+    internal func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        readyToPullDismiss = scrollView.contentOffset.y == -(listDetailTableViewContentInsetTop)
+        
+        if viewPositionY > 0 {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    internal func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        readyToPullDismiss = scrollView.contentOffset.y == -(listDetailTableViewContentInsetTop)
+        
+        if viewPositionY > 0 {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+
 // MARK: TableView
 extension ListDetailViewController {
     
@@ -187,22 +243,6 @@ extension ListDetailViewController {
         
         openBrowser(url: url)
     }
-    
-//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//
-//        let recognizer = scrollView.panGestureRecognizer
-//
-//        if recognizer.state == .began {
-//            let translationY = scrollView.panGestureRecognizer.translation(in: self.view).y
-//            if translationY > 0.0 && self.returnTableViewIsOnTop() {
-//                self.listDetailTableView.isScrollEnabled = false
-//            }
-//        }
-//    }
-//
-//    func returnTableViewIsOnTop() -> Bool {
-//        return listDetailTableView.contentOffset.y == -(listDetailTableViewTopContentInset)
-//    }
 }
 
 extension ListDetailViewController {
@@ -214,24 +254,22 @@ extension ListDetailViewController {
         if sender.state == UIGestureRecognizerState.began {
 
             let point: CGPoint = sender.location(in: self.listDetailTableView)
-            let indexPath = self.listDetailTableView.indexPathForRow(at: point)
-        
-            callActionSheet(indexPath!)
+            guard let indexPath = self.listDetailTableView.indexPathForRow(at: point) else { return }
+            
+            callActionSheet(indexPath)
         }
     }
     
     
     func callActionSheet(_ indexPath: IndexPath) {
-        
-        //let url = self.urls[indexPath.row].url
-        //let title = self.urls[indexPath.row].title
-        let sortedUrls = RealmManager.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false)
-        let url = sortedUrls![indexPath.row].url
-        let title = sortedUrls![indexPath.row].title
-        
+
+        guard let domain = RealmManager.getDomainByName(selectedDomain!.name) else { return }
+        let sortedUrls = domain.urls.sorted(byKeyPath: "createdAt", ascending: false)
+        let url = sortedUrls[indexPath.row].url
+        let title = sortedUrls[indexPath.row].title
         
         let actionSheet: UIAlertController = UIAlertController(title: title, message: "Delete this Url.\nAre you Sure ??".localized(), preferredStyle: .actionSheet)
-        let ok = UIAlertAction(title: "DELETE".localized(), style: .destructive, handler: { (action: UIAlertAction!) in
+        let ok = UIAlertAction(title: "DELETE".localized(), style: .destructive, handler: { (action) in
             
             DispatchQueue.main.async {
                 let _url = RealmManager.getUrlWithPrimaryKey(url)

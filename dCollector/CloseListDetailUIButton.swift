@@ -1,10 +1,3 @@
-//
-//  CloseListDetailUIButton.swift
-//  dCollector
-//
-//  Created by Kazuki Sugita on 2018/05/12.
-//  Copyright © 2018年 Kazuki Sugita. All rights reserved.
-//
 
 import UIKit
 

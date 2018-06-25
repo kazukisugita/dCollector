@@ -63,7 +63,12 @@ public struct Transaction {
                 var iconUrl: URL = URL(string: "\(httpProtocol)://" + host + iconPath)!
                 
                 if let node = domainObj?.xPath("//head/link[@rel='icon']")?.first {
-                    iconPath = node["href"]!
+                    
+                    guard let iconPath = node["href"] else {
+                        completion(false, url)
+                        return
+                    }
+                    
                     iconUrl = URL(string: "\(httpProtocol)://" + host + iconPath)!
                     
                     if iconPath.contains(host) {
@@ -75,7 +80,12 @@ public struct Transaction {
                     //print("rel=icon: \(iconUrl)")
                 }
                 if let node = domainObj?.xPath("//head/link[@rel='shortcut icon']")?.first {
-                    iconPath = node["href"]!
+                    
+                    guard let iconPath = node["href"] else {
+                        completion(false, url)
+                        return
+                    }
+                    
                     iconUrl = URL(string: "\(httpProtocol)://" + host + iconPath)!
                     
                     if iconPath.contains(host) {
@@ -87,7 +97,12 @@ public struct Transaction {
                     //print("rel=shortcut icon: \(iconUrl)")
                 }
                 if let node = domainObj?.xPath("//head/link[@rel='apple-touch-icon']")?.first {
-                    iconPath = node["href"]!
+                    
+                    guard let iconPath = node["href"] else {
+                        completion(false, url)
+                        return
+                    }
+                    
                     iconUrl = URL(string: "\(httpProtocol)://" + host + iconPath)!
                     
                     if iconPath.contains(host) {

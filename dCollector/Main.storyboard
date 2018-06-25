@@ -416,19 +416,18 @@
                             <constraint firstItem="XDW-bQ-uf1" firstAttribute="top" secondItem="xyg-HC-YTm" secondAttribute="bottom" id="TBF-0e-Gcy"/>
                             <constraint firstItem="ZS0-eC-9PM" firstAttribute="top" secondItem="xyg-HC-YTm" secondAttribute="top" constant="-19" id="Zvy-pI-njW"/>
                             <constraint firstItem="XDW-bQ-uf1" firstAttribute="centerX" secondItem="xyg-HC-YTm" secondAttribute="centerX" id="eHZ-Jl-Utg"/>
-                            <constraint firstItem="xyg-HC-YTm" firstAttribute="top" secondItem="c12-hY-p8s" secondAttribute="bottom" constant="24" id="fbb-d9-7E6"/>
                             <constraint firstItem="xyg-HC-YTm" firstAttribute="leading" secondItem="I65-o9-Lbw" secondAttribute="leading" id="kzZ-Cc-5pq"/>
                             <constraint firstItem="XDW-bQ-uf1" firstAttribute="leading" secondItem="I65-o9-Lbw" secondAttribute="leading" id="lxh-oP-VZL"/>
+                            <constraint firstItem="xyg-HC-YTm" firstAttribute="top" secondItem="c12-hY-p8s" secondAttribute="bottom" constant="24" id="sBK-uY-NKO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LGD-rn-de6"/>
                     <connections>
-                        <outlet property="closeButton" destination="ZS0-eC-9PM" id="OGh-fQ-lpO"/>
                         <outlet property="domainDescription" destination="Nwr-wO-wm9" id="wHn-1R-D1n"/>
                         <outlet property="domainHost" destination="e2h-aZ-7MG" id="nbM-DD-pEh"/>
                         <outlet property="domainIcon" destination="0Ty-CT-yy8" id="VUd-OE-Ian"/>
                         <outlet property="domainInfoView" destination="xyg-HC-YTm" id="fyu-Mi-xag"/>
-                        <outlet property="domainInfoViewTopConstraint" destination="fbb-d9-7E6" id="ows-vo-zPZ"/>
+                        <outlet property="domainInfoViewTopConstraint" destination="sBK-uY-NKO" id="dkQ-aL-8Nl"/>
                         <outlet property="domainTitle" destination="wrR-vT-sDv" id="Rel-q9-kYb"/>
                         <outlet property="listDetailTableView" destination="XDW-bQ-uf1" id="1Z2-nq-mAR"/>
                     </connections>
