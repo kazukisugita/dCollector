@@ -31,6 +31,13 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
     
     let modalTransitionDelegate = ModalTransitionDelegate()
     
+    override func loadView() {
+        super.loadView()
+        
+        // TableView Cell
+        let nib: UINib = UINib(nibName: "ListsTableViewCell", bundle: nil)
+        listsTableView.register(nib, forCellReuseIdentifier: "ListsTableViewCell")
+    }
     
     override func viewDidLoad() {
         
@@ -59,11 +66,6 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         
         //self.editButton = UIBarButtonItem(title: "edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.selToEdit))
         //self.navigationItem.leftBarButtonItem = self.editButton
-        
-        // TableView Cell
-        
-        let nib: UINib = UINib(nibName: "ListsTableViewCell", bundle: nil)
-        listsTableView.register(nib, forCellReuseIdentifier: "ListsTableViewCell")
         
         // TableView Refresh
         
@@ -98,7 +100,6 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         //refreshTable()
         //let appDelegate = UIApplication.shared.delegate as! AppDelegate
         //print("failUrls: \(appDelegate.transactionFailUrls)")
-
     }
     
     
@@ -189,7 +190,7 @@ extension ListsViewController {
         listsDetailVC.transitioningDelegate = modalTransitionDelegate
         listsDetailVC.modalPresentationStyle = .custom
         
-        self.present(listsDetailVC, animated: true, completion: nil)
+        navigationController?.present(listsDetailVC, animated: true, completion: nil)
         listsDetailVC.selectedDomain = RealmManager.getAllDomain()[indexPath.row]
     }
     

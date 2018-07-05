@@ -39,6 +39,7 @@
 		BBC0637F1EC5B02B00840A40 /* Launch.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBC063721EC5B02B00840A40 /* Launch.xib */; };
 		BBC063801EC5B02B00840A40 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC063731EC5B02B00840A40 /* ListDetailViewController.swift */; };
 		BBC063821EC5B02B00840A40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC063751EC5B02B00840A40 /* Main.storyboard */; };
+		BBCB1B3820EB452200467030 /* PropertyAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCB1B3720EB452200467030 /* PropertyAnimation.swift */; };
 		BBDEB0711EC97A4100E85572 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDEB0701EC97A4100E85572 /* UIColorExtension.swift */; };
 		BBDEB0861EC9D67100E85572 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDEB0851EC9D67100E85572 /* Transaction.swift */; };
 		BBE178741F0B9A4100A0A646 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE178731F0B9A4100A0A646 /* NavigationController.swift */; };
@@ -108,6 +109,7 @@
 		BBC063721EC5B02B00840A40 /* Launch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Launch.xib; sourceTree = "<group>"; };
 		BBC063731EC5B02B00840A40 /* ListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
 		BBC063751EC5B02B00840A40 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		BBCB1B3720EB452200467030 /* PropertyAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyAnimation.swift; sourceTree = "<group>"; };
 		BBDEB0701EC97A4100E85572 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		BBDEB0851EC9D67100E85572 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		BBE178731F0B9A4100A0A646 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				BBC0636E1EC5B02B00840A40 /* RealmManager.swift */,
 				BB063C841ED6DF5F00A1DE1C /* License.swift */,
 				BB063C861ED6E35800A1DE1C /* FileName.swift */,
+				BBCB1B3720EB452200467030 /* PropertyAnimation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBCB1B3820EB452200467030 /* PropertyAnimation.swift in Sources */,
 				BB36A4DA20A67A8600A58A1E /* CloseListDetailUIButton.swift in Sources */,
 				BBC063781EC5B02B00840A40 /* AppDelegate.swift in Sources */,
 				BB2B050C1EF4D34100339B5E /* ModalPresentationController.swift in Sources */,

@@ -13,11 +13,11 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     
     fileprivate var selfDidAppeared: Bool = false
     @IBOutlet weak var listDetailTableView: UITableView!
-    fileprivate let listDetailTableViewContentInsetTop: CGFloat = 24.0
-    fileprivate let listDetailTableViewTopContentInset: CGFloat = 24.0
+    fileprivate let listDetailTableViewContentInset: CGFloat = 24.0
+    @IBOutlet weak var listDetailTableViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var closeButton: CloseListDetailUIButton!
     @IBOutlet weak var domainInfoView: UIView!
-    fileprivate let domainInfoViewTopMargin: CGFloat = 24.0
+    public let domainInfoViewTopMargin: CGFloat = 24.0
     @IBOutlet weak var domainInfoViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var domainIcon: UIImageView?
     @IBOutlet weak var domainHost: UILabel!
@@ -26,9 +26,12 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     
     fileprivate var readyToPullDismiss: Bool = true
     fileprivate var viewPositionY: CGFloat = 0.0
-    fileprivate var previousListDetailTableViewContentOffsetY: CGFloat = 0.0
+    
+    fileprivate var pullToDismiss: PullToDismiss?
     
     @IBAction func closeButtonHandle(_ sender: UIButton) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
+        pullToDismiss?.start()
     }
     
     var selectedDomain: Domain? {
@@ -39,6 +42,11 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     var urls: [Url] = []
     
     fileprivate var selfViewPanDirectionY: CGFloat = 0.0
+    
+    override func loadView() {
+        super.loadView()
+        
+    }
     
 
     override func viewDidLoad() {
@@ -60,7 +68,8 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         listDetailTableView.rowHeight = 70.0
         listDetailTableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
         listDetailTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
-        listDetailTableView.contentInset = UIEdgeInsetsMake(listDetailTableViewTopContentInset, 0.0, 24.0, 0.0)
+        listDetailTableView.contentInset = UIEdgeInsetsMake(listDetailTableViewContentInset, 0.0, listDetailTableViewContentInset, 0.0)
+        setHeightForTableView()
         
         // TableView Cell
         
@@ -82,6 +91,10 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.callSafariInHostPage))
         domainInfoView.addGestureRecognizer(domainInfoViewTap)
         domainInfoViewTopConstraint.constant = domainInfoViewTopMargin
+        
+        // PullToDismiss
+        
+        pullToDismiss = PullToDismiss(in: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -108,6 +121,14 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
             }
             
         }
+    }
+    
+    private func setHeightForTableView() {
+        
+        let top = domainInfoViewTopMargin + domainInfoView.bounds.height
+        let bottom = UIScreen.main.bounds.height
+        
+        listDetailTableViewBottomConstraint.constant = top - bottom
     }
     
     func callSafariInHostPage() {
@@ -163,43 +184,44 @@ extension ListDetailViewController {
             return
         }
         
-        print(offset.y)
-        
         updateViewPosition(scrollView: tableView, offset: offset.y)
     }
     
     fileprivate func updateViewPosition(scrollView: UIScrollView, offset: CGFloat) {
         
-        if offset >= -(listDetailTableViewContentInsetTop) { return }
+        if offset >= -(listDetailTableViewContentInset) { return }
         if selfDidAppeared == false { return }
         if readyToPullDismiss == false { return }
         
-        let diff = -(offset - previousListDetailTableViewContentOffsetY)
-        
+        let diff = -(offset + listDetailTableViewContentInset)
         viewPositionY += diff
-        self.view.frame.origin.y = viewPositionY + domainInfoViewTopMargin
+//        UIView.performWithoutAnimation({ () in
+//            domainInfoViewTopConstraint.constant += diff
+//        })
+        pullToDismiss?.onFraction(viewPositionY)
         
         // reset
-        scrollView.contentOffset.y = -scrollView.contentInset.top
-        previousListDetailTableViewContentOffsetY = scrollView.contentOffset.y
+        scrollView.contentOffset.y = -listDetailTableViewContentInset
     }
     
     internal func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        readyToPullDismiss = scrollView.contentOffset.y == -(listDetailTableViewContentInsetTop)
+        readyToPullDismiss = scrollView.contentOffset.y == -(listDetailTableViewContentInset)
         
-        if viewPositionY > 0 {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
-            self.dismiss(animated: true, completion: nil)
-        }
+//        if viewPositionY > 0 {
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
+//            self.dismiss(animated: true, completion: nil)
+//        }
+        pullToDismiss?.start()
     }
     
     internal func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        readyToPullDismiss = scrollView.contentOffset.y == -(listDetailTableViewContentInsetTop)
+        readyToPullDismiss = scrollView.contentOffset.y == -(listDetailTableViewContentInset)
         
-        if viewPositionY > 0 {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
-            self.dismiss(animated: true, completion: nil)
-        }
+//        if viewPositionY > 0 {
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
+//            self.dismiss(animated: true, completion: nil)
+//        }
+        pullToDismiss?.start()
     }
 }
 
@@ -311,15 +333,17 @@ extension ListDetailViewController {
     func handlePan (gestureRecognizer: UIPanGestureRecognizer) {
         
         if gestureRecognizer.state == .changed {
-
+            
             let translationY = gestureRecognizer.translation(in: self.view).y
+
+            pullToDismiss?.onFraction(translationY)
             
-            domainInfoViewTopConstraint.constant += translationY
-            gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-            
-            selfViewPanDirectionY = translationY
-            
-            self.view.layoutIfNeeded()
+//            UIView.performWithoutAnimation({ () in
+//                domainInfoViewTopConstraint.constant += translationY
+//            })
+//            gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+//
+//            selfViewPanDirectionY = translationY
             
         } else if gestureRecognizer.state == .ended {
             
@@ -329,10 +353,11 @@ extension ListDetailViewController {
                 self.dismiss(animated: true, completion: nil)
             } else {
                 //print("up")
-                UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
-                    self.domainInfoViewTopConstraint.constant = self.domainInfoViewTopMargin
-                    self.view.layoutIfNeeded()
-                }, completion: nil)
+//                UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
+//                    self.domainInfoViewTopConstraint.constant = self.domainInfoViewTopMargin
+//                    self.view.layoutIfNeeded()
+//                }, completion: nil)
+                self.pullToDismiss?.start()
             }
         }
         
