@@ -144,7 +144,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         case Browsers.dDefault.hashValue:
             let safariViewController = SFSafariViewController(url: URL(string: url.url)!)
             safariViewController.modalPresentationStyle = .popover
-            present(safariViewController, animated: true, completion: nil);
+            present(safariViewController, animated: true, completion: nil)
             
         case Browsers.safari.hashValue:
             let url: URL = URL(string:"\(url.url)")!

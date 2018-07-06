@@ -54,11 +54,11 @@ class NavigationController: UINavigationController {
             return
         }
         
-        let ty = -71+((heightDiff/2)*rate) as CGFloat
+        let ty = -75+((heightDiff/2)*rate) as CGFloat
         
-        UIView.animate(withDuration: 0.0, animations: { () in
+        UIView.performWithoutAnimation { () in
             self.headerView.transform = __CGAffineTransformMake(1, -0.04*rate, 0, 1, 0, ty)
-        })
+        }
     }
     
     private func generateGradientHeader(_ view: UIView) -> CAGradientLayer {
