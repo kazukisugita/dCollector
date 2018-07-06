@@ -3,9 +3,12 @@ import UIKit
 
 class PullToDismiss: NSObject {
     
-    private var parentViewController: UIViewController?
+    private var targetViewController: ListDetailViewController?
+    private var initialMarginTop: CGFloat = 0.0
     public var dismissAnimation: UIViewPropertyAnimator?
+    public var reverseAnimation: UIViewPropertyAnimator?
     private var moveDistance: CGFloat = 0.0
+    private var toDismiss: Bool = true
     
     override init() {
         super.init()
@@ -14,28 +17,41 @@ class PullToDismiss: NSObject {
     required init(in viewController: UIViewController) {
         super.init()
         
-        parentViewController = viewController
-        initSelf()
+        if let listDetailViewController = viewController as? ListDetailViewController {
+            targetViewController = listDetailViewController
+            initialMarginTop = listDetailViewController.domainInfoViewTopConstraint.constant
+            moveDistance = UIScreen.main.bounds.height + listDetailViewController.domainInfoViewTopMargin
+        }
     }
     
-    private func initSelf() {
+    public func ready() {
         
-        guard let listDetailViewController = parentViewController as? ListDetailViewController else { return }
-        moveDistance = UIScreen.main.bounds.height - listDetailViewController.domainInfoViewTopMargin
+        guard targetViewController != nil else { return }
         
-        dismissAnimation = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 1.0, animations: { () in
+        dismissAnimation = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut, animations: { () in
             
-            if let modalPresentationController = listDetailViewController.presentationController as? ModalPresentationController {
+            if let modalPresentationController = self.targetViewController?.presentationController as? ModalPresentationController {
                 modalPresentationController.dimmingView.effect = nil
             }
-            
-            listDetailViewController.domainInfoViewTopConstraint.constant += self.moveDistance
-            listDetailViewController.view.layoutIfNeeded()
+            self.targetViewController?.domainInfoViewTopConstraint.constant += self.moveDistance
+            self.targetViewController?.view.layoutIfNeeded()
         })
+        dismissAnimation?.addCompletion { (complete) in
+            if self.toDismiss {
+                self.targetViewController?.dismiss(animated: false, completion: nil)
+            } else {
+                self.toDismiss = true
+                self.targetViewController?.domainInfoViewTopConstraint.constant = self.initialMarginTop
+            }
+        }
         
-        dismissAnimation?.addCompletion({ (complete) in
-            listDetailViewController.dismiss(animated: false, completion: nil)
-//            self.dismissAnimation?.isReversed = false
+        reverseAnimation = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut, animations: { () in
+            
+            if let modalPresentationController = self.targetViewController?.presentationController as? ModalPresentationController {
+                modalPresentationController.dimmingView.effect = UIBlurEffect(style: .dark)
+            }
+            self.targetViewController?.domainInfoViewTopConstraint.constant = (self.targetViewController?.domainInfoViewTopMargin)!
+            self.targetViewController?.view.layoutIfNeeded()
         })
     }
     
@@ -45,10 +61,14 @@ class PullToDismiss: NSObject {
     }
     
     public func start() {
+        ready()
         dismissAnimation?.startAnimation()
     }
     
-    public func end() {
+    public func reverse() {
+//        dismissAnimation?.stopAnimation(true)
+//        dismissAnimation?.finishAnimation(at: .current)
+        toDismiss = false
         dismissAnimation?.isReversed = true
         dismissAnimation?.startAnimation()
     }

@@ -43,12 +43,6 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     
     fileprivate var selfViewPanDirectionY: CGFloat = 0.0
     
-    override func loadView() {
-        super.loadView()
-        
-    }
-    
-
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -95,6 +89,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         // PullToDismiss
         
         pullToDismiss = PullToDismiss(in: self)
+        pullToDismiss!.ready()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -211,7 +206,8 @@ extension ListDetailViewController {
 //            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
 //            self.dismiss(animated: true, completion: nil)
 //        }
-        pullToDismiss?.start()
+        
+//        pullToDismiss?.start()
     }
     
     internal func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -221,7 +217,8 @@ extension ListDetailViewController {
 //            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
 //            self.dismiss(animated: true, completion: nil)
 //        }
-        pullToDismiss?.start()
+        
+//        pullToDismiss?.start()
     }
 }
 
@@ -332,12 +329,15 @@ extension ListDetailViewController {
     
     func handlePan (gestureRecognizer: UIPanGestureRecognizer) {
         
-        if gestureRecognizer.state == .changed {
+        if gestureRecognizer.state == .began {
+            
+            pullToDismiss?.ready()
+            
+        } else if gestureRecognizer.state == .changed {
             
             let translationY = gestureRecognizer.translation(in: self.view).y
-
             pullToDismiss?.onFraction(translationY)
-            
+        
 //            UIView.performWithoutAnimation({ () in
 //                domainInfoViewTopConstraint.constant += translationY
 //            })
@@ -357,10 +357,10 @@ extension ListDetailViewController {
 //                    self.domainInfoViewTopConstraint.constant = self.domainInfoViewTopMargin
 //                    self.view.layoutIfNeeded()
 //                }, completion: nil)
-                self.pullToDismiss?.start()
+                
+                self.pullToDismiss?.reverse()
             }
         }
-        
     }
     
     
