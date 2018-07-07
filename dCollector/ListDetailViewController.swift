@@ -15,7 +15,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var listDetailTableView: UITableView!
     fileprivate let listDetailTableViewContentInset: CGFloat = 24.0
     @IBOutlet weak var listDetailTableViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var closeButton: CloseListDetailUIButton!
+    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var domainInfoView: UIView!
     public let domainInfoViewTopMargin: CGFloat = 24.0
     @IBOutlet weak var domainInfoViewTopConstraint: NSLayoutConstraint!
@@ -24,8 +24,8 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var domainTitle: UILabel!
     @IBOutlet weak var domainDescription: UILabel!
     
-    fileprivate var readyToPullDismiss: Bool = true
-    fileprivate var viewPositionY: CGFloat = 0.0
+    fileprivate var pullDismissing: Bool = false
+    fileprivate var nowDismissing: Bool = false
     fileprivate var prevPanTranslationY: CGFloat = 0.0
     fileprivate var panDirection: PanningTo = .Down
     fileprivate enum PanningTo {
@@ -34,7 +34,6 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     fileprivate var pullToDismiss: PullToDismiss?
     
     @IBAction func closeButtonHandle(_ sender: UIButton) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
         pullToDismiss?.start()
     }
     
@@ -44,6 +43,13 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     var urls: [Url] = []
+    
+    override func loadView() {
+        super.loadView()
+        
+        let nib: UINib = UINib(nibName: "ListDetailTableViewCell", bundle: nil)
+        listDetailTableView.register(nib, forCellReuseIdentifier: "ListDetailTableViewCell")
+    }
     
     override func viewDidLoad() {
         
@@ -55,22 +61,14 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         self.view.addGestureRecognizer(panGestureRecognizer)
         
         // TableView
-    
-        listDetailTableView.addObserver(self, forKeyPath: "contentOffset", options: .new, context: nil)
         
         listDetailTableView.delegate = self
         listDetailTableView.dataSource = self
-        
         listDetailTableView.rowHeight = 70.0
         listDetailTableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
         listDetailTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
         listDetailTableView.contentInset = UIEdgeInsetsMake(listDetailTableViewContentInset, 0.0, listDetailTableViewContentInset, 0.0)
         setHeightForTableView()
-        
-        // TableView Cell
-        
-        let nib: UINib = UINib(nibName: "ListDetailTableViewCell", bundle: nil)
-        listDetailTableView.register(nib, forCellReuseIdentifier: "ListDetailTableViewCell")
         
         // Long Press
         
@@ -86,6 +84,12 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         domainInfoView.isUserInteractionEnabled = true
         let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.callSafariInHostPage))
         domainInfoView.addGestureRecognizer(domainInfoViewTap)
+        if #available(iOS 11.0, *) {
+            domainInfoView.clipsToBounds = true
+            domainInfoView.layer.cornerRadius = 15.0
+            domainInfoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        }
+        
         domainInfoViewTopConstraint.constant = domainInfoViewTopMargin
         
         // PullToDismiss
@@ -170,57 +174,43 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
 // MARK: ScrollView KeyValueChangeEvent
 extension ListDetailViewController {
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        if keyPath != "contentOffset" { return }
-        
-        guard
-            let tableView = object as? UITableView,
-            let offset = change![NSKeyValueChangeKey.newKey] as? CGPoint
-        else {
-            return
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+
+        if scrollView.contentOffset.y <= -(listDetailTableViewContentInset) &&
+           scrollView.panGestureRecognizer.velocity(in: self.view).y > 0
+        {
+            pullDismissing = true
+            pullToDismiss?.ready()
         }
-        
-        updateViewPosition(scrollView: tableView, offset: offset.y)
     }
     
-    fileprivate func updateViewPosition(scrollView: UIScrollView, offset: CGFloat) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        if offset >= -(listDetailTableViewContentInset) { return }
-        if selfDidAppeared == false { return }
-        if readyToPullDismiss == false { return }
+        if pullDismissing == false { return }
+        if nowDismissing == true { return }
         
-        let diff = -(offset + listDetailTableViewContentInset)
-        viewPositionY += diff
-//        UIView.performWithoutAnimation({ () in
-//            domainInfoViewTopConstraint.constant += diff
-//        })
-        pullToDismiss?.onFraction(viewPositionY)
+        let translationY = scrollView.panGestureRecognizer.translation(in: self.view).y
+        pullToDismiss?.onFraction(translationY)
         
-        // reset
-        scrollView.contentOffset.y = -listDetailTableViewContentInset
-    }
-    
-    internal func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        readyToPullDismiss = scrollView.contentOffset.y == -(listDetailTableViewContentInset)
-        
-//        if viewPositionY > 0 {
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
-//            self.dismiss(animated: true, completion: nil)
-//        }
-        
-//        pullToDismiss?.start()
+        if translationY - prevPanTranslationY != 0 {
+            panDirection = (translationY - prevPanTranslationY) > 0 ? .Down : .Up
+            prevPanTranslationY = translationY
+        }
+        scrollView.contentOffset.y = -listDetailTableViewContentInset // reset
     }
     
     internal func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        readyToPullDismiss = scrollView.contentOffset.y == -(listDetailTableViewContentInset)
         
-//        if viewPositionY > 0 {
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
-//            self.dismiss(animated: true, completion: nil)
-//        }
-        
-//        pullToDismiss?.start()
+        if pullDismissing == false { return }
+    
+        if panDirection == .Down {
+            nowDismissing = true
+            pullToDismiss?.continueAnimation()
+        } else {
+            pullToDismiss?.reverse()
+            prevPanTranslationY = 0.0
+            pullDismissing = false
+        }
     }
 }
 
@@ -339,9 +329,11 @@ extension ListDetailViewController {
             
             let translationY = gestureRecognizer.translation(in: self.view).y
             pullToDismiss?.onFraction(translationY)
-        
-            panDirection = (translationY - prevPanTranslationY) >= 0 ? .Down : .Up
-            prevPanTranslationY = translationY
+            
+            if translationY - prevPanTranslationY != 0 {
+                panDirection = (translationY - prevPanTranslationY) > 0 ? .Down : .Up
+                prevPanTranslationY = translationY
+            }
             
         } else if gestureRecognizer.state == .ended {
             
@@ -349,6 +341,7 @@ extension ListDetailViewController {
                 self.pullToDismiss?.continueAnimation()
             } else {
                 self.pullToDismiss?.reverse()
+                prevPanTranslationY = 0.0
             }
         }
     }

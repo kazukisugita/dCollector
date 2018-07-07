@@ -20,7 +20,6 @@
 		BB2B050D1EF4D34100339B5E /* ModalTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2B050B1EF4D34100339B5E /* ModalTransition.swift */; };
 		BB2D01521EBD673F00D13D35 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2D01511EBD673F00D13D35 /* AppGroup.swift */; };
 		BB2D01531EBD673F00D13D35 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2D01511EBD673F00D13D35 /* AppGroup.swift */; };
-		BB36A4DA20A67A8600A58A1E /* CloseListDetailUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB36A4D920A67A8600A58A1E /* CloseListDetailUIButton.swift */; };
 		BB37967120E11CA300D083B1 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB37967020E11CA300D083B1 /* Alert.swift */; };
 		BB3A66641ED81299003E7CC9 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3A66631ED81299003E7CC9 /* AppSettings.swift */; };
 		BB3A66661ED8192D003E7CC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB3A66651ED8192D003E7CC9 /* SystemConfiguration.framework */; };
@@ -86,7 +85,6 @@
 		BB2B050A1EF4D34100339B5E /* ModalPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalPresentationController.swift; sourceTree = "<group>"; };
 		BB2B050B1EF4D34100339B5E /* ModalTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalTransition.swift; sourceTree = "<group>"; };
 		BB2D01511EBD673F00D13D35 /* AppGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
-		BB36A4D920A67A8600A58A1E /* CloseListDetailUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseListDetailUIButton.swift; sourceTree = "<group>"; };
 		BB37967020E11CA300D083B1 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		BB3A66631ED81299003E7CC9 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		BB3A66651ED8192D003E7CC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -272,7 +270,6 @@
 				BB3D028D1ECC3C7F00604435 /* ListDetailTableViewCell.swift */,
 				BB3D028E1ECC3C7F00604435 /* ListDetailTableViewCell.xib */,
 				BBAA326C1F0BB2C200AD97D4 /* MoreBrowserSwitchTableViewCell.swift */,
-				BB36A4D920A67A8600A58A1E /* CloseListDetailUIButton.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -461,7 +458,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBCB1B3820EB452200467030 /* PropertyAnimation.swift in Sources */,
-				BB36A4DA20A67A8600A58A1E /* CloseListDetailUIButton.swift in Sources */,
 				BBC063781EC5B02B00840A40 /* AppDelegate.swift in Sources */,
 				BB2B050C1EF4D34100339B5E /* ModalPresentationController.swift in Sources */,
 				BB2B050D1EF4D34100339B5E /* ModalTransition.swift in Sources */,
