@@ -26,7 +26,11 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     
     fileprivate var readyToPullDismiss: Bool = true
     fileprivate var viewPositionY: CGFloat = 0.0
-    
+    fileprivate var prevPanTranslationY: CGFloat = 0.0
+    fileprivate var panDirection: PanningTo = .Down
+    fileprivate enum PanningTo {
+        case Up, Down
+    }
     fileprivate var pullToDismiss: PullToDismiss?
     
     @IBAction func closeButtonHandle(_ sender: UIButton) {
@@ -40,8 +44,6 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     var urls: [Url] = []
-    
-    fileprivate var selfViewPanDirectionY: CGFloat = 0.0
     
     override func viewDidLoad() {
         
@@ -338,26 +340,14 @@ extension ListDetailViewController {
             let translationY = gestureRecognizer.translation(in: self.view).y
             pullToDismiss?.onFraction(translationY)
         
-//            UIView.performWithoutAnimation({ () in
-//                domainInfoViewTopConstraint.constant += translationY
-//            })
-//            gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-//
-//            selfViewPanDirectionY = translationY
+            panDirection = (translationY - prevPanTranslationY) >= 0 ? .Down : .Up
+            prevPanTranslationY = translationY
             
         } else if gestureRecognizer.state == .ended {
             
-            if (selfViewPanDirectionY > 0) {
-                //print("down")
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
-                self.dismiss(animated: true, completion: nil)
+            if panDirection == .Down {
+                self.pullToDismiss?.continueAnimation()
             } else {
-                //print("up")
-//                UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
-//                    self.domainInfoViewTopConstraint.constant = self.domainInfoViewTopMargin
-//                    self.view.layoutIfNeeded()
-//                }, completion: nil)
-                
                 self.pullToDismiss?.reverse()
             }
         }

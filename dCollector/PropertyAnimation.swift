@@ -24,6 +24,12 @@ class PullToDismiss: NSObject {
         }
     }
     
+    deinit {
+        targetViewController = nil
+        dismissAnimation = nil
+        reverseAnimation = nil
+    }
+    
     public func ready() {
         
         guard targetViewController != nil else { return }
@@ -36,11 +42,13 @@ class PullToDismiss: NSObject {
             self.targetViewController?.domainInfoViewTopConstraint.constant += self.moveDistance
             self.targetViewController?.view.layoutIfNeeded()
         })
-        dismissAnimation?.addCompletion { (complete) in
+        dismissAnimation?.addCompletion { (_) in
             if self.toDismiss {
-                self.targetViewController?.dismiss(animated: false, completion: nil)
+                self.targetViewController?.dismiss(animated: false, completion: { _ in
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
+                })
             } else {
-                self.toDismiss = true
+                self.toDismiss = true // reset
                 self.targetViewController?.domainInfoViewTopConstraint.constant = self.initialMarginTop
             }
         }
@@ -65,9 +73,11 @@ class PullToDismiss: NSObject {
         dismissAnimation?.startAnimation()
     }
     
+    public func continueAnimation() {
+        dismissAnimation?.continueAnimation(withTimingParameters: nil, durationFactor: 0.3)
+    }
+    
     public func reverse() {
-//        dismissAnimation?.stopAnimation(true)
-//        dismissAnimation?.finishAnimation(at: .current)
         toDismiss = false
         dismissAnimation?.isReversed = true
         dismissAnimation?.startAnimation()
