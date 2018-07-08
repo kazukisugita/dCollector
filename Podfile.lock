@@ -1,9 +1,9 @@
 PODS:
-  - Ji (2.0.1):
-    - Ji/Ji (= 2.0.1)
-  - Ji/Ji (2.0.1):
+  - Ji (2.1.0):
+    - Ji/Ji (= 2.1.0)
+  - Ji/Ji (2.1.0):
     - Ji/Ji-libxml
-  - Ji/Ji-libxml (2.0.1)
+  - Ji/Ji-libxml (2.1.0)
   - Realm (2.6.2):
     - Realm/Headers (= 2.6.2)
   - Realm/Headers (2.6.2)
@@ -11,24 +11,20 @@ PODS:
     - Realm (= 2.6.2)
 
 DEPENDENCIES:
-  - Ji (from `git@github.com:honghaoz/Ji.git`, branch `swift4`)
+  - Ji (~> 2.1.0)
   - RealmSwift
 
-EXTERNAL SOURCES:
-  Ji:
-    :branch: swift4
-    :git: git@github.com:honghaoz/Ji.git
-
-CHECKOUT OPTIONS:
-  Ji:
-    :commit: a2e4f13f972d719b2d7a36ed20cfaf5c5b76f7fa
-    :git: git@github.com:honghaoz/Ji.git
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Ji
+    - Realm
+    - RealmSwift
 
 SPEC CHECKSUMS:
-  Ji: 6bb602a28dd08b804158f64990e6051ed5de0110
+  Ji: 21946da4e13425485ddd424edfaeeced0d80ad28
   Realm: 29222766425b9f831228f81b63f0e38a97a4d700
   RealmSwift: d161a80f96cb91ae88391a7d5a9cf08024a7bc8e
 
-PODFILE CHECKSUM: e97349eb2bbb3798ac4d119bf66830128a20df36
+PODFILE CHECKSUM: 7ccd1c04a989f4ca4a8ff21101c519b350f416cf
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.5.3

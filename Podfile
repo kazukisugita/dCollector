@@ -1,5 +1,8 @@
+source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
+platform :ios, '10.0'
+
 target 'dCollector' do
-  pod 'Ji', :git=> 'git@github.com:honghaoz/Ji.git', :branch => 'swift4'
+  pod 'Ji', '~> 2.1.0'
   pod 'RealmSwift'
 end
