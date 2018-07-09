@@ -4,11 +4,11 @@ PODS:
   - Ji/Ji (2.1.0):
     - Ji/Ji-libxml
   - Ji/Ji-libxml (2.1.0)
-  - Realm (2.6.2):
-    - Realm/Headers (= 2.6.2)
-  - Realm/Headers (2.6.2)
-  - RealmSwift (2.6.2):
-    - Realm (= 2.6.2)
+  - Realm (3.7.4):
+    - Realm/Headers (= 3.7.4)
+  - Realm/Headers (3.7.4)
+  - RealmSwift (3.7.4):
+    - Realm (= 3.7.4)
 
 DEPENDENCIES:
   - Ji (~> 2.1.0)
@@ -22,8 +22,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Ji: 21946da4e13425485ddd424edfaeeced0d80ad28
-  Realm: 29222766425b9f831228f81b63f0e38a97a4d700
-  RealmSwift: d161a80f96cb91ae88391a7d5a9cf08024a7bc8e
+  Realm: a469bb59e33f9926102ccaea4349822c53b9117e
+  RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
 
 PODFILE CHECKSUM: 7ccd1c04a989f4ca4a8ff21101c519b350f416cf
 
