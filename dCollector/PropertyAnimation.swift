@@ -32,7 +32,7 @@ class PullToDismiss: NSObject {
         
         guard let _targetViewController = targetViewController else { return }
         
-        dismissAnimation = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut, animations: { () in
+        dismissAnimation = UIViewPropertyAnimator(duration: 0.4, curve: .easeOut, animations: { () in
             
             if let modalPresentationController = _targetViewController.presentationController as? ModalPresentationController {
                 modalPresentationController.dimmingView.effect = nil
@@ -65,7 +65,7 @@ class PullToDismiss: NSObject {
     }
     
     public func continueAnimation() {
-        dismissAnimation?.continueAnimation(withTimingParameters: nil, durationFactor: 0.3)
+        dismissAnimation?.continueAnimation(withTimingParameters: nil, durationFactor: 0.4)
     }
     
     public func reverse() {

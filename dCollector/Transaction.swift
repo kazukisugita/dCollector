@@ -173,45 +173,31 @@ public struct Transaction {
         
         let session = URLSession(configuration: .default)
         
-        guard let host = domain.name else { return }
+        guard let domain = domain as? Domain else { return }
         guard let iconPath = domain.iconPath else { return }
-        let iconUrl: URL = URL(string: iconPath!)!
+        let iconUrl: URL = URL(string: iconPath)!
         
-        //let hostUrl = URL(string: "https://\(host)")
-        //var iconPath: String = "/favicon.ico"
-        
-        DispatchQueue.global(qos: .userInteractive).async {
-            session.downloadTask(with: iconUrl, completionHandler: { (location, response, error) in
-                
-                if let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode {
-                    print("\(host) -> response: 200...299")
-                    
-                    if let data = try? Data(contentsOf: iconUrl){
-                        //print("data: \(data)")
+        session.downloadTask(with: iconUrl, completionHandler: { (location, response, error) in
+            if let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode {
+                if let data = try? Data(contentsOf: iconUrl){
+                    DispatchQueue.main.async {
+                        let iconObject = RealmManager.getDomainWithPrimaryKey(domain.name)
+                        RealmManager.rewriteSpecificDomain(iconObject!, image: data as NSData)
                         
-                        DispatchQueue.main.async(execute: { () -> Void in
-                            let iconObject = RealmManager.getDomainWithPrimaryKey(host)
-                            RealmManager.rewriteSpecificDomain(iconObject!, image: data as NSData)
-                            
-                            if cell is ListsTableViewCell {
-                                let cell = cell as! ListsTableViewCell
-                                cell.domainIcon?.image = UIImage(data: data)
-                                cell.domainIcon?.backgroundColor = .none
-                                cell.layoutIfNeeded()
-                            }
-                        })
+                        if cell is ListsTableViewCell {
+                            let cell = cell as! ListsTableViewCell
+                            cell.domainIcon?.image = UIImage(data: data)
+                            cell.domainIcon?.backgroundColor = .none
+                            cell.layoutIfNeeded()
+                        }
                     }
-                } else {
-                    print("\(host) -> response: getIconImageInBackground")
-                    //print(response as? HTTPURLResponse!)
-                    //Transaction.getIconImageInBackground(forCell: cell, domainName: host)
-                    Transaction.getIconImageInBackground(forCell: cell, url: iconPath!, domainName: host)
                 }
-                
-                session.invalidateAndCancel()
-                
-            }).resume()
-        }
+            } else {
+                Transaction.getIconImageInBackground(forCell: cell, url: iconPath, domainName: domain.name)
+            }
+            session.invalidateAndCancel()
+        }).resume()
+
     }
     
     

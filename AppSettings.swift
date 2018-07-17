@@ -1,14 +1,6 @@
-//
-//  AppSettings.swift
-//  dCollector
-//
-//  Created by Kazuki Sugita on 2017/05/26.
-//  Copyright © 2017年 Kazuki Sugita. All rights reserved.
-//
 
 import Foundation
-import SystemConfiguration.CaptiveNetwork
-
+import Reachability
 
 struct AppSettings {
     
@@ -41,17 +33,8 @@ extension AppSettings {
     }
     
     
-    static func wifiSsidNameExisting() -> Bool {
-        var ssidExisting: Bool = false
-        if let interfaces = CNCopySupportedInterfaces() as NSArray? {
-            for interface in interfaces {
-                if let _ = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
-                    ssidExisting = true
-                    break
-                }
-            }
-        }
-        return ssidExisting
+    static func isWifiConnection() -> Bool {
+        return Reachability()?.connection == .wifi
     }
     
 }
@@ -69,7 +52,16 @@ extension AppSettings {
  
     static func broswerIs() -> Int {
         if let num = settings.object(forKey: self.userSettings_browser) as? Int {
-            return num
+            switch num {
+            case Browsers.dDefault.hashValue:
+                return 0
+            case Browsers.safari.hashValue:
+                return 1
+            case Browsers.chrome.hashValue:
+                return 2
+            default:
+                return 0
+            }
         } else {
             let _num = Browsers.dDefault.hashValue
             settings.set(_num, forKey: self.userSettings_browser)

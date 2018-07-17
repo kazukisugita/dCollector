@@ -25,7 +25,7 @@ class MoreBrowserSwitchTableViewCell: UITableViewCell {
         
         title.text = "Browser that opens the URL is".localized()
         if UIApplication.shared.canOpenURL(URL(string:"googlechrome://")!) == false {
-            segment.setEnabled(false, forSegmentAt: Browsers.chrome.hashValue)
+            segment.setEnabled(false, forSegmentAt: 2)
         }
         segment.selectedSegmentIndex = AppSettings.broswerIs()
         browserImage.image = browserIcons[AppSettings.broswerIs()]

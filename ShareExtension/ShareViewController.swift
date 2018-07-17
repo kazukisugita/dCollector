@@ -30,38 +30,17 @@ final class ShareViewController: UIViewController {
         self.view.isOpaque = false
         
         getExtensionContext()
-        
         customization()
-        
-        appearAnimation()
-    
-        
+        animate()
     }
     
-    private func appearAnimation() {
-        
-        self.view.setNeedsLayout()
-        
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
-            self.innerView.frame.size.width = self.innerViewWidth.appeared
-            self.message.alpha = 1.0
-            self.view.layoutIfNeeded()
-        }, completion: { _ in
-            self.disappearAnimation()
-        })
-        
-    }
-    
-    private func disappearAnimation() {
-        
-        UIView.animate(withDuration: 0.3, delay: 0.8, options: .curveEaseOut, animations: {
-            self.innerView.frame.size.width = self.innerViewWidth.initial
-            self.message.alpha = 0.0
-            self.view.layoutIfNeeded()
+    private func animate() {
+        UIView.animate(withDuration: 0.4, delay: 1.0, options: .curveEaseOut, animations: {
+            self.innerView.transform = __CGAffineTransformMake(0.2, 0.0, 0.0, 0.2, 0.0, 20.0)
+            self.innerView.alpha = 0.0
         }, completion: { _ in
             self.completeRequest()
         })
-        
     }
     
     private func completeRequest() {
@@ -95,7 +74,10 @@ final class ShareViewController: UIViewController {
                                 if object == url_str {
                                     //self.shareString.append(url_str)
                                     //defaults.set(self.shareString, forKey: AppGroup.keyName)
-                                    self.message.text = "Already Have"
+                                    DispatchQueue.main.async {
+                                        self.message.text = "Already Have"
+                                        self.innerView.layoutIfNeeded()
+                                    }
                                     return
                                 }
                             }
@@ -104,26 +86,38 @@ final class ShareViewController: UIViewController {
                             defaults.set(self.shareString, forKey: AppGroup.keyName)
                             
                             if url_str.hasPrefix("https") {
-                                self.message.text = "   Success"
+                                DispatchQueue.main.async {
+                                    self.message.text = "   Success"
+                                }
                             } else {
                                 //self.message.text = "HTTP might fail"
-                                self.message.text = "   Success"
+                                DispatchQueue.main.async {
+                                    self.message.text = "   Success"
+                                }
                             }
                         } else {
                             // ひとつめの格納
                             self.shareString.append(url_str)
                             defaults.set(self.shareString, forKey: AppGroup.keyName)
                             if url_str.hasPrefix("https") {
-                                self.message.text = "   Success"
+                                DispatchQueue.main.async {
+                                    self.message.text = "   Success"
+                                }
                             } else {
                                 //self.message.text = "HTTP might fail"
-                                self.message.text = "   Success"
+                                DispatchQueue.main.async {
+                                    self.message.text = "   Success"
+                                }
                             }
                         }
                         
                         AppGroup.tryGetData()
+                        self.innerView.layoutIfNeeded()
                     } else {
-                        self.message.text = "   Failure"
+                        DispatchQueue.main.async {
+                            self.message.text = "   Failure"
+                            self.innerView.layoutIfNeeded()
+                        }
                     }
                 })
             } else {
@@ -144,9 +138,9 @@ extension ShareViewController {
         
         self.innerView.center = self.view.center
         self.innerView.layer.cornerRadius = 8
-        self.innerView.frame.size.width = self.innerViewWidth.initial
-        
-        self.message.alpha = 0.0
+        self.innerView.frame.size.width = self.innerViewWidth.appeared
+    
+        self.view.layoutIfNeeded()
     }
     
 }

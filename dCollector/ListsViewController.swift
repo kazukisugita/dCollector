@@ -43,6 +43,8 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         
         super.viewDidLoad()
         
+//        let _ = iCloudManager()
+        
         // Self View
         
         //let titleImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
@@ -165,20 +167,6 @@ extension ListsViewController {
         return cell
     }
     
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //print("didSelectRowAtIndexPath")
-    }
-    
-    func _tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        tableView.deselectRow(at: indexPath, animated: false)
-        self.selectedDomain = RealmManager.getAllDomain()[indexPath.row]
-        
-        performSegue(withIdentifier: "toListDetailFromLists", sender: nil)
-    }
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: false)
@@ -213,29 +201,11 @@ extension ListsViewController {
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         //print("didHighlightRowAt")
     }
-
-    /*
-    func selToEdit(sender: UIButton) {
-        
-        if (self.listsTableView.isEditing) {
-            self.editButton?.title = "edit"
-            self.listsTableView.setEditing(false, animated: true)
-        } else {
-            self.editButton?.title = "done"
-            self.listsTableView.setEditing(true, animated: true)
-        }
-        
-    }
-    */
     
     func refreshTable() {
         
         if AppSettings.onlyDownloadWithWifi() {
-            //print(" --- Only Download With Wifi --- ")
-            
-            if AppSettings.wifiSsidNameExisting() == false {
-                //print(" --- and You are Not On Wifi --- ")
-                //self.listRefresher.endRefreshing()
+            if AppSettings.isWifiConnection() == false {
                 return
             }
         }
@@ -284,14 +254,13 @@ extension ListsViewController {
                     counter += 1
                     self.textInLoadingView.text = "\(counter) / \(defaultsCount)"
                     
-                    if let url_ = url {
-                        self.successUrlInLoadingView.alpha = 0.0
-                        //self.successUrlInLoadingView.text = "OK: \(url_)"
-                        UIView.animate(withDuration: 0.2, animations: {
-                            self.successUrlInLoadingView.text = "OK: \(url_)"
-                            self.successUrlInLoadingView.alpha = 1.0
-                        })
-                    }
+//                    if let _ = url {
+//                        self.successUrlInLoadingView.alpha = 0.0
+//                        UIView.animate(withDuration: 0.2, animations: {
+//                            self.successUrlInLoadingView.text = "OK: \(url_)"
+//                            self.successUrlInLoadingView.alpha = 1.0
+//                        })
+//                    }
                     
                     if defaultsCount == counter {
                         print(" --- --- --- --- --- --- --- --- ")
