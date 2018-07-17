@@ -169,31 +169,30 @@ public struct Transaction {
     }
     
     
-    public static func getIconImage (forCell cell: AnyObject, withObject domain: AnyObject) {
+    public static func getIconImage (forCell cell: AnyObject, iconPath: String, hostName: String) {
         
         let session = URLSession(configuration: .default)
-        
-        guard let domain = domain as? Domain else { return }
-        guard let iconPath = domain.iconPath else { return }
         let iconUrl: URL = URL(string: iconPath)!
         
         session.downloadTask(with: iconUrl, completionHandler: { (location, response, error) in
             if let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode {
                 if let data = try? Data(contentsOf: iconUrl){
                     DispatchQueue.main.async {
-                        let iconObject = RealmManager.getDomainWithPrimaryKey(domain.name)
-                        RealmManager.rewriteSpecificDomain(iconObject!, image: data as NSData)
-                        
-                        if cell is ListsTableViewCell {
-                            let cell = cell as! ListsTableViewCell
-                            cell.domainIcon?.image = UIImage(data: data)
-                            cell.domainIcon?.backgroundColor = .none
-                            cell.layoutIfNeeded()
+                        autoreleasepool {
+                            //                            let iconObject = RealmManager.getDomainWithPrimaryKey(domain.name)
+                            //                            RealmManager.rewriteSpecificDomain(iconObject!, image: data as NSData)
+                            
+                            if cell is ListsTableViewCell {
+                                let cell = cell as! ListsTableViewCell
+                                cell.domainIcon?.image = UIImage(data: data)
+                                cell.domainIcon?.backgroundColor = .none
+                                cell.layoutIfNeeded()
+                            }
                         }
                     }
                 }
             } else {
-                Transaction.getIconImageInBackground(forCell: cell, url: iconPath, domainName: domain.name)
+                Transaction.getIconImageInBackground(forCell: cell, url: iconPath, hostName: hostName)
             }
             session.invalidateAndCancel()
         }).resume()
@@ -201,7 +200,7 @@ public struct Transaction {
     }
     
     
-    private static func getIconImageInBackground (forCell cell: AnyObject, url iconUrl: String, domainName name: String) {
+    private static func getIconImageInBackground (forCell cell: AnyObject, url iconUrl: String, hostName name: String) {
         
         let session = URLSession(configuration: .default)
         

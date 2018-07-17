@@ -147,7 +147,9 @@ extension ListsViewController {
         let domain = RealmManager.getAllDomain()[indexPath.row]
         
         if domain.icon == nil && isLoading == false {
-            Transaction.getIconImage(forCell: cell, withObject: domain)
+            if let iconPath = domain.iconPath {
+                Transaction.getIconImage(forCell: cell, iconPath: iconPath, hostName: domain.name)
+            }
         }
         
         if domain.icon != nil {
@@ -288,45 +290,6 @@ extension ListsViewController {
 
     
 }
-
-extension ListsViewController {
-    /*
-    func animate(_ direction: Direction) {
-        let cells = listsTableView.visibleCells as! [ListsTableViewCell]
-        var x: CGFloat?
-        
-        switch direction {
-        case .toLeft:
-            x = 160.0
-        case .toRight:
-            x = -160
-        }
-        
-        for cell in cells {
-            cell.transform = CGAffineTransform(translationX: 0, y: 100)
-        }
-        
-        var delayCounter = 0
-        for cell in cells {
-            
-            UIView.animate(withDuration: 0.7, delay: Double(delayCounter) * 0.02, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .transitionFlipFromLeft, animations: {
-                cell.transform = CGAffineTransform.identity
-            }, completion: nil)
-            delayCounter += 1
- 
-            UIView.animate(withDuration: 0.7, delay: Double(delayCounter) * 0.02, options: .curveEaseOut, animations: {
-                cell.domainIcon.alpha = 1.0
-            }, completion: { (finished) in
-                cell.domainIcon.alpha = 1.0
-            })
-            delayCounter += 1
-        }
-    }
-    */
-    
-    
-}
-
 
 //MARK: Cell
 
