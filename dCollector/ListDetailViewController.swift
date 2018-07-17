@@ -142,16 +142,16 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         
         switch AppSettings.broswerIs() {
             
-        case Browsers.dDefault.hashValue:
+        case 0:
             let safariViewController = SFSafariViewController(url: URL(string: url.url)!)
             safariViewController.modalPresentationStyle = .popover
             present(safariViewController, animated: true, completion: nil)
             
-        case Browsers.safari.hashValue:
+        case 1:
             let url: URL = URL(string:"\(url.url)")!
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
             
-        case Browsers.chrome.hashValue:
+        case 2:
             
             var urlStr = url.url
             

@@ -71,8 +71,20 @@ extension AppSettings {
     
     
     static func changeBrowserIs(index: Int) {
+        var num: Int = 0
+        switch index {
+        case 0:
+            num = Browsers.dDefault.hashValue
+        case 1:
+            num = Browsers.safari.hashValue
+        case 2:
+            num = Browsers.chrome.hashValue
+        default:
+            num = 0
+        }
+        
         if let _ = settings.object(forKey: self.userSettings_browser) as? Int {
-            settings.set(index, forKey: self.userSettings_browser)
+            settings.set(num, forKey: self.userSettings_browser)
         }
     }
     
