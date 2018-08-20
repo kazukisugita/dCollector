@@ -1,13 +1,12 @@
-use_frameworks!
-target 'dCollector' do
-  pod 'Ji', '~> 2.0.0'
-  pod 'RealmSwift'
-end
 
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '3.1'
-    end
-  end
+platform :ios, '11.0'
+
+target 'dCollector' do
+    use_frameworks!
+
+    pod 'Ji', '~> 2.1.0'
+    pod 'RealmSwift'
+    pod 'ReachabilitySwift'
+    pod 'SnapKit', '~> 4.0.0'
+    pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
 end

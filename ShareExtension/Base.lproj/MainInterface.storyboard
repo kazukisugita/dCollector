@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="j1y-V4-xli">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="j1y-V4-xli">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,8 +23,8 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <outlet property="innerView" destination="pll-fv-0gV" id="l94-wW-6rK"/>
-                        <outlet property="message" destination="usb-H2-wkt" id="ugW-3a-OKj"/>
+                        <outlet property="innerView" destination="pll-fv-0gV" id="gCX-tm-pU5"/>
+                        <outlet property="message" destination="usb-H2-wkt" id="Ndz-VO-r11"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEy-Cv-SGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -40,7 +40,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usb-H2-wkt">
-                            <rect key="frame" x="56" y="14" width="0.0" height="21"/>
+                            <rect key="frame" x="56" y="13.5" width="119" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="M3P-iK-x8a"/>
                             </constraints>
@@ -54,6 +54,7 @@
                         <constraint firstItem="usb-H2-wkt" firstAttribute="leading" secondItem="Xxv-dt-7rh" secondAttribute="trailing" constant="8" id="4Zw-4n-ibK"/>
                         <constraint firstItem="Xxv-dt-7rh" firstAttribute="leading" secondItem="pll-fv-0gV" secondAttribute="leading" constant="8" id="6Qa-ci-UD9"/>
                         <constraint firstItem="usb-H2-wkt" firstAttribute="centerY" secondItem="pll-fv-0gV" secondAttribute="centerY" id="Kco-gn-o38"/>
+                        <constraint firstAttribute="trailing" secondItem="usb-H2-wkt" secondAttribute="trailing" constant="5" id="QBp-AX-p4L"/>
                         <constraint firstItem="Xxv-dt-7rh" firstAttribute="centerY" secondItem="pll-fv-0gV" secondAttribute="centerY" id="hlO-QB-2Fk"/>
                         <constraint firstItem="usb-H2-wkt" firstAttribute="leading" secondItem="pll-fv-0gV" secondAttribute="leading" constant="56" id="m65-zy-76Y"/>
                     </constraints>
@@ -63,6 +64,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon-App-40x40" width="16" height="16"/>
+        <image name="Icon-App-40x40" width="40" height="40"/>
     </resources>
 </document>

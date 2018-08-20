@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  dCollector
+
+  Created by Kazuki Sugita on 2017/06/11.
+  Copyright © 2017年 Kazuki Sugita. All rights reserved.
+*/
+
+"Only Download with WiFi" = "WiFiでのみダウンロード";
+"Browser that opens the URL is" = "URLを開くブラウザ";
+"LOADING..." = "通信中...";
+"Delete the selected Domain's All Urls.\nAre you Sure ??" = "選択したサイトのURLを全て削除します。\nよろしいですか？";
+"DELETE" = "削除";
+"Cancel" = "キャンセル";
+"Delete this Url.\nAre you Sure ??" = "このURLを削除します。\nよろしいですか？";
+"Collect URL from Safari !!" = "SafariアプリからURLを集めよう!!";
+"Settings" = "設定";

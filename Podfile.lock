@@ -1,24 +1,50 @@
 PODS:
-  - Ji (2.0.1):
-    - Ji/Ji (= 2.0.1)
-  - Ji/Ji (2.0.1):
+  - Ji (2.1.0):
+    - Ji/Ji (= 2.1.0)
+  - Ji/Ji (2.1.0):
     - Ji/Ji-libxml
-  - Ji/Ji-libxml (2.0.1)
-  - Realm (2.6.2):
-    - Realm/Headers (= 2.6.2)
-  - Realm/Headers (2.6.2)
-  - RealmSwift (2.6.2):
-    - Realm (= 2.6.2)
+  - Ji/Ji-libxml (2.1.0)
+  - ReachabilitySwift (4.1.0)
+  - Realm (3.7.6):
+    - Realm/Headers (= 3.7.6)
+  - Realm/Headers (3.7.6)
+  - RealmSwift (3.7.6):
+    - Realm (= 3.7.6)
+  - SnapKit (4.0.0)
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
-  - Ji (~> 2.0.0)
+  - Ji (~> 2.1.0)
+  - ReachabilitySwift
   - RealmSwift
+  - SnapKit (~> 4.0.0)
+  - SVProgressHUD (from `https://github.com/SVProgressHUD/SVProgressHUD.git`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Ji
+    - ReachabilitySwift
+    - Realm
+    - RealmSwift
+    - SnapKit
+
+EXTERNAL SOURCES:
+  SVProgressHUD:
+    :git: https://github.com/SVProgressHUD/SVProgressHUD.git
+
+CHECKOUT OPTIONS:
+  SVProgressHUD:
+    :commit: d860511141f71fa0fb40c3241a0701be06ad7838
+    :git: https://github.com/SVProgressHUD/SVProgressHUD.git
 
 SPEC CHECKSUMS:
-  Ji: 6bb602a28dd08b804158f64990e6051ed5de0110
-  Realm: 29222766425b9f831228f81b63f0e38a97a4d700
-  RealmSwift: d161a80f96cb91ae88391a7d5a9cf08024a7bc8e
+  Ji: 21946da4e13425485ddd424edfaeeced0d80ad28
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+  Realm: 9eaecad54712d6246d08ba34c10f354e4715d7d3
+  RealmSwift: 1fe08b4ebaeeaacf17f9ba0343f7b25c9fc31fa6
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: ee057f1f0ed4bacb2143dcf642a9e7a1ce01bba1
+PODFILE CHECKSUM: ea25f4777d1a01a71333ec1132ddcf6d6cf0583d
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.5.3

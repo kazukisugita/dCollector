@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,35 +18,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="117.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQ9-K5-p2o">
-                        <rect key="frame" x="16" y="10" width="343" height="97.5"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydu-bL-F3N">
-                                <rect key="frame" x="16" y="15" width="311" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="W43-LK-pFC"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyU-LA-oIk">
-                                <rect key="frame" x="16" y="71" width="311" height="0.0"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Ydu-bL-F3N" secondAttribute="trailing" constant="16" id="2nO-qy-oOh"/>
-                            <constraint firstItem="hyU-LA-oIk" firstAttribute="top" secondItem="Ydu-bL-F3N" secondAttribute="bottom" constant="12" id="ImQ-B4-07m"/>
-                            <constraint firstItem="Ydu-bL-F3N" firstAttribute="top" secondItem="hQ9-K5-p2o" secondAttribute="top" constant="15" id="VnX-yz-qrj"/>
-                            <constraint firstItem="Ydu-bL-F3N" firstAttribute="leading" secondItem="hQ9-K5-p2o" secondAttribute="leading" constant="16" id="l4f-s4-KuR"/>
-                            <constraint firstAttribute="trailing" secondItem="hyU-LA-oIk" secondAttribute="trailing" constant="16" id="ti7-jB-2HF"/>
-                            <constraint firstItem="hyU-LA-oIk" firstAttribute="leading" secondItem="hQ9-K5-p2o" secondAttribute="leading" constant="16" id="xkk-1c-Xcc"/>
-                        </constraints>
-                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckf-3m-7GY">
+                        <rect key="frame" x="20" y="55" width="292" height="11"/>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="9"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muX-FW-7HF">
+                        <rect key="frame" x="24" y="12" width="288" height="43"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="hQ9-K5-p2o" secondAttribute="bottom" constant="10" id="1qg-0W-LC8"/>

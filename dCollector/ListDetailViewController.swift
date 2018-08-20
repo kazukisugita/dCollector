@@ -1,19 +1,16 @@
-//
-//  ListDetailViewController.swift
-//  dCollector
-//
-//  Created by Kazuki Sugita on 2017/05/08.
-//  Copyright © 2017年 Kazuki Sugita. All rights reserved.
-//
 
 import UIKit
 import SafariServices
 
-final class ListDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CAAnimationDelegate {
-
+final class ListDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+    
     @IBOutlet weak var listDetailTableView: UITableView!
-
+    fileprivate let listDetailTableViewContentInset: CGFloat = 24.0
+    @IBOutlet weak var listDetailTableViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var domainInfoView: UIView!
+    public let domainInfoViewTopMargin: CGFloat = 24.0
+    @IBOutlet weak var domainInfoViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var domainIcon: UIImageView?
     @IBOutlet weak var domainHost: UILabel!
     @IBOutlet weak var domainTitle: UILabel!
@@ -22,6 +19,20 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     var colorSets = [[CGColor]]()
     var currentColorSet: Int!
     
+    fileprivate var selfDidAppeared: Bool = false
+    fileprivate var pullDismissing: Bool = false
+    fileprivate var nowDismissing: Bool = false
+    fileprivate var prevPanTranslationY: CGFloat = 0.0
+    fileprivate var panDirection: PanningTo = .Down
+    fileprivate enum PanningTo {
+        case Up, Down
+    }
+    fileprivate var pullToDismiss: PullToDismissService?
+    
+    @IBAction func closeButtonHandle(_ sender: UIButton) {
+        pullToDismiss?.start()
+    }
+    
     var selectedDomain: Domain? {
         didSet {
             configureDomain()
@@ -29,151 +40,66 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     }
     var urls: [Url] = []
     
-    fileprivate var selfViewPanDirectionX: CGFloat = 0.0
-    fileprivate var panBlock: Bool = false
-    
-
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-
-        // Self View
-        
-        self.view.alpha = 1.0
-    
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ListDetailViewController.handlePan(gestureRecognizer:)))
-        self.view.addGestureRecognizer(panGestureRecognizer)
-        
-        // TableView
-    
-        listDetailTableView.delegate = self
-        listDetailTableView.dataSource = self
-        
-        listDetailTableView.rowHeight = 98.0 + 20.0
-        listDetailTableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        //listDetailTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
-        listDetailTableView.contentInset = UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0)
-        
-        //let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(ListDetailViewController.swipeDownTableView(sendor:)))
-        //swipeGesture.direction = .down
-        //listDetailTableView.addGestureRecognizer(swipeGesture)
-        
-        // TableView Cell
+    override func loadView() {
+        super.loadView()
         
         let nib: UINib = UINib(nibName: "ListDetailTableViewCell", bundle: nil)
         listDetailTableView.register(nib, forCellReuseIdentifier: "ListDetailTableViewCell")
-        /*
-        if let _domain = selectedDomain {
-            self.domainTitle?.text = _domain.title
-            self.domainHost?.text = _domain.name
-            self.domainDescription?.text = _domain.siteDescription
-            
-            if let image = _domain.icon {
-                self.domainIcon?.image = UIImage(data: image as Data)
-            } else {
-                let i = #imageLiteral(resourceName: "no-image-icon")
-                self.domainIcon?.image = i
-            }
-            
-        }
-        */
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        initUIs()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        selfDidAppeared = true
+    }
+    
+    deinit {
+        listDetailTableView.removeObserver(self, forKeyPath: "contentOffset")
+    }
+    
+    private func initUIs() {
+        
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(gestureRecognizer:)))
+        self.view.addGestureRecognizer(panGestureRecognizer)
+        
+        listDetailTableView.delegate = self
+        listDetailTableView.dataSource = self
+        listDetailTableView.rowHeight = 70.0
+        listDetailTableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
+        listDetailTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
+        listDetailTableView.contentInset = UIEdgeInsetsMake(listDetailTableViewContentInset, 0.0, listDetailTableViewContentInset, 0.0)
+        setHeightForTableView()
         // Long Press
-        
-        let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ListDetailViewController.longPressHandler))
+        let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressHandler))
         longPress.allowableMovement = 400
         longPress.minimumPressDuration = 0.6
         longPress.numberOfTapsRequired = 0
         longPress.numberOfTouchesRequired = 1
         listDetailTableView.addGestureRecognizer(longPress)
         
-        // Domain Info View
-        
-        configureDomainInfoView()
-    
-    }
-    
-    
-    func configureDomainInfoView() {
-        
-        //domainInfoView.layer.cornerRadius = 12
-        //domainInfoView.isUserInteractionEnabled = true
-        //let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.callSafariInHostPage))
-        //domainInfoView.addGestureRecognizer(domainInfoViewTap)
-        
-        /*
-        let leftColor = UIColor.hexStrRaw(hex: "#9FA8DA", alpha: 1.0).cgColor
-        let rightColor = UIColor.hexStrRaw(hex: "#90CAF9", alpha: 1.0).cgColor
-        
-        let gradientColors: [CGColor] = [leftColor, rightColor]
-        let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.colors = gradientColors
-        gradientLayer.frame = domainInfoView.bounds
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
-        
-        domainInfoView.layer.insertSublayer(gradientLayer, at: 0)
-        */
-        
-        createColorSets()
-        createGradientLayer()
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.handleTapGesture(gestureRecognizer:)))
-        domainInfoView.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    
-    func createGradientLayer() {
-        gradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.domainInfoView.bounds
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
-        gradientLayer.colors = colorSets[currentColorSet]
-        self.domainInfoView.layer.insertSublayer(gradientLayer, at: 0)
-    }
-    
-
-    func createColorSets() {
-        colorSets.append([UIColor.hexStrRaw(hex: "#F48FB1", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#EF9A9A", alpha: 1.0).cgColor])
-        colorSets.append([UIColor.hexStrRaw(hex: "#CE93D8", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#B39DDB", alpha: 1.0).cgColor])
-        colorSets.append([UIColor.hexStrRaw(hex: "#90CAF9", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#9FA8DA", alpha: 1.0).cgColor])
-        colorSets.append([UIColor.hexStrRaw(hex: "#81D4FA", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#80DEEA", alpha: 1.0).cgColor])
-        colorSets.append([UIColor.hexStrRaw(hex: "#4DB6AC", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#81C784", alpha: 1.0).cgColor])
-        colorSets.append([UIColor.hexStrRaw(hex: "#66BB6A", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#AED581", alpha: 1.0).cgColor])
-        colorSets.append([UIColor.hexStrRaw(hex: "#D6ED00", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#EAD201", alpha: 1.0).cgColor])
-        colorSets.append([UIColor.hexStrRaw(hex: "#FFCA28", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#FFA726", alpha: 1.0).cgColor])
-        colorSets.append([UIColor.hexStrRaw(hex: "#FFA726", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#FF7043", alpha: 1.0).cgColor])
-        colorSets.append([UIColor.hexStrRaw(hex: "#FF5722", alpha: 1.0).cgColor, UIColor.hexStrRaw(hex: "#FF8F8D", alpha: 1.0).cgColor])
-        currentColorSet = 0
-    }
-    
-    
-    func handleTapGesture(gestureRecognizer: UITapGestureRecognizer) {
-        if currentColorSet < colorSets.count - 1 {
-            currentColorSet! += 1
-        }
-        else {
-            currentColorSet = 0
+        domainInfoView.isUserInteractionEnabled = true
+        let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(callSafariInHostPage))
+        domainInfoView.addGestureRecognizer(domainInfoViewTap)
+        if #available(iOS 11.0, *) {
+            domainInfoView.clipsToBounds = true
+            domainInfoView.layer.cornerRadius = 15.0
+            domainInfoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         }
         
-        let colorChangeAnimation = CABasicAnimation(keyPath: "colors")
-        colorChangeAnimation.duration = 0.4
-        colorChangeAnimation.toValue = colorSets[currentColorSet]
-        colorChangeAnimation.fillMode = kCAFillModeForwards
-        colorChangeAnimation.isRemovedOnCompletion = false
-        colorChangeAnimation.delegate = self
-        gradientLayer.add(colorChangeAnimation, forKey: "colorChange")
+        domainInfoViewTopConstraint.constant = domainInfoViewTopMargin
+        
+        pullToDismiss = PullToDismissService(in: self)
+        pullToDismiss!.ready()
     }
     
-    
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        //print("didStop")
-        if flag {
-            self.gradientLayer.colors = colorSets[currentColorSet]
-        }
-    }
-    
-    
-    func configureDomain() {
+    func configureDomainView() {
+        
         if let _domain = selectedDomain {
             self.domainTitle?.text = _domain.title
             self.domainHost?.text = _domain.name
@@ -189,133 +115,185 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    
-    @IBAction func dismiss(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
-        self.dismiss(animated: true, completion: nil)
-    }
+    private func setHeightForTableView() {
         
-    
-    func callSafariInHostPage() {
-        let url: String = "https://" + self.domainHost.text!
-        let safariViewController = SFSafariViewController(url: URL(string: url)!)
-        safariViewController.modalPresentationStyle = .popover
-        present(safariViewController, animated: true, completion: nil);
+        let top = domainInfoViewTopMargin + domainInfoView.bounds.height
+        let bottom = UIScreen.main.bounds.height
+        
+        listDetailTableViewBottomConstraint.constant = top - bottom
     }
     
+    @objc func callSafariInHostPage() {
+        let url: Url = Url()
+        url.url = "https://" + self.domainHost.text!
+        openBrowser(url: url)
+    }
+    
+    func openBrowser(url: Url) {
+        
+        switch AppSettings.broswerIs() {
+            
+        case 0:
+            let safariViewController = SFSafariViewController(url: URL(string: url.url)!)
+            safariViewController.modalPresentationStyle = .popover
+            present(safariViewController, animated: true, completion: nil)
+            
+        case 1:
+            let url: URL = URL(string:"\(url.url)")!
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            
+        case 2:
+            var urlStr = url.url
+            
+            if let range = url.url.range(of: "http://") {
+                urlStr.removeSubrange(range)
+            } else if let range = url.url.range(of: "https://") {
+                urlStr.removeSubrange(range)
+            }
+            
+            let _url: URL = URL(string:"googlechrome://\(urlStr)")!
+            UIApplication.shared.open(_url, options: [:], completionHandler: nil)
+            
+        default:
+            break
+        }
+    }
     
 }
 
+// MARK: ScrollView KeyValueChangeEvent
+
 extension ListDetailViewController {
     
-    // TableView
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+
+        if scrollView.contentOffset.y <= -(listDetailTableViewContentInset) &&
+           scrollView.panGestureRecognizer.velocity(in: self.view).y > 0
+        {
+            pullDismissing = true
+            pullToDismiss?.ready()
+        }
+    }
+    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if pullDismissing == false { return }
+        if nowDismissing == true { return }
+        
+        let translationY = scrollView.panGestureRecognizer.translation(in: self.view).y
+        pullToDismiss?.onFraction(translationY)
+        
+        if translationY - prevPanTranslationY != 0 {
+            panDirection = (translationY - prevPanTranslationY) > 0 ? .Down : .Up
+            prevPanTranslationY = translationY
+        }
+        scrollView.contentOffset.y = -listDetailTableViewContentInset // reset
+    }
+    
+    internal func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        if pullDismissing == false { return }
+    
+        if panDirection == .Down {
+            nowDismissing = true
+            pullToDismiss?.continueAnimation()
+        } else {
+            pullToDismiss?.reverse()
+            prevPanTranslationY = 0.0
+            pullDismissing = false
+        }
+    }
+}
+
+
+// MARK: TableView
+
+extension ListDetailViewController {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 1.0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return self.urls.count
-        return (RealmManager.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false).count)!
+        
+        guard let sortedUrls = RealmService.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false) else {
+            return 0
+        }
+        return sortedUrls.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+        guard let sortedUrls = RealmService.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false) else {
+            return UITableViewCell()
+        }
         
-        //let url = urls[indexPath.row]
-        
-        var url: Url!
-        let sortedUrls = RealmManager.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false)
-        url = sortedUrls![indexPath.row]
-        
-        let cell: ListDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ListDetailTableViewCell", for: indexPath) as! ListDetailTableViewCell
-        
-        cell.urlTitle?.text = url.title
-        cell.url?.text = url.url
+        let selectedUrl = sortedUrls[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ListDetailTableViewCell", for: indexPath) as! ListDetailTableViewCell
+        cell.urlTitle?.text = selectedUrl.title
+        cell.url?.text = selectedUrl.url
         
         return cell
     }
-    
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: false)
+        guard let sortedUrls = RealmService.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false) else { return }
         
-        var url: Url!
-        let sortedUrls = RealmManager.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false)
-        url = sortedUrls![indexPath.row]
-        
-        let safariViewController = SFSafariViewController(url: URL(string: url.url)!)
-        //safariViewController.modalPresentationStyle = .popover
-        present(safariViewController, animated: true, completion: nil);
-        //guard let root = UIApplication.shared.keyWindow?.rootViewController else { return }
+        openBrowser(url: sortedUrls[indexPath.row])
     }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        //print("hogehoge!!")
-    }
-    
-    
 }
+
+// MARK: TableView Cell
 
 extension ListDetailViewController {
     
-    // Cell
-    
-    func longPressHandler(sender: UILongPressGestureRecognizer) {
+    @objc func longPressHandler(sender: UILongPressGestureRecognizer) {
         
         if sender.state == UIGestureRecognizerState.began {
 
             let point: CGPoint = sender.location(in: self.listDetailTableView)
-            let indexPath = self.listDetailTableView.indexPathForRow(at: point)
-        
-            callActionSheet(indexPath!)
+            guard let indexPath = self.listDetailTableView.indexPathForRow(at: point) else { return }
+            
+            callActionSheet(indexPath)
         }
     }
     
     
     func callActionSheet(_ indexPath: IndexPath) {
-        
-        //let url = self.urls[indexPath.row].url
-        //let title = self.urls[indexPath.row].title
-        let sortedUrls = RealmManager.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false)
-        let url = sortedUrls![indexPath.row].url
-        let title = sortedUrls![indexPath.row].title
-        
+
+        guard
+            let selectedDomain = self.selectedDomain,
+            let domain = RealmService.getDomainWithPrimaryKey(selectedDomain.name)
+        else {
+            return
+        }
+        let sortedUrls = domain.urls.sorted(byKeyPath: "createdAt", ascending: false)
+        let url = sortedUrls[indexPath.row].url
+        let title = sortedUrls[indexPath.row].title
         
         let actionSheet: UIAlertController = UIAlertController(title: title, message: "Delete this Url.\nAre you Sure ??".localized(), preferredStyle: .actionSheet)
-        let ok = UIAlertAction(title: "DELETE".localized(), style: .destructive, handler: { (action: UIAlertAction!) in
+        let ok = UIAlertAction(title: "DELETE".localized(), style: .destructive, handler: { _ in DispatchQueue.main.async {
             
-            DispatchQueue.main.async {
-                let _url = RealmManager.getUrlWithPrimaryKey(url)
-                RealmManager.deleteUrl(url: _url!)
-                
-                let _domain = RealmManager.getDomainWithPrimaryKey(self.selectedDomain!.name)
-                
-                self.urls.removeAll()
-                
-                for url_ in (_domain?.urls)! {
-                    self.urls.append(url_)
-                }
-                
-                let table = self.listDetailTableView!
-                
-                table.beginUpdates()
-                table.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
-                table.perform(#selector(table.reloadData), with: nil, afterDelay: 0.3)
-                table.layoutIfNeeded()
-                table.endUpdates()
+            guard let deleteUrl = RealmService.getUrlWithPrimaryKey(url) else {
+                return
+            }
+            RealmService.deleteUrl(url: deleteUrl)
+            
+            self.urls.removeAll()
+            for _url in domain.urls {
+                self.urls.append(_url)
             }
             
-        })
-        
-        let cancel = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: { (action: UIAlertAction!) in
-        })
-        
+            let table = self.listDetailTableView!
+            table.beginUpdates()
+            table.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+            table.perform(#selector(table.reloadData), with: nil, afterDelay: 0.3)
+            table.layoutIfNeeded()
+            table.endUpdates()
+        }})
+        let cancel = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
         actionSheet.addAction(ok)
         actionSheet.addAction(cancel)
         
@@ -327,104 +305,32 @@ extension ListDetailViewController {
 
 extension ListDetailViewController {
     
-    // SearchBar
-    /*
-    // 検索ボタンが押された時に呼ばれる
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.view.endEditing(true)
-        searchBar.showsCancelButton = true
-        self.searchResults = self.urls.filter{_ in 
-            // 大文字と小文字を区別せずに検索
-            //$0.lowercased().contains(searchBar.text!.lowercased())
-        }
-        self.listDetailTableView.reloadData()
-    }
-    
-    // キャンセルボタンが押された時に呼ばれる
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
-        self.view.endEditing(true)
-        searchBar.text = ""
-        self.listDetailTableView.reloadData()
-    }
-    
-    // テキストフィールド入力開始前に呼ばれる
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.showsCancelButton = true
-        return true
-    }
-    */
-    
-    
-}
-
-
-extension ListDetailViewController {
-    /*
-    func handlePan_(recognizer: UIPanGestureRecognizer) {
-        
-        switch recognizer.state {
-        case .began:
-            animator = UIViewPropertyAnimator(duration: 1, curve: .easeOut, animations: {
-                self.view.frame = self.view.frame.offsetBy(dx: 0, dy: 300)
-            })
-            animator.pauseAnimation()
-        case .changed:
-            let translation = recognizer.translation(in: self.view)
-            animator.fractionComplete = translation.y / 300
-        case .ended:
-            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-        default:
-            return
-        }
-        
-    }
-    */
-    
-    func handlePan (gestureRecognizer:UIPanGestureRecognizer) {
+    @objc func handlePan (gestureRecognizer: UIPanGestureRecognizer) {
         
         if gestureRecognizer.state == .began {
             
-        } else if gestureRecognizer.state == .changed && panBlock == false {
+            pullToDismiss?.ready()
             
-            let translation = gestureRecognizer.translation(in: self.view)
-
-            if ((gestureRecognizer.view!.center.x + translation.x) <= UIScreen.main.bounds.width/2) { return }
+        } else if gestureRecognizer.state == .changed {
             
-            gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x + translation.x, y: gestureRecognizer.view!.center.y)
-            gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+            let translationY = gestureRecognizer.translation(in: self.view).y
+            pullToDismiss?.onFraction(translationY)
             
-            selfViewPanDirectionX = translation.x
-            
-            //print(gestureRecognizer.view!.center.x)
+            if translationY - prevPanTranslationY != 0 {
+                panDirection = (translationY - prevPanTranslationY) > 0 ? .Down : .Up
+                prevPanTranslationY = translationY
+            }
             
         } else if gestureRecognizer.state == .ended {
-            /*
-            let centerY = gestureRecognizer.view!.center.y
-            print(centerY)
             
-            if centerY > 420 {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
-                self.dismiss(animated: true, completion: nil)
+            if panDirection == .Down {
+                self.pullToDismiss?.continueAnimation()
             } else {
-                UIView.animate(withDuration: 0.2, delay: 0.00, options: .curveEaseOut, animations: {
-                    gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: UIScreen.main.bounds.height/2)
-                }, completion: nil)
-            }
-            */
-            
-            if (selfViewPanDirectionX > 0) {
-                //print("down")
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
-                self.dismiss(animated: true, completion: nil)
-            } else {
-                //print("up")
-                UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
-                    self.view!.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
-                }, completion: nil)
+
+                self.pullToDismiss?.reverse()
+                prevPanTranslationY = 0.0
             }
         }
-        
     }
     
     
