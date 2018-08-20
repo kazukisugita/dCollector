@@ -30,8 +30,8 @@
                         </connections>
                     </segmentedControl>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRe-yN-3d5">
-                        <rect key="frame" x="15" y="12" width="34" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="16" y="12" width="30" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -50,7 +50,7 @@
                     <constraint firstItem="HW5-HN-ssc" firstAttribute="top" secondItem="bRe-yN-3d5" secondAttribute="bottom" constant="12" id="TKI-8z-5af"/>
                     <constraint firstAttribute="trailing" secondItem="Ufd-K5-m9H" secondAttribute="trailing" constant="24" id="aJp-fk-5zn"/>
                     <constraint firstAttribute="trailing" secondItem="HW5-HN-ssc" secondAttribute="trailing" constant="8" id="uHW-fF-04Z"/>
-                    <constraint firstItem="bRe-yN-3d5" firstAttribute="leading" secondItem="Bbx-di-Igy" secondAttribute="leading" constant="15" id="x7G-Eh-8Jw"/>
+                    <constraint firstItem="bRe-yN-3d5" firstAttribute="leading" secondItem="Bbx-di-Igy" secondAttribute="leading" constant="16" id="x7G-Eh-8Jw"/>
                     <constraint firstItem="HW5-HN-ssc" firstAttribute="top" secondItem="Ufd-K5-m9H" secondAttribute="bottom" constant="5" id="zUR-n8-HGU"/>
                 </constraints>
             </tableViewCellContentView>

@@ -2,6 +2,7 @@
 import UIKit
 import SnapKit
 import SVProgressHUD
+import Reachability
 
 final class ListsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -92,10 +93,9 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @objc func handleDidBecomeActive() {
-    
-        if AppSettings.onlyDownloadWithWifi() == false && AppSettings.isWifiConnection() == true {
-            refreshTable()
-        }
+        
+        if AppSettings.onlyDownloadWithWifi() == true && Reachability()?.connection == .cellular { return }
+        refreshTable()
     }
     
 }
