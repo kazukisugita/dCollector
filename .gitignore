@@ -1,2 +1,8 @@
 .DS_Store
-UserInterfaceState.xcuserstate
+xcuserdata
+project.xcworkspace
+*xcuserdatad*
+xcuserdatad
+.gitignore~
+BeaconTest.xcodeproj/xcuserdatad*
+Pods
