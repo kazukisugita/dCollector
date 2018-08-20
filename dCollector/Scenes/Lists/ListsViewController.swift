@@ -21,11 +21,6 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         initLayout()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        refreshTable()
-    }
-    
     private func initUIs() {
         
         self.navigationItem.title = "Domains"
@@ -167,8 +162,8 @@ extension ListsViewController {
     
     @objc func refreshTable() {
     
-        if let presenting = presentingViewController {
-            presenting.dismiss(animated: true)
+        if let listDetailViewController = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController as? ListDetailViewController {
+            listDetailViewController.dismiss(animated: true)
         }
         
         guard let urls = AppGroup.getUrlsFromUserDefaults() else {
