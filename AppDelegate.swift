@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  dCollector
-//
-//  Created by Kazuki Sugita on 2017/05/02.
-//  Copyright © 2017年 Kazuki Sugita. All rights reserved.
-//
 
 import UIKit
 import RealmSwift

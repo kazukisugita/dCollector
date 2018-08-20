@@ -1,10 +1,3 @@
-//
-//  color.swift
-//  dCollector
-//
-//  Created by Kazuki Sugita on 2017/05/15.
-//  Copyright © 2017年 Kazuki Sugita. All rights reserved.
-//
 
 import UIKit
 import Foundation
@@ -16,17 +9,9 @@ enum Colors {
     case blue1
     case textLight
     case defaultBackground
-    // v2
-    case navHeader
-    case textBlack_v2
-    case textBlack_light_v2
-    case textBlack_light_Domains_v2
-    case shadow
 }
 
 extension UIColor {
-    
-    // UIColor.hexStr("34495e", alpha: 1)
     
     class func hexStr ( type : Colors, alpha : CGFloat) -> UIColor {
         
@@ -45,17 +30,6 @@ extension UIColor {
             hexStr = "4E4E4E"
         case .defaultBackground:
             hexStr = "EFEFF4"
-        // v2
-        case .navHeader:
-            hexStr = "0087EC"
-        case .textBlack_v2:
-            hexStr = "444444"
-        case .textBlack_light_v2:
-            hexStr = "CCCCCC"
-        case .textBlack_light_Domains_v2:
-            hexStr = "95989A"
-        case .shadow:
-            hexStr = "000000"
         }
         
         let alpha = alpha

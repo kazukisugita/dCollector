@@ -20,7 +20,6 @@
 		BB2B050D1EF4D34100339B5E /* ModalTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2B050B1EF4D34100339B5E /* ModalTransition.swift */; };
 		BB2D01521EBD673F00D13D35 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2D01511EBD673F00D13D35 /* AppGroup.swift */; };
 		BB2D01531EBD673F00D13D35 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2D01511EBD673F00D13D35 /* AppGroup.swift */; };
-		BB37967120E11CA300D083B1 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB37967020E11CA300D083B1 /* Alert.swift */; };
 		BB3A66641ED81299003E7CC9 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3A66631ED81299003E7CC9 /* AppSettings.swift */; };
 		BB3A66661ED8192D003E7CC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB3A66651ED8192D003E7CC9 /* SystemConfiguration.framework */; };
 		BB3D02891ECC082200604435 /* ListsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D02871ECC082200604435 /* ListsTableViewCell.swift */; };
@@ -40,10 +39,10 @@
 		BBC063801EC5B02B00840A40 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC063731EC5B02B00840A40 /* ListDetailViewController.swift */; };
 		BBC063821EC5B02B00840A40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC063751EC5B02B00840A40 /* Main.storyboard */; };
 		BBCB1B3820EB452200467030 /* PropertyAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCB1B3720EB452200467030 /* PropertyAnimation.swift */; };
-		BBDEB0711EC97A4100E85572 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDEB0701EC97A4100E85572 /* UIColorExtension.swift */; };
+		BBDEB0711EC97A4100E85572 /* ExColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDEB0701EC97A4100E85572 /* ExColor.swift */; };
 		BBDEB0861EC9D67100E85572 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDEB0851EC9D67100E85572 /* Transaction.swift */; };
 		BBE178741F0B9A4100A0A646 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE178731F0B9A4100A0A646 /* NavigationController.swift */; };
-		BBF6D0E41EED7B5100F87F88 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF6D0E31EED7B5100F87F88 /* StringExtension.swift */; };
+		BBF6D0E41EED7B5100F87F88 /* ExString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF6D0E31EED7B5100F87F88 /* ExString.swift */; };
 		BBF6D0E71EED7F7200F87F88 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBF6D0E91EED7F7200F87F88 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -86,7 +85,6 @@
 		BB2B050A1EF4D34100339B5E /* ModalPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalPresentationController.swift; sourceTree = "<group>"; };
 		BB2B050B1EF4D34100339B5E /* ModalTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalTransition.swift; sourceTree = "<group>"; };
 		BB2D01511EBD673F00D13D35 /* AppGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
-		BB37967020E11CA300D083B1 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		BB3A66631ED81299003E7CC9 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		BB3A66651ED8192D003E7CC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BB3D02871ECC082200604435 /* ListsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsTableViewCell.swift; sourceTree = "<group>"; };
@@ -100,6 +98,7 @@
 		BB77835B1EB8A77E004C132E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB7783951EB8B169004C132E /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
 		BB781FFA20F337DC0033344E /* iCloudManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudManager.swift; sourceTree = "<group>"; };
+		BB935849212A5064009B0381 /* dCollector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = dCollector.entitlements; path = dCollector/dCollector.entitlements; sourceTree = "<group>"; };
 		BBAA326C1F0BB2C200AD97D4 /* MoreBrowserSwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreBrowserSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		BBC0636A1EC5B02B00840A40 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC0636D1EC5B02B00840A40 /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
@@ -110,10 +109,10 @@
 		BBC063731EC5B02B00840A40 /* ListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
 		BBC063751EC5B02B00840A40 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BBCB1B3720EB452200467030 /* PropertyAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyAnimation.swift; sourceTree = "<group>"; };
-		BBDEB0701EC97A4100E85572 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		BBDEB0701EC97A4100E85572 /* ExColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExColor.swift; sourceTree = "<group>"; };
 		BBDEB0851EC9D67100E85572 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		BBE178731F0B9A4100A0A646 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
-		BBF6D0E31EED7B5100F87F88 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		BBF6D0E31EED7B5100F87F88 /* ExString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExString.swift; sourceTree = "<group>"; };
 		BBF6D0E81EED7F7200F87F88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BBF6D0EA1EED7FAB00F87F88 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C2155B64B2573736BD1CB62D /* Pods-dCollector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dCollector.debug.xcconfig"; path = "Pods/Target Support Files/Pods-dCollector/Pods-dCollector.debug.xcconfig"; sourceTree = "<group>"; };
@@ -171,7 +170,6 @@
 			children = (
 				BB7783141EB89EEA004C132E /* dCollector */,
 				BB7783551EB8A77E004C132E /* ShareExtension */,
-				BB2D01501EBD66D600D13D35 /* Util */,
 			);
 			name = appGroup;
 			sourceTree = "<group>";
@@ -179,19 +177,24 @@
 		BB2D01501EBD66D600D13D35 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				BB00AE521F70FC9000DDFC6D /* GoogleService-Info.plist */,
+				BBC0636F1EC5B02B00840A40 /* dCollector.entitlements */,
+				BBC063711EC5B02B00840A40 /* Info.plist */,
+				BB063C821ED6DD0700A1DE1C /* Licenses.plist */,
+				BBF6D0E91EED7F7200F87F88 /* Localizable.strings */,
 				BB2D01511EBD673F00D13D35 /* AppGroup.swift */,
-				BBDEB0701EC97A4100E85572 /* UIColorExtension.swift */,
 				BB3A66631ED81299003E7CC9 /* AppSettings.swift */,
-				BBF6D0E31EED7B5100F87F88 /* StringExtension.swift */,
+				BBC0636A1EC5B02B00840A40 /* AppDelegate.swift */,
 			);
 			name = Util;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		BB61D3841EC0063600FA0633 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				BB2B05091EF4D32400339B5E /* ModalSystem */,
 				BBDEB0851EC9D67100E85572 /* Transaction.swift */,
-				BB37967020E11CA300D083B1 /* Alert.swift */,
 				BB781FFA20F337DC0033344E /* iCloudManager.swift */,
 			);
 			name = Service;
@@ -200,6 +203,7 @@
 		BB7783091EB89EEA004C132E = {
 			isa = PBXGroup;
 			children = (
+				BB935849212A5064009B0381 /* dCollector.entitlements */,
 				BB2D014F1EBD66A600D13D35 /* appGroup */,
 				BB7783131EB89EEA004C132E /* Products */,
 				0A5F5D7D24B40D736FC6481A /* Pods */,
@@ -219,24 +223,14 @@
 		BB7783141EB89EEA004C132E /* dCollector */ = {
 			isa = PBXGroup;
 			children = (
-				BB00AE521F70FC9000DDFC6D /* GoogleService-Info.plist */,
-				BB2B05091EF4D32400339B5E /* ModalSystem */,
+				BB2D01501EBD66D600D13D35 /* Util */,
+				BB935847212A4E3C009B0381 /* Extension */,
 				BB1948051ECD86CB0065A473 /* Assets.xcassets */,
-				BBC0636A1EC5B02B00840A40 /* AppDelegate.swift */,
 				BBE178731F0B9A4100A0A646 /* NavigationController.swift */,
-				BBC0636F1EC5B02B00840A40 /* dCollector.entitlements */,
-				BBC063711EC5B02B00840A40 /* Info.plist */,
-				BB063C821ED6DD0700A1DE1C /* Licenses.plist */,
-				BBC063721EC5B02B00840A40 /* Launch.xib */,
-				BBC063731EC5B02B00840A40 /* ListDetailViewController.swift */,
-				BB1CFA311EE69F7A00B58C57 /* ListsViewController.swift */,
-				BB063C7E1ED6CB1C00A1DE1C /* MoreTableViewController.swift */,
-				BB063C801ED6D9EA00A1DE1C /* LicenseViewController.swift */,
-				BBC063751EC5B02B00840A40 /* Main.storyboard */,
+				BB935848212A4F2D009B0381 /* Scenes */,
 				BBDEB0841EC9A12600E85572 /* View */,
 				BBC76F4F1EC09C81000EB7CF /* Model */,
 				BB61D3841EC0063600FA0633 /* Service */,
-				BBF6D0E91EED7F7200F87F88 /* Localizable.strings */,
 			);
 			path = dCollector;
 			sourceTree = "<group>";
@@ -251,6 +245,29 @@
 				BB77835B1EB8A77E004C132E /* Info.plist */,
 			);
 			path = ShareExtension;
+			sourceTree = "<group>";
+		};
+		BB935847212A4E3C009B0381 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BBDEB0701EC97A4100E85572 /* ExColor.swift */,
+				BBF6D0E31EED7B5100F87F88 /* ExString.swift */,
+			);
+			name = Extension;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		BB935848212A4F2D009B0381 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				BBC063721EC5B02B00840A40 /* Launch.xib */,
+				BBC063731EC5B02B00840A40 /* ListDetailViewController.swift */,
+				BB1CFA311EE69F7A00B58C57 /* ListsViewController.swift */,
+				BB063C7E1ED6CB1C00A1DE1C /* MoreTableViewController.swift */,
+				BB063C801ED6D9EA00A1DE1C /* LicenseViewController.swift */,
+				BBC063751EC5B02B00840A40 /* Main.storyboard */,
+			);
+			name = Scenes;
 			sourceTree = "<group>";
 		};
 		BBC76F4F1EC09C81000EB7CF /* Model */ = {
@@ -468,7 +485,6 @@
 				BB063C871ED6E35800A1DE1C /* FileName.swift in Sources */,
 				BBDEB0861EC9D67100E85572 /* Transaction.swift in Sources */,
 				BB3D02891ECC082200604435 /* ListsTableViewCell.swift in Sources */,
-				BB37967120E11CA300D083B1 /* Alert.swift in Sources */,
 				BB1CFA321EE69F7A00B58C57 /* ListsViewController.swift in Sources */,
 				BB3D028F1ECC3C7F00604435 /* ListDetailTableViewCell.swift in Sources */,
 				BBC0637B1EC5B02B00840A40 /* Realm.swift in Sources */,
@@ -477,9 +493,9 @@
 				BB063C7F1ED6CB1C00A1DE1C /* MoreTableViewController.swift in Sources */,
 				BB3A66641ED81299003E7CC9 /* AppSettings.swift in Sources */,
 				BBC063801EC5B02B00840A40 /* ListDetailViewController.swift in Sources */,
-				BBF6D0E41EED7B5100F87F88 /* StringExtension.swift in Sources */,
+				BBF6D0E41EED7B5100F87F88 /* ExString.swift in Sources */,
 				BBE178741F0B9A4100A0A646 /* NavigationController.swift in Sources */,
-				BBDEB0711EC97A4100E85572 /* UIColorExtension.swift in Sources */,
+				BBDEB0711EC97A4100E85572 /* ExColor.swift in Sources */,
 				BB2D01521EBD673F00D13D35 /* AppGroup.swift in Sources */,
 				BBAA326D1F0BB2C200AD97D4 /* MoreBrowserSwitchTableViewCell.swift in Sources */,
 			);
@@ -630,8 +646,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = dCollector/dCollector.entitlements;
 				DEVELOPMENT_TEAM = DX96WU2A55;
-				INFOPLIST_FILE = dCollector/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KazukiSugita.dCollectorApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -648,8 +664,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = dCollector/dCollector.entitlements;
 				DEVELOPMENT_TEAM = DX96WU2A55;
-				INFOPLIST_FILE = dCollector/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KazukiSugita.dCollectorApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -665,7 +681,7 @@
 				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
 				DEVELOPMENT_TEAM = DX96WU2A55;
 				INFOPLIST_FILE = ShareExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KazukiSugita.dCollectorApp.Extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -682,7 +698,7 @@
 				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
 				DEVELOPMENT_TEAM = DX96WU2A55;
 				INFOPLIST_FILE = ShareExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KazukiSugita.dCollectorApp.Extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";

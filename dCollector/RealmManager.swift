@@ -1,10 +1,3 @@
-//
-//  RealmManager.swift
-//  dCollector
-//
-//  Created by Kazuki Sugita on 2017/05/09.
-//  Copyright © 2017年 Kazuki Sugita. All rights reserved.
-//
 
 import Foundation
 import RealmSwift
@@ -17,8 +10,18 @@ final class RealmManager {
         //debugPrint(realm.configuration.fileURL!.absoluteString)
     }
     
+    static func setCopyToICloudIfNeeded() {
+        if let domainsPath = iCloudManager.instance.documentsURLs.domains {
+            do {
+                try realm.writeCopy(toFile: domainsPath)
+            } catch {
+//                print(error.localizedDescription)
+//                print(FileManager.default.fileExists(atPath: domainsPath.absoluteString))
+            }
+        }
+    }
+    
     static func getAllDomain() -> Results<Domain> {
-        //return realm.objects(Domain.self)
         return realm.objects(Domain.self).sorted(byKeyPath: "title", ascending: true)
     }
     
