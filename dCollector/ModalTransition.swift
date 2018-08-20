@@ -1,10 +1,3 @@
-//
-//  MovieTransitioner.swift
-//  MovieSelectr
-//
-//  Created by Training on 10/10/2016.
-//  Copyright © 2016 Training. All rights reserved.
-//
 
 import UIKit
 
@@ -12,11 +5,9 @@ class ModalAnimatedTransitoning: NSObject, UIViewControllerAnimatedTransitioning
     
     var isPresentation = false
     
-    
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.6
     }
-    
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
@@ -73,7 +64,6 @@ class ModalTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
         let presentationController = ModalPresentationController(presentedViewController: presented, presenting: presenting)
         
         return presentationController
-        
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -89,7 +79,6 @@ class ModalTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
         
         return animationController
     }
-    
     
 }
 

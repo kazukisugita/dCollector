@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        SVProgressHUD.setDefaultMaskType(.clear)
+        SVProgressHUD.setDefaultMaskType(.black)
         
         window = UIWindow()
         let navigationController = CustomizedNavigationController()

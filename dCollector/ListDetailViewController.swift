@@ -1,17 +1,9 @@
-//
-//  ListDetailViewController.swift
-//  dCollector
-//
-//  Created by Kazuki Sugita on 2017/05/08.
-//  Copyright © 2017年 Kazuki Sugita. All rights reserved.
-//
 
 import UIKit
 import SafariServices
 
 final class ListDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
-    fileprivate var selfDidAppeared: Bool = false
     @IBOutlet weak var listDetailTableView: UITableView!
     fileprivate let listDetailTableViewContentInset: CGFloat = 24.0
     @IBOutlet weak var listDetailTableViewBottomConstraint: NSLayoutConstraint!
@@ -24,6 +16,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var domainTitle: UILabel!
     @IBOutlet weak var domainDescription: UILabel!
     
+    fileprivate var selfDidAppeared: Bool = false
     fileprivate var pullDismissing: Bool = false
     fileprivate var nowDismissing: Bool = false
     fileprivate var prevPanTranslationY: CGFloat = 0.0
@@ -31,7 +24,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     fileprivate enum PanningTo {
         case Up, Down
     }
-    fileprivate var pullToDismiss: PullToDismiss?
+    fileprivate var pullToDismiss: PullToDismissService?
     
     @IBAction func closeButtonHandle(_ sender: UIButton) {
         pullToDismiss?.start()
@@ -52,50 +45,9 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
-        // Self View
-        
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(gestureRecognizer:)))
-        self.view.addGestureRecognizer(panGestureRecognizer)
-        
-        // TableView
-        
-        listDetailTableView.delegate = self
-        listDetailTableView.dataSource = self
-        listDetailTableView.rowHeight = 70.0
-        listDetailTableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
-        listDetailTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
-        listDetailTableView.contentInset = UIEdgeInsetsMake(listDetailTableViewContentInset, 0.0, listDetailTableViewContentInset, 0.0)
-        setHeightForTableView()
-        
-        // Long Press
-        
-        let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressHandler))
-        longPress.allowableMovement = 400
-        longPress.minimumPressDuration = 0.6
-        longPress.numberOfTapsRequired = 0
-        longPress.numberOfTouchesRequired = 1
-        listDetailTableView.addGestureRecognizer(longPress)
-        
-        // Domain Info View
-        
-        domainInfoView.isUserInteractionEnabled = true
-        let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(callSafariInHostPage))
-        domainInfoView.addGestureRecognizer(domainInfoViewTap)
-        if #available(iOS 11.0, *) {
-            domainInfoView.clipsToBounds = true
-            domainInfoView.layer.cornerRadius = 15.0
-            domainInfoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        }
-        
-        domainInfoViewTopConstraint.constant = domainInfoViewTopMargin
-        
-        // PullToDismiss
-        
-        pullToDismiss = PullToDismiss(in: self)
-        pullToDismiss!.ready()
+        initUIs()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -108,7 +60,43 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         listDetailTableView.removeObserver(self, forKeyPath: "contentOffset")
     }
     
+    private func initUIs() {
+        
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(gestureRecognizer:)))
+        self.view.addGestureRecognizer(panGestureRecognizer)
+        
+        listDetailTableView.delegate = self
+        listDetailTableView.dataSource = self
+        listDetailTableView.rowHeight = 70.0
+        listDetailTableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
+        listDetailTableView.separatorColor = UIColor.hexStr(type: .textBlack, alpha: 0.16)
+        listDetailTableView.contentInset = UIEdgeInsetsMake(listDetailTableViewContentInset, 0.0, listDetailTableViewContentInset, 0.0)
+        setHeightForTableView()
+        // Long Press
+        let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressHandler))
+        longPress.allowableMovement = 400
+        longPress.minimumPressDuration = 0.6
+        longPress.numberOfTapsRequired = 0
+        longPress.numberOfTouchesRequired = 1
+        listDetailTableView.addGestureRecognizer(longPress)
+        
+        domainInfoView.isUserInteractionEnabled = true
+        let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(callSafariInHostPage))
+        domainInfoView.addGestureRecognizer(domainInfoViewTap)
+        if #available(iOS 11.0, *) {
+            domainInfoView.clipsToBounds = true
+            domainInfoView.layer.cornerRadius = 15.0
+            domainInfoView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        }
+        
+        domainInfoViewTopConstraint.constant = domainInfoViewTopMargin
+        
+        pullToDismiss = PullToDismissService(in: self)
+        pullToDismiss!.ready()
+    }
+    
     func configureDomainView() {
+        
         if let _domain = selectedDomain {
             self.domainTitle?.text = _domain.title
             self.domainHost?.text = _domain.name
@@ -152,7 +140,6 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
             
         case 2:
-            
             var urlStr = url.url
             
             if let range = url.url.range(of: "http://") {
@@ -172,6 +159,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
 }
 
 // MARK: ScrollView KeyValueChangeEvent
+
 extension ListDetailViewController {
     
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -216,6 +204,7 @@ extension ListDetailViewController {
 
 
 // MARK: TableView
+
 extension ListDetailViewController {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -223,42 +212,39 @@ extension ListDetailViewController {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return self.urls.count
-        return (RealmManager.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false).count)!
+        
+        guard let sortedUrls = RealmService.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false) else {
+            return 0
+        }
+        return sortedUrls.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+        guard let sortedUrls = RealmService.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false) else {
+            return UITableViewCell()
+        }
         
-        //let url = urls[indexPath.row]
-        
-        var url: Url!
-        let sortedUrls = RealmManager.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false)
-        url = sortedUrls![indexPath.row]
-        
-        let cell: ListDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ListDetailTableViewCell", for: indexPath) as! ListDetailTableViewCell
-        
-        cell.urlTitle?.text = url.title
-        cell.url?.text = url.url
+        let selectedUrl = sortedUrls[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ListDetailTableViewCell", for: indexPath) as! ListDetailTableViewCell
+        cell.urlTitle?.text = selectedUrl.title
+        cell.url?.text = selectedUrl.url
         
         return cell
     }
-    
-    /// セルが選択された時に呼ばれるデリゲートメソッド
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: false)
+        guard let sortedUrls = RealmService.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false) else { return }
         
-        var url: Url!
-        let sortedUrls = RealmManager.getDomainByName(selectedDomain!.name)?.urls.sorted(byKeyPath: "createdAt", ascending: false)
-        url = sortedUrls![indexPath.row]
-        
-        openBrowser(url: url)
+        openBrowser(url: sortedUrls[indexPath.row])
     }
 }
 
+// MARK: TableView Cell
+
 extension ListDetailViewController {
-    
-    // Cell
     
     @objc func longPressHandler(sender: UILongPressGestureRecognizer) {
         
@@ -274,40 +260,37 @@ extension ListDetailViewController {
     
     func callActionSheet(_ indexPath: IndexPath) {
 
-        guard let domain = RealmManager.getDomainByName(selectedDomain!.name) else { return }
+        guard
+            let selectedDomain = self.selectedDomain,
+            let domain = RealmService.getDomainWithPrimaryKey(selectedDomain.name)
+        else {
+            return
+        }
         let sortedUrls = domain.urls.sorted(byKeyPath: "createdAt", ascending: false)
         let url = sortedUrls[indexPath.row].url
         let title = sortedUrls[indexPath.row].title
         
         let actionSheet: UIAlertController = UIAlertController(title: title, message: "Delete this Url.\nAre you Sure ??".localized(), preferredStyle: .actionSheet)
-        let ok = UIAlertAction(title: "DELETE".localized(), style: .destructive, handler: { (action) in
+        let ok = UIAlertAction(title: "DELETE".localized(), style: .destructive, handler: { _ in DispatchQueue.main.async {
             
-            DispatchQueue.main.async {
-                let _url = RealmManager.getUrlWithPrimaryKey(url)
-                RealmManager.deleteUrl(url: _url!)
-                
-                let _domain = RealmManager.getDomainWithPrimaryKey(self.selectedDomain!.name)
-                
-                self.urls.removeAll()
-                
-                for url_ in (_domain?.urls)! {
-                    self.urls.append(url_)
-                }
-                
-                let table = self.listDetailTableView!
-                
-                table.beginUpdates()
-                table.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
-                table.perform(#selector(table.reloadData), with: nil, afterDelay: 0.3)
-                table.layoutIfNeeded()
-                table.endUpdates()
+            guard let deleteUrl = RealmService.getUrlWithPrimaryKey(url) else {
+                return
+            }
+            RealmService.deleteUrl(url: deleteUrl)
+            
+            self.urls.removeAll()
+            for _url in domain.urls {
+                self.urls.append(_url)
             }
             
-        })
-        
-        let cancel = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: { (action: UIAlertAction!) in
-        })
-        
+            let table = self.listDetailTableView!
+            table.beginUpdates()
+            table.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+            table.perform(#selector(table.reloadData), with: nil, afterDelay: 0.3)
+            table.layoutIfNeeded()
+            table.endUpdates()
+        }})
+        let cancel = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
         actionSheet.addAction(ok)
         actionSheet.addAction(cancel)
         

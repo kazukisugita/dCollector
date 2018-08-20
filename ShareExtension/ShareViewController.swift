@@ -1,13 +1,5 @@
-//
-//  ShareViewController.swift
-//  ShareExtension
-//
-//  Created by Kazuki Sugita on 2017/05/02.
-//  Copyright © 2017年 Kazuki Sugita. All rights reserved.
-//
 
 import UIKit
-//import Social
 import MobileCoreServices
 
 final class ShareViewController: UIViewController {
@@ -23,7 +15,6 @@ final class ShareViewController: UIViewController {
     var shareString: Array<String> = []
     
     override func viewDidLoad() {
-        print("*** ShareViewController loaded ***")
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.2)
@@ -57,12 +48,11 @@ final class ShareViewController: UIViewController {
             
             if itemProvider.hasItemConformingToTypeIdentifier(puclicURL) {
                 
-                itemProvider.loadItem(forTypeIdentifier: puclicURL, options: nil, completionHandler: { (item, error) in
+                itemProvider.loadItem(forTypeIdentifier: puclicURL, options: nil, completionHandler: { item, error in
                     
-                    if let url: NSURL = item as? NSURL {
+                    if let url = item as? NSURL {
                         let url_str = url.absoluteString!
                         print("url_str: \(url_str)")
-                        
                         let defaults = UserDefaults(suiteName: AppGroup.suiteName)!
                         
                         // 既存の確認
@@ -72,8 +62,6 @@ final class ShareViewController: UIViewController {
                             // 新規とUserDefaults内の重複を確認
                             for object in arrayObject {
                                 if object == url_str {
-                                    //self.shareString.append(url_str)
-                                    //defaults.set(self.shareString, forKey: AppGroup.keyName)
                                     DispatchQueue.main.async {
                                         self.message.text = "Already Have"
                                         self.innerView.layoutIfNeeded()
@@ -85,48 +73,24 @@ final class ShareViewController: UIViewController {
                             self.shareString.append(url_str)
                             defaults.set(self.shareString, forKey: AppGroup.keyName)
                             
-                            if url_str.hasPrefix("https") {
-                                DispatchQueue.main.async {
-                                    self.message.text = "   Success"
-                                }
-                            } else {
-                                //self.message.text = "HTTP might fail"
-                                DispatchQueue.main.async {
-                                    self.message.text = "   Success"
-                                }
-                            }
+                            DispatchQueue.main.async { self.message.text = "Success" }
+                            
                         } else {
                             // ひとつめの格納
                             self.shareString.append(url_str)
                             defaults.set(self.shareString, forKey: AppGroup.keyName)
-                            if url_str.hasPrefix("https") {
-                                DispatchQueue.main.async {
-                                    self.message.text = "   Success"
-                                }
-                            } else {
-                                //self.message.text = "HTTP might fail"
-                                DispatchQueue.main.async {
-                                    self.message.text = "   Success"
-                                }
-                            }
+                            
+                            DispatchQueue.main.async { self.message.text = "Success" }
                         }
                         
-                        AppGroup.tryGetData()
-                        self.innerView.layoutIfNeeded()
-                    } else {
-                        DispatchQueue.main.async {
-                            self.message.text = "   Failure"
-                            self.innerView.layoutIfNeeded()
-                        }
-                    }
+                    } else { DispatchQueue.main.async {
+                        self.message.text = "Failure"
+                    }}
                 })
-            } else {
-                //self.message.text = "   Failure"
             }
             
         }
     }
-    
     
 }
 

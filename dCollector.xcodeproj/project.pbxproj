@@ -10,10 +10,7 @@
 		5CB470DB43401AE8FA39DC27 /* Pods_dCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF23F84B3A34D67648F2F56 /* Pods_dCollector.framework */; };
 		BB00AE531F70FC9000DDFC6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB00AE521F70FC9000DDFC6D /* GoogleService-Info.plist */; };
 		BB063C7F1ED6CB1C00A1DE1C /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB063C7E1ED6CB1C00A1DE1C /* SettingTableViewController.swift */; };
-		BB063C811ED6D9EA00A1DE1C /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB063C801ED6D9EA00A1DE1C /* LicenseViewController.swift */; };
 		BB063C831ED6DD0700A1DE1C /* Licenses.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB063C821ED6DD0700A1DE1C /* Licenses.plist */; };
-		BB063C851ED6DF5F00A1DE1C /* License.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB063C841ED6DF5F00A1DE1C /* License.swift */; };
-		BB063C871ED6E35800A1DE1C /* FileName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB063C861ED6E35800A1DE1C /* FileName.swift */; };
 		BB1948061ECD86CB0065A473 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB1948051ECD86CB0065A473 /* Assets.xcassets */; };
 		BB1CFA321EE69F7A00B58C57 /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1CFA311EE69F7A00B58C57 /* ListsViewController.swift */; };
 		BB2B050C1EF4D34100339B5E /* ModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2B050A1EF4D34100339B5E /* ModalPresentationController.swift */; };
@@ -27,23 +24,21 @@
 		BB3D028F1ECC3C7F00604435 /* ListDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D028D1ECC3C7F00604435 /* ListDetailTableViewCell.swift */; };
 		BB3D02901ECC3C7F00604435 /* ListDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB3D028E1ECC3C7F00604435 /* ListDetailTableViewCell.xib */; };
 		BB7783571EB8A77E004C132E /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7783561EB8A77E004C132E /* ShareViewController.swift */; };
-		BB77835A1EB8A77E004C132E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB7783581EB8A77E004C132E /* MainInterface.storyboard */; };
 		BB77835E1EB8A77E004C132E /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BB7783541EB8A77E004C132E /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BB7783961EB8B169004C132E /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB7783951EB8B169004C132E /* AppIcon.xcassets */; };
-		BB781FFB20F337DC0033344E /* iCloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB781FFA20F337DC0033344E /* iCloudManager.swift */; };
 		BBAA326D1F0BB2C200AD97D4 /* SettingBrowserSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAA326C1F0BB2C200AD97D4 /* SettingBrowserSwitchTableViewCell.swift */; };
 		BBC063781EC5B02B00840A40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC0636A1EC5B02B00840A40 /* AppDelegate.swift */; };
 		BBC0637B1EC5B02B00840A40 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC0636D1EC5B02B00840A40 /* Realm.swift */; };
-		BBC0637C1EC5B02B00840A40 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC0636E1EC5B02B00840A40 /* RealmManager.swift */; };
+		BBC0637C1EC5B02B00840A40 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC0636E1EC5B02B00840A40 /* RealmService.swift */; };
 		BBC0637F1EC5B02B00840A40 /* Launch.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBC063721EC5B02B00840A40 /* Launch.xib */; };
 		BBC063801EC5B02B00840A40 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC063731EC5B02B00840A40 /* ListDetailViewController.swift */; };
-		BBC063821EC5B02B00840A40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC063751EC5B02B00840A40 /* Main.storyboard */; };
-		BBCB1B3820EB452200467030 /* PropertyAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCB1B3720EB452200467030 /* PropertyAnimation.swift */; };
+		BBCB1B3820EB452200467030 /* PullToDismissService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCB1B3720EB452200467030 /* PullToDismissService.swift */; };
 		BBCC6853212A619100B1C78E /* CustomizedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCC6852212A619100B1C78E /* CustomizedNavigationController.swift */; };
 		BBCC6857212A6EFE00B1C78E /* SettingBrowserSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBCC6856212A6EFE00B1C78E /* SettingBrowserSwitchTableViewCell.xib */; };
+		BBCC685D212A7FE100B1C78E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB7783581EB8A77E004C132E /* MainInterface.storyboard */; };
+		BBCC6872212A927700B1C78E /* ListDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBCC6871212A927700B1C78E /* ListDetailViewController.storyboard */; };
 		BBDEB0711EC97A4100E85572 /* ExColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDEB0701EC97A4100E85572 /* ExColor.swift */; };
-		BBDEB0861EC9D67100E85572 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDEB0851EC9D67100E85572 /* Transaction.swift */; };
-		BBE178741F0B9A4100A0A646 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE178731F0B9A4100A0A646 /* NavigationController.swift */; };
+		BBDEB0861EC9D67100E85572 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDEB0851EC9D67100E85572 /* TransactionService.swift */; };
 		BBF6D0E41EED7B5100F87F88 /* ExString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF6D0E31EED7B5100F87F88 /* ExString.swift */; };
 		BBF6D0E71EED7F7200F87F88 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBF6D0E91EED7F7200F87F88 /* Localizable.strings */; };
 /* End PBXBuildFile section */
@@ -77,10 +72,7 @@
 		9EF23F84B3A34D67648F2F56 /* Pods_dCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB00AE521F70FC9000DDFC6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BB063C7E1ED6CB1C00A1DE1C /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
-		BB063C801ED6D9EA00A1DE1C /* LicenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
 		BB063C821ED6DD0700A1DE1C /* Licenses.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Licenses.plist; sourceTree = "<group>"; };
-		BB063C841ED6DF5F00A1DE1C /* License.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = License.swift; sourceTree = "<group>"; };
-		BB063C861ED6E35800A1DE1C /* FileName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileName.swift; sourceTree = "<group>"; };
 		BB1948051ECD86CB0065A473 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB1962531EB9D0FF00AA3818 /* ShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareExtension.entitlements; sourceTree = "<group>"; };
 		BB1CFA311EE69F7A00B58C57 /* ListsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
@@ -99,23 +91,20 @@
 		BB7783591EB8A77E004C132E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		BB77835B1EB8A77E004C132E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB7783951EB8B169004C132E /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
-		BB781FFA20F337DC0033344E /* iCloudManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudManager.swift; sourceTree = "<group>"; };
-		BB935849212A5064009B0381 /* dCollector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = dCollector.entitlements; path = dCollector/dCollector.entitlements; sourceTree = "<group>"; };
 		BBAA326C1F0BB2C200AD97D4 /* SettingBrowserSwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingBrowserSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		BBC0636A1EC5B02B00840A40 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC0636D1EC5B02B00840A40 /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
-		BBC0636E1EC5B02B00840A40 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		BBC0636E1EC5B02B00840A40 /* RealmService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		BBC0636F1EC5B02B00840A40 /* dCollector.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = dCollector.entitlements; sourceTree = "<group>"; };
 		BBC063711EC5B02B00840A40 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBC063721EC5B02B00840A40 /* Launch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Launch.xib; sourceTree = "<group>"; };
 		BBC063731EC5B02B00840A40 /* ListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
-		BBC063751EC5B02B00840A40 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		BBCB1B3720EB452200467030 /* PropertyAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyAnimation.swift; sourceTree = "<group>"; };
+		BBCB1B3720EB452200467030 /* PullToDismissService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToDismissService.swift; sourceTree = "<group>"; };
 		BBCC6852212A619100B1C78E /* CustomizedNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizedNavigationController.swift; sourceTree = "<group>"; };
 		BBCC6856212A6EFE00B1C78E /* SettingBrowserSwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingBrowserSwitchTableViewCell.xib; sourceTree = "<group>"; };
+		BBCC6871212A927700B1C78E /* ListDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListDetailViewController.storyboard; sourceTree = "<group>"; };
 		BBDEB0701EC97A4100E85572 /* ExColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExColor.swift; sourceTree = "<group>"; };
-		BBDEB0851EC9D67100E85572 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
-		BBE178731F0B9A4100A0A646 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		BBDEB0851EC9D67100E85572 /* TransactionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		BBF6D0E31EED7B5100F87F88 /* ExString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExString.swift; sourceTree = "<group>"; };
 		BBF6D0E81EED7F7200F87F88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BBF6D0EA1EED7FAB00F87F88 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -160,20 +149,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		BB2B05091EF4D32400339B5E /* ModalSystem */ = {
+		BB2B05091EF4D32400339B5E /* Modal */ = {
 			isa = PBXGroup;
 			children = (
 				BB2B050A1EF4D34100339B5E /* ModalPresentationController.swift */,
 				BB2B050B1EF4D34100339B5E /* ModalTransition.swift */,
 			);
-			name = ModalSystem;
+			name = Modal;
 			sourceTree = "<group>";
 		};
 		BB2D014F1EBD66A600D13D35 /* appGroup */ = {
 			isa = PBXGroup;
 			children = (
 				BB7783141EB89EEA004C132E /* dCollector */,
-				BB7783551EB8A77E004C132E /* ShareExtension */,
 			);
 			name = appGroup;
 			sourceTree = "<group>";
@@ -197,9 +185,10 @@
 		BB61D3841EC0063600FA0633 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				BB2B05091EF4D32400339B5E /* ModalSystem */,
-				BBDEB0851EC9D67100E85572 /* Transaction.swift */,
-				BB781FFA20F337DC0033344E /* iCloudManager.swift */,
+				BB2B05091EF4D32400339B5E /* Modal */,
+				BBCB1B3720EB452200467030 /* PullToDismissService.swift */,
+				BBC0636E1EC5B02B00840A40 /* RealmService.swift */,
+				BBDEB0851EC9D67100E85572 /* TransactionService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -207,8 +196,8 @@
 		BB7783091EB89EEA004C132E = {
 			isa = PBXGroup;
 			children = (
-				BB935849212A5064009B0381 /* dCollector.entitlements */,
 				BB2D014F1EBD66A600D13D35 /* appGroup */,
+				BB7783551EB8A77E004C132E /* ShareExtension */,
 				BB7783131EB89EEA004C132E /* Products */,
 				0A5F5D7D24B40D736FC6481A /* Pods */,
 				8C7FD820FC818656BCA6D1D9 /* Frameworks */,
@@ -230,12 +219,10 @@
 				BBCC6851212A615800B1C78E /* Component */,
 				BB2D01501EBD66D600D13D35 /* Util */,
 				BB935847212A4E3C009B0381 /* Extension */,
-				BB1948051ECD86CB0065A473 /* Assets.xcassets */,
-				BBE178731F0B9A4100A0A646 /* NavigationController.swift */,
 				BB935848212A4F2D009B0381 /* Scenes */,
-				BBDEB0841EC9A12600E85572 /* View */,
 				BBC76F4F1EC09C81000EB7CF /* Model */,
 				BB61D3841EC0063600FA0633 /* Service */,
+				BB1948051ECD86CB0065A473 /* Assets.xcassets */,
 			);
 			path = dCollector;
 			sourceTree = "<group>";
@@ -267,10 +254,8 @@
 			children = (
 				BBCC6855212A6E9E00B1C78E /* Setting */,
 				BBCC6854212A623C00B1C78E /* Lists */,
+				BBCC6870212A8EA000B1C78E /* ListDetail */,
 				BBC063721EC5B02B00840A40 /* Launch.xib */,
-				BBC063731EC5B02B00840A40 /* ListDetailViewController.swift */,
-				BB063C801ED6D9EA00A1DE1C /* LicenseViewController.swift */,
-				BBC063751EC5B02B00840A40 /* Main.storyboard */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -279,10 +264,6 @@
 			isa = PBXGroup;
 			children = (
 				BBC0636D1EC5B02B00840A40 /* Realm.swift */,
-				BBC0636E1EC5B02B00840A40 /* RealmManager.swift */,
-				BB063C841ED6DF5F00A1DE1C /* License.swift */,
-				BB063C861ED6E35800A1DE1C /* FileName.swift */,
-				BBCB1B3720EB452200467030 /* PropertyAnimation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -315,13 +296,15 @@
 			name = Setting;
 			sourceTree = "<group>";
 		};
-		BBDEB0841EC9A12600E85572 /* View */ = {
+		BBCC6870212A8EA000B1C78E /* ListDetail */ = {
 			isa = PBXGroup;
 			children = (
 				BB3D028D1ECC3C7F00604435 /* ListDetailTableViewCell.swift */,
 				BB3D028E1ECC3C7F00604435 /* ListDetailTableViewCell.xib */,
+				BBC063731EC5B02B00840A40 /* ListDetailViewController.swift */,
+				BBCC6871212A927700B1C78E /* ListDetailViewController.storyboard */,
 			);
-			name = View;
+			name = ListDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,7 +354,7 @@
 		BB77830A1EB89EEA004C132E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Kazuki Sugita";
 				TargetAttributes = {
@@ -390,7 +373,7 @@
 								enabled = 1;
 							};
 							com.apple.iCloud = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -438,10 +421,10 @@
 				BB3D028A1ECC082200604435 /* ListsTableViewCell.xib in Resources */,
 				BB00AE531F70FC9000DDFC6D /* GoogleService-Info.plist in Resources */,
 				BBC0637F1EC5B02B00840A40 /* Launch.xib in Resources */,
+				BBCC6872212A927700B1C78E /* ListDetailViewController.storyboard in Resources */,
 				BB063C831ED6DD0700A1DE1C /* Licenses.plist in Resources */,
 				BBF6D0E71EED7F7200F87F88 /* Localizable.strings in Resources */,
 				BB1948061ECD86CB0065A473 /* Assets.xcassets in Resources */,
-				BBC063821EC5B02B00840A40 /* Main.storyboard in Resources */,
 				BB3D02901ECC3C7F00604435 /* ListDetailTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,8 +433,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBCC685D212A7FE100B1C78E /* MainInterface.storyboard in Resources */,
 				BB7783961EB8B169004C132E /* AppIcon.xcassets in Resources */,
-				BB77835A1EB8A77E004C132E /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,26 +494,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBCB1B3820EB452200467030 /* PropertyAnimation.swift in Sources */,
-				BB781FFB20F337DC0033344E /* iCloudManager.swift in Sources */,
+				BBCB1B3820EB452200467030 /* PullToDismissService.swift in Sources */,
 				BBC063781EC5B02B00840A40 /* AppDelegate.swift in Sources */,
 				BB2B050C1EF4D34100339B5E /* ModalPresentationController.swift in Sources */,
 				BB2B050D1EF4D34100339B5E /* ModalTransition.swift in Sources */,
-				BB063C811ED6D9EA00A1DE1C /* LicenseViewController.swift in Sources */,
-				BB063C871ED6E35800A1DE1C /* FileName.swift in Sources */,
 				BBCC6853212A619100B1C78E /* CustomizedNavigationController.swift in Sources */,
-				BBDEB0861EC9D67100E85572 /* Transaction.swift in Sources */,
+				BBDEB0861EC9D67100E85572 /* TransactionService.swift in Sources */,
 				BB3D02891ECC082200604435 /* ListsTableViewCell.swift in Sources */,
 				BB1CFA321EE69F7A00B58C57 /* ListsViewController.swift in Sources */,
 				BB3D028F1ECC3C7F00604435 /* ListDetailTableViewCell.swift in Sources */,
 				BBC0637B1EC5B02B00840A40 /* Realm.swift in Sources */,
-				BBC0637C1EC5B02B00840A40 /* RealmManager.swift in Sources */,
-				BB063C851ED6DF5F00A1DE1C /* License.swift in Sources */,
+				BBC0637C1EC5B02B00840A40 /* RealmService.swift in Sources */,
 				BB063C7F1ED6CB1C00A1DE1C /* SettingTableViewController.swift in Sources */,
 				BB3A66641ED81299003E7CC9 /* AppSettings.swift in Sources */,
 				BBC063801EC5B02B00840A40 /* ListDetailViewController.swift in Sources */,
 				BBF6D0E41EED7B5100F87F88 /* ExString.swift in Sources */,
-				BBE178741F0B9A4100A0A646 /* NavigationController.swift in Sources */,
 				BBDEB0711EC97A4100E85572 /* ExColor.swift in Sources */,
 				BB2D01521EBD673F00D13D35 /* AppGroup.swift in Sources */,
 				BBAA326D1F0BB2C200AD97D4 /* SettingBrowserSwitchTableViewCell.swift in Sources */,
@@ -619,7 +597,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -665,7 +643,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -681,6 +659,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = dCollector/dCollector.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = DX96WU2A55;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -699,6 +678,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = dCollector/dCollector.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = DX96WU2A55;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -718,7 +698,7 @@
 				DEVELOPMENT_TEAM = DX96WU2A55;
 				INFOPLIST_FILE = ShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KazukiSugita.dCollectorApp.Extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -735,7 +715,7 @@
 				DEVELOPMENT_TEAM = DX96WU2A55;
 				INFOPLIST_FILE = ShareExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KazukiSugita.dCollectorApp.Extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

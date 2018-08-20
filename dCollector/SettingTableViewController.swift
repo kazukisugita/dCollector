@@ -3,12 +3,6 @@ import UIKit
 import SnapKit
 
 class SettingTableViewController: UITableViewController {
-
-//    @IBOutlet weak var appVersionLabel: UILabel!
-//    let license = License()
-//    var titles: [String] { return license?.titles ?? [] }
-    
-//    fileprivate var tappedLicense = (githubText: "", licenseText: "")
     
     override init(style: UITableViewStyle) {
         super.init(style: style)
@@ -41,15 +35,6 @@ class SettingTableViewController: UITableViewController {
         
     }
     
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-//        if (segue.identifier == "licenseSegue") {
-//            if let vc: LicenseViewController = segue.destination as? LicenseViewController {
-//                vc._githubText = tappedLicense.githubText
-//                vc._licenseText = tappedLicense.licenseText
-//            }
-//        }
-//    }
 }
 
 // MARK: TableView
@@ -60,11 +45,9 @@ extension SettingTableViewController {
         return 1
     }
     
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

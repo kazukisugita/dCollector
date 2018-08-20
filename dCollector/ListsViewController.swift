@@ -11,7 +11,6 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
     private var extensionGuid: UIImageView!
     private var guidLabel: UILabel!
     
-    fileprivate var isLoading: Bool = false
     let modalTransitionDelegate = ModalTransitionDelegate()
     
     override func viewDidLoad() {
@@ -30,7 +29,7 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         
         self.navigationItem.title = "Domains"
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(refreshTable),
+                                               selector: #selector(handleDidBecomeActive),
                                                name: NSNotification.Name.UIApplicationDidBecomeActive,
                                                object: nil)
         
@@ -57,12 +56,10 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         
         extensionGuid = UIImageView(image: UIImage(named: "extensionGuid"))
         extensionGuid.contentMode = .scaleAspectFit
-        extensionGuid.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
         self.view.addSubview(extensionGuid)
         
         guidLabel = UILabel()
         guidLabel.text = "Collect URL from Safari !!".localized()
-        guidLabel.isHidden = true
         self.view.addSubview(guidLabel)
     }
     
@@ -93,6 +90,13 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         self.navigationController?.pushViewController(settingTableViewController, animated: true)
     }
     
+    @objc func handleDidBecomeActive() {
+    
+        if AppSettings.onlyDownloadWithWifi() == false && AppSettings.isWifiConnection() == true {
+            refreshTable()
+        }
+    }
+    
 }
 
 
@@ -105,11 +109,11 @@ extension ListsViewController {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let counts = RealmManager.getAllDomain().count
+        let counts = RealmService.getAllDomain().count
         if counts == 0 {
-            extensinGuidVisible(is: true)
+            extensinGuid(isVisible: true)
         } else {
-            extensinGuidVisible(is: false)
+            extensinGuid(isVisible: false)
         }
         return counts
     }
@@ -118,11 +122,11 @@ extension ListsViewController {
         
         let cell: ListsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ListsTableViewCell", for: indexPath) as! ListsTableViewCell
 
-        let domain = RealmManager.getAllDomain()[indexPath.row]
+        let domain = RealmService.getAllDomain()[indexPath.row]
         
-        if domain.icon == nil && isLoading == false {
+        if domain.icon == nil {
             if let iconPath = domain.iconPath {
-                Transaction.getIconImage(forCell: cell, iconPath: iconPath, hostName: domain.name)
+                TransactionService.getIconImage(forCell: cell, iconPath: iconPath, hostName: domain.name)
             }
         }
         
@@ -145,51 +149,36 @@ extension ListsViewController {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let listsDetailVC = sb.instantiateViewController(withIdentifier: "ListDetailView") as! ListDetailViewController
-        
+        let sb = UIStoryboard(name: "ListDetailViewController", bundle: nil)
+        guard let listDetailViewController = sb.instantiateViewController(withIdentifier: "ListDetailViewController") as? ListDetailViewController else {
+            fatalError()
+        }
+
         transitioningDelegate = modalTransitionDelegate
-        listsDetailVC.transitioningDelegate = modalTransitionDelegate
-        listsDetailVC.modalPresentationStyle = .custom
+        listDetailViewController.transitioningDelegate = modalTransitionDelegate
+        listDetailViewController.modalPresentationStyle = .custom
         
-        navigationController?.present(listsDetailVC, animated: true)
-        listsDetailVC.selectedDomain = RealmManager.getAllDomain()[indexPath.row]
+        self.navigationController?.present(listDetailViewController, animated: true)
+        listDetailViewController.selectedDomain = RealmService.getAllDomain()[indexPath.row]
         
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
     @objc func refreshTable() {
-        
-        if AppSettings.onlyDownloadWithWifi() {
-            if AppSettings.isWifiConnection() == false {
-                return
-            }
+    
+        if let presenting = presentingViewController {
+            presenting.dismiss(animated: true)
         }
         
-        if (self.isLoading) {
-            return
-        }
-        self.isLoading = true
-        
-        var urlsCount: Int
-        
-        if let urls = AppGroup.getUrlsFromUserDefaults() {
-            SVProgressHUD.setStatus("0 / \(urls.count)")
-            urlsCount = urls.count
-        } else {
+        guard let urls = AppGroup.getUrlsFromUserDefaults() else {
             self.listsTableView.reloadData()
-            self.isLoading = false
             return
         }
         
-        
+        SVProgressHUD.show(withStatus: "0 / \(urls.count)")
         var counter: Int = 0
         
-        SVProgressHUD.show()
-
-        self.extensionGuid.isHidden = true
-        
-        Transaction.fromUserdefaultsToRealm { complete, url in
+        TransactionService.fromUserdefaultsToRealm { complete, url in
         
             if let url = url {
                 AppGroup.deleteUserDefaultsOneByOne(url: url)
@@ -198,15 +187,11 @@ extension ListsViewController {
             if complete { DispatchQueue.main.async {
                     
                 counter += 1
-                SVProgressHUD.setStatus("\(counter) / \(urlsCount)")
+                SVProgressHUD.setStatus("\(counter) / \(urls.count)")
                 
-                if urlsCount == counter {
+                if urls.count == counter {
                     AppGroup.deleteUserDefaultsData()
-                    
                     self.listsTableView.reloadData()
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    self.isLoading = false
-                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                         SVProgressHUD.dismiss()
                     }
@@ -238,14 +223,14 @@ extension ListsViewController {
     
     func callActionSheet(_ indexPath: IndexPath) {
         
-        let domain = RealmManager.getAllDomain()[indexPath.row]
+        let domain = RealmService.getAllDomain()[indexPath.row]
         
-        let actionSheet: UIAlertController = UIAlertController(title: domain.name, message: "Delete the selected Domain's All Urls.\nAre you Sure ??".localized(), preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: domain.name, message: "Delete the selected Domain's All Urls.\nAre you Sure ??".localized(), preferredStyle: .actionSheet)
         let ok = UIAlertAction(title: "DELETE".localized(), style: .destructive, handler: { _ in
             
             DispatchQueue.main.async {
-                let domain = RealmManager.getAllDomain()[indexPath.row]
-                RealmManager.deleteDomain(domain: domain)
+                let domain = RealmService.getAllDomain()[indexPath.row]
+                RealmService.deleteDomain(domain: domain)
                 
                 let table = self.listsTableView!
                 
@@ -270,19 +255,18 @@ extension ListsViewController {
 
 extension ListsViewController {
     
-    func extensinGuidVisible(is bool: Bool) {
-     
-        if (bool) {
-            self.extensionGuid.isHidden = false
-            self.guidLabel.isHidden = false
+    func extensinGuid(isVisible visible: Bool) {
+        
+        if visible {
             UIView.animate(withDuration: 0.4, delay: 0.0, options: [.curveEaseOut], animations: {
                 self.extensionGuid.alpha = 1.0
+                self.guidLabel.alpha = 1.0
                 self.extensionGuid.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             })
         } else {
-            self.extensionGuid.isHidden = true
-            self.guidLabel.isHidden = true
+            self.extensionGuid.alpha = 0.0
             self.extensionGuid.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            self.guidLabel.alpha = 0.0
         }
         
     }

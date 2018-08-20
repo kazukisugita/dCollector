@@ -1,7 +1,7 @@
 
 import UIKit
 
-class PullToDismiss: NSObject {
+class PullToDismissService: NSObject {
     
     private var targetViewController: ListDetailViewController?
     private var initialMarginTop: CGFloat = 0.0

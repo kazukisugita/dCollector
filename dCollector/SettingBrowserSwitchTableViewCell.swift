@@ -1,13 +1,5 @@
-//
-//  MoreBrowserSwitchTableViewCell.swift
-//  dCollector
-//
-//  Created by Kazuki Sugita on 2017/07/04.
-//  Copyright © 2017年 Kazuki Sugita. All rights reserved.
-//
 
 import UIKit
-
 
 class SettingBrowserSwitchTableViewCell: UITableViewCell {
 

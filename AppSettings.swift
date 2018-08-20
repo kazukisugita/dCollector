@@ -9,10 +9,14 @@ struct AppSettings {
     static let userSettings_browser: String = "browser"
     
     static let settings: UserDefaults = UserDefaults(suiteName: userSettings)!
+    
+    enum Browsers: String {
+        case dDefault = "Default"
+        case safari = "Safari"
+        case chrome = "Chrome"
+    }
 }
 
-
-// onlyDownloadViaWifi
 extension AppSettings {
     
     static func onlyDownloadWithWifi() -> Bool {
@@ -25,13 +29,11 @@ extension AppSettings {
         }
     }
     
-    
     static func changeBool_onlyDownloadWithWifi(_ bool: Bool) {
         if let _ = settings.object(forKey: self.userSettings_onlyDownloadViaWifi) as? Bool {
             settings.set(bool, forKey: self.userSettings_onlyDownloadViaWifi)
         }
     }
-    
     
     static func isWifiConnection() -> Bool {
         return Reachability()?.connection == .wifi
@@ -39,15 +41,6 @@ extension AppSettings {
     
 }
 
-
-enum Browsers: String {
-    case dDefault = "Default"
-    case safari = "Safari"
-    case chrome = "Chrome"
-}
-
-
-// browser
 extension AppSettings {
  
     static func broswerIs() -> Int {
