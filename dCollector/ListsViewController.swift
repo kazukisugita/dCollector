@@ -159,7 +159,7 @@ extension ListsViewController {
         listDetailViewController.transitioningDelegate = modalTransitionDelegate
         listDetailViewController.modalPresentationStyle = .custom
         
-        self.navigationController?.present(listDetailViewController, animated: true)
+        self.present(listDetailViewController, animated: true)
         listDetailViewController.selectedDomain = RealmService.getAllDomain()[indexPath.row]
         
         tableView.deselectRow(at: indexPath, animated: false)
