@@ -34,11 +34,7 @@ extension AppSettings {
             settings.set(bool, forKey: self.userSettings_onlyDownloadViaWifi)
         }
     }
-    
-    static func isWifiConnection() -> Bool {
-        return Reachability()?.connection == .wifi
-    }
-    
+        
 }
 
 extension AppSettings {

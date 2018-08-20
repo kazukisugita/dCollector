@@ -2,6 +2,7 @@
 import UIKit
 import SnapKit
 import SVProgressHUD
+import Reachability
 
 final class ListsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -18,11 +19,6 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         
         initUIs()
         initLayout()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        refreshTable()
     }
     
     private func initUIs() {
@@ -92,10 +88,9 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @objc func handleDidBecomeActive() {
-    
-        if AppSettings.onlyDownloadWithWifi() == false && AppSettings.isWifiConnection() == true {
-            refreshTable()
-        }
+        
+        if AppSettings.onlyDownloadWithWifi() == true && Reachability()?.connection == .cellular { return }
+        refreshTable()
     }
     
 }
@@ -167,8 +162,8 @@ extension ListsViewController {
     
     @objc func refreshTable() {
     
-        if let presenting = presentingViewController {
-            presenting.dismiss(animated: true)
+        if let listDetailViewController = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController as? ListDetailViewController {
+            listDetailViewController.dismiss(animated: true)
         }
         
         guard let urls = AppGroup.getUrlsFromUserDefaults() else {

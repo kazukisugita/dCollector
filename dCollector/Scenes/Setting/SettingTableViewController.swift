@@ -15,13 +15,7 @@ class SettingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
-//            self.appVersionLabel.text = "ver " + version
-        }
-        
         initUIs()
-        initLayout()
     }
     
     private func initUIs() {
@@ -29,10 +23,27 @@ class SettingTableViewController: UITableViewController {
         self.navigationItem.title = "Settings".localized()
         
         self.tableView.register(UINib(nibName: "SettingBrowserSwitchTableViewCell", bundle: nil), forCellReuseIdentifier: "SettingBrowserSwitchTableViewCell")
+        
+        let footerView = UIView()
+        footerView.frame.size = CGSize(width: self.view.frame.width, height: 80.0)
+        let versionLabel = UILabel()
+        versionLabel.frame.size = CGSize(width: self.view.frame.width, height: 20.0)
+        versionLabel.textColor = .gray
+        versionLabel.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
+        if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
+            versionLabel.text = "ver " + version
+        }
+        footerView.addSubview(versionLabel)
+        versionLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(footerView.snp.centerX).offset(0.0)
+            make.centerY.equalTo(footerView.snp.centerY).offset(-5.0)
+        }
+        self.tableView.tableFooterView = footerView
     }
     
-    private func initLayout() {
-        
+    @objc func onSwitch(sender: UISwitch) {
+        let bool = sender.isOn
+        AppSettings.changeBool_onlyDownloadWithWifi(bool)
     }
     
 }
@@ -53,6 +64,7 @@ extension SettingTableViewController {
         
         var cell: UITableViewCell!
         cell = indexPath.row == 1 ? tableView.dequeueReusableCell(withIdentifier: "SettingBrowserSwitchTableViewCell") : UITableViewCell()
+        cell.selectionStyle = .none
         
         if indexPath.row == 0 {
             let wifiSwitch = UISwitch()
@@ -63,33 +75,22 @@ extension SettingTableViewController {
             cell.accessoryView = UIView(frame: wifiSwitch.frame)
             cell.accessoryView?.addSubview(wifiSwitch)
         }
-        
-        if indexPath.row == 1 {
-            cell.selectionStyle = .none
-        }
 
         return cell
     }
     
+}
+
+// MARK: TableView Design
+
+extension SettingTableViewController {
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.row == 1 {
             return 88.0
         }
         return tableView.rowHeight
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-}
-
-extension SettingTableViewController {
-    
-    @objc func onSwitch(sender: UISwitch) {
-        let bool = sender.isOn
-        AppSettings.changeBool_onlyDownloadWithWifi(bool)
     }
     
 }
