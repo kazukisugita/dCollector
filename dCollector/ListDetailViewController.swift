@@ -35,7 +35,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
     
     var selectedDomain: Domain? {
         didSet {
-            configureDomain()
+            configureDomainView()
         }
     }
     var urls: [Url] = []

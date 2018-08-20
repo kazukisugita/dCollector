@@ -32,7 +32,7 @@ class PullToDismissService: NSObject {
         
         guard let _targetViewController = targetViewController else { return }
         
-        dismissAnimation = UIViewPropertyAnimator(duration: 0.4, curve: .easeOut, animations: { () in
+        dismissAnimation = UIViewPropertyAnimator(duration: 0.4, curve: .easeOut) {
             
             if let modalPresentationController = _targetViewController.presentationController as? ModalPresentationController {
                 modalPresentationController.dimmingView.effect = nil
@@ -41,8 +41,8 @@ class PullToDismissService: NSObject {
             }
             _targetViewController.domainInfoViewTopConstraint.constant += self.moveDistance
             _targetViewController.view.layoutIfNeeded()
-        })
-        dismissAnimation?.addCompletion { (_) in
+        }
+        dismissAnimation?.addCompletion { _ in
             if self.toDismiss {
                 _targetViewController.dismiss(animated: false) {
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
