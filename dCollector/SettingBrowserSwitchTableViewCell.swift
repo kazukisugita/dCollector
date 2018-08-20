@@ -9,7 +9,7 @@
 import UIKit
 
 
-class MoreBrowserSwitchTableViewCell: UITableViewCell {
+class SettingBrowserSwitchTableViewCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var browserImage: UIImageView!
@@ -18,9 +18,7 @@ class MoreBrowserSwitchTableViewCell: UITableViewCell {
     
     fileprivate let browserIcons: [UIImage] = [#imageLiteral(resourceName: "browser-default"), #imageLiteral(resourceName: "browser-safari"), #imageLiteral(resourceName: "browser-chrome")]
     
-    
     override func awakeFromNib() {
-        
         super.awakeFromNib()
         
         title.text = "Browser that opens the URL is".localized()

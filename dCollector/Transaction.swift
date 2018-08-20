@@ -142,7 +142,7 @@ public struct Transaction {
     
     public static func fromUserdefaultsToRealm (with completion: @escaping (_ success: Bool, _ successUrl: String?)->() ) {
         
-        guard let userdefaults = AppGroup.tryReturnUserDefaults() else { return }
+        guard let userdefaults = AppGroup.getUrlsFromUserDefaults() else { return }
         
         print(userdefaults)
         

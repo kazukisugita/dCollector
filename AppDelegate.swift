@@ -1,7 +1,6 @@
 
 import UIKit
-import RealmSwift
-
+import SVProgressHUD
 import UserNotifications
 
 
@@ -14,45 +13,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        SVProgressHUD.setDefaultMaskType(.clear)
         
-        /*
-        let realmConfig = Realm.Configuration(
-            schemaVersion: 1,
-            migrationBlock: { migration, oldSchemaVersion in
-                if (oldSchemaVersion < 1) {
-                }
-        })
-        Realm.Configuration.defaultConfiguration = realmConfig
-        */
-        RealmManager.getRealmAbsoluteFilePath()
+        window = UIWindow()
+        let navigationController = CustomizedNavigationController()
+        navigationController.viewControllers = [ListsViewController()]
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
         
         return true
     }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        //print(" *** applicationDidEnterBackground *** ")
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        //print(" *** applicationDidBecomeActive ***")
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
-
-        //Transaction.fromUserdefaultsfToRealm()
-        
-        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "applicationDidBecomeActiveNotification"), object: nil)
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        //print(" *** applicationWillTerminate *** ")
-    }
-
 }
 

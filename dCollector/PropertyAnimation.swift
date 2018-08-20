@@ -44,9 +44,9 @@ class PullToDismiss: NSObject {
         })
         dismissAnimation?.addCompletion { (_) in
             if self.toDismiss {
-                _targetViewController.dismiss(animated: false, completion: { _ in
+                _targetViewController.dismiss(animated: false) {
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "listsViewReload"), object: nil)
-                })
+                }
             } else {
                 self.toDismiss = true // reset
                 _targetViewController.domainInfoViewTopConstraint.constant = self.initialMarginTop

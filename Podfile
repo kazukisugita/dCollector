@@ -1,9 +1,12 @@
-source 'https://github.com/CocoaPods/Specs.git'
-use_frameworks!
-platform :ios, '10.0'
+
+platform :ios, '11.0'
 
 target 'dCollector' do
-  pod 'Ji', '~> 2.1.0'
-  pod 'RealmSwift'
-  pod 'ReachabilitySwift'
+    use_frameworks!
+
+    pod 'Ji', '~> 2.1.0'
+    pod 'RealmSwift'
+    pod 'ReachabilitySwift'
+    pod 'SnapKit', '~> 4.0.0'
+    pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
 end

@@ -17,7 +17,7 @@ struct AppGroup {
         }
     }
     
-    static func tryReturnUserDefaults() -> Array<String>? {
+    static func getUrlsFromUserDefaults() -> Array<String>? {
 //        print("*** tryGetData ***")
         let sharedDefaults: UserDefaults = UserDefaults(suiteName: self.suiteName)!
         if let arrayObject = sharedDefaults.object(forKey: self.keyName) as? Array<String> {

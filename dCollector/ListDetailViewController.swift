@@ -57,7 +57,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         
         // Self View
         
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ListDetailViewController.handlePan(gestureRecognizer:)))
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(gestureRecognizer:)))
         self.view.addGestureRecognizer(panGestureRecognizer)
         
         // TableView
@@ -72,7 +72,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         
         // Long Press
         
-        let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ListDetailViewController.longPressHandler))
+        let longPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressHandler))
         longPress.allowableMovement = 400
         longPress.minimumPressDuration = 0.6
         longPress.numberOfTapsRequired = 0
@@ -82,7 +82,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         // Domain Info View
         
         domainInfoView.isUserInteractionEnabled = true
-        let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListDetailViewController.callSafariInHostPage))
+        let domainInfoViewTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(callSafariInHostPage))
         domainInfoView.addGestureRecognizer(domainInfoViewTap)
         if #available(iOS 11.0, *) {
             domainInfoView.clipsToBounds = true
@@ -132,7 +132,7 @@ final class ListDetailViewController: UIViewController, UITableViewDelegate, UIT
         listDetailTableViewBottomConstraint.constant = top - bottom
     }
     
-    func callSafariInHostPage() {
+    @objc func callSafariInHostPage() {
         let url: Url = Url()
         url.url = "https://" + self.domainHost.text!
         openBrowser(url: url)
@@ -260,7 +260,7 @@ extension ListDetailViewController {
     
     // Cell
     
-    func longPressHandler(sender: UILongPressGestureRecognizer) {
+    @objc func longPressHandler(sender: UILongPressGestureRecognizer) {
         
         if sender.state == UIGestureRecognizerState.began {
 
@@ -319,7 +319,7 @@ extension ListDetailViewController {
 
 extension ListDetailViewController {
     
-    func handlePan (gestureRecognizer: UIPanGestureRecognizer) {
+    @objc func handlePan (gestureRecognizer: UIPanGestureRecognizer) {
         
         if gestureRecognizer.state == .began {
             

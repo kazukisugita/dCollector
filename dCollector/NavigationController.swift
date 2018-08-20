@@ -20,12 +20,12 @@ class NavigationController: UINavigationController {
         
         self.navigationBar.barTintColor = UIColor.white
         self.navigationBar.tintColor = UIColor.black
-        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.black]
+        self.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.black]
         self.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationBar.shadowImage = UIImage()
                 
         if #available(iOS 11.0, *) {
-            self.navigationBar.largeTitleTextAttributes = [NSForegroundColorAttributeName : UIColor.black]
+            self.navigationBar.largeTitleTextAttributes = [.foregroundColor : UIColor.black]
         }
         
 //        headerView.transform = __CGAffineTransformMake(1, -0.04, 0, 1, 0, 0)
